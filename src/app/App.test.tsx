@@ -8,17 +8,17 @@ import App from "./App";
 import ReactDOM from "react-dom";
 import reportWebVitals from "../reportWebVitals";
 
-ReactDOM.render(
+ReactDOM.render( // DOM
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
       </ThemeProvider>
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </Provider> 
+  </React.StrictMode>, /** visual DOM*/
   // eslint-disable-next-line testing-library/no-node-access
-  document.getElementById("root")
+  document.getElementById("root") /** real DOM*/
 );
 
 reportWebVitals();
