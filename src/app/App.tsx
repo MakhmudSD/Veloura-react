@@ -10,6 +10,7 @@ import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
 import  HelpPage  from "./screens/helpPage";
+import AboutUs from "./screens/aboutUs";
 
 
 function App() {
@@ -18,7 +19,6 @@ function App() {
     <>
       {location.pathname === "/" ? <HomeNavbar /> : <OtherNavbar />}
       <Switch>
-        {/** checks the path and directs us to the related page */}
         <Route path="/products">
           <ProductsPage />
         </Route>
@@ -28,12 +28,14 @@ function App() {
         <Route path="/member-page">
           <UserPage />
         </Route>
+        <Route path="/aboutUs">
+          <AboutUs />
+        </Route>
         <Route path="/help">
           <HelpPage />
         </Route>
         <Route path="/">Home
           {" "}
-          {/** route / must be put at the end to provide correct switching */}
           <HomePage />
         </Route>
       </Switch>

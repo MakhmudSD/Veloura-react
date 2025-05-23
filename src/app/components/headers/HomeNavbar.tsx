@@ -3,82 +3,97 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
 
-const authMember = true;
+const authMember = false;
 
 export default function HomeNavbar() {
   return (
     <div className="home-navbar">
-      <Container className="navbar-container">
-        <Stack className="menu">
-          <Box>
-            <NavLink to="/">
-              <img className="brand-logo" src="/icons/burak.svg" />
-            </NavLink>
-          </Box>
-          <Stack className="links">
-            <Box className={"hover-line"}>
-              <NavLink to="/" activeClassName={"underline"}>
-                Home
+      <Container
+        maxWidth={false}
+        style={{ maxWidth: "1236px", paddingLeft: 32, paddingRight: 32 }}
+        className="navbar-container"
+      >
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ height: 41 }}
+        >
+          {/* Left Side: Logo + Navigation Links */}
+          <Stack direction="row" spacing={4} alignItems="center" className="navbar-frame-left">
+            <Box>
+            <Box className="hover-line">
+              <NavLink to="/">
+                <div className="logo-txt">Veloura</div>
               </NavLink>
+              </Box>
             </Box>
-            <Box className={"hover-line"}>
-              <NavLink to="/products" activeClassName={"underline"}>
-                Products
-              </NavLink>
-            </Box>
-            {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/orders" activeClassName={"underline"}>
-                  Orders
+
+            <Stack direction="row" spacing={3} className="links" alignItems="center">
+              <Box className="hover-line">
+                <NavLink to="/" activeClassName="underline">
+                  Home
                 </NavLink>
               </Box>
-            ) : null}
-            {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/member-page" activeClassName={"underline"}>
-                  My Page
+              <Box className="hover-line">
+                <NavLink to="/products" activeClassName="underline">
+                  Shop
                 </NavLink>
               </Box>
-            ) : null}
-            <Box className={"hover-line"}>
-              <NavLink to="/help" activeClassName={"underline"}>
-                Help
-              </NavLink>
-            </Box>
-            <Basket/>
+
+              <Box className="hover-line">
+                <NavLink to="/aboutUs" activeClassName="underline">
+                  About Us
+                </NavLink>
+              </Box>
+              {authMember && (
+                <Box className="hover-line">
+                  <NavLink to="/orders" activeClassName="underline">
+                    Orders
+                  </NavLink>
+                </Box>
+              )}
+              {authMember && (
+                <Box className="hover-line">
+                  <NavLink to="/member-page" activeClassName="underline">
+                    My Page
+                  </NavLink>
+                </Box>
+              )}
+              <Box className="hover-line">
+                <NavLink to="/help" activeClassName="underline">
+                  Help
+                </NavLink>
+              </Box>
+            </Stack>
+          </Stack>
+
+          {/* Right Side: Cart + Auth Buttons or Avatar */}
+          <Stack
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            className="navbar-frame-right"
+          >
+            <Basket />
 
             {!authMember ? (
-              <Box>
-                <Button variant="contained" className="login-button">
+              <>
+                <Button variant="outlined" className="login-button">
                   Login
                 </Button>
-              </Box>
-            ) : (
-              // eslint-disable-next-line jsx-a11y/role-supports-aria-props
-              <img
-                className="user-avatar"
-                src={"/icons/default-user.svg"}
-                aria-haspopup={"true"}
-              />
-            )}
-          </Stack>
-        </Stack>
-        <Stack className="header-frame">
-          <Stack className="detail">
-            <Box className="head-main-txt">World's Most Delicious Cousine</Box>
-            <Box className="wel-txt">The Choice, not just a choice</Box>
-            <Box className="service-txt">24-hour service</Box>
-            <Box className="signup">
-              {!authMember ? (
                 <Button variant="contained" className="signup-button">
                   Sign Up
                 </Button>
-              ) : null}
-            </Box>
+              </>
+            ) : (
+              <img
+                className="user-avatar"
+                src="/icons/default-user.svg"
+                alt="User"
+              />
+            )}
           </Stack>
-          <Box className="logo-frame">
-            <div className="logo-img"></div>
-          </Box>
         </Stack>
       </Container>
     </div>
