@@ -1,89 +1,124 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-import { Box, Container, Stack } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Button, Container, Stack } from "@mui/material";
 import styled from "styled-components";
 
 const Footers = styled.div`
   width: 100%;
-  height: 590px;
-  display: flex;
-  background: #343434;
+  background: #161515;
   background-size: cover;
+  padding: 60px 0;
 `;
 
 export default function Footer() {
-  const authMember = null;
-
   return (
     <Footers>
-      <Container>
-        <Stack flexDirection={"row"} sx={{ mt: "94px" }}>
-          <Stack flexDirection={"column"} style={{ width: "340px" }}>
-            <Box>
-              <img width={"100px"} src={"/icons/burak.svg"} />
-            </Box>
-            <Box className={"foot-desc-txt"}>
-              Focusing on the gourmet Turkish breakfast as well as the youth
-              society, CZN Burak Gurme aims to bring Turkish cuisine back. CZN
-              Burak Gurme creates an illusion with its cuisine.
-            </Box>
-            <Box className="sns-context">
-              <img src={"/icons/facebook.svg"} />
-              <img src={"/icons/twitter.svg"} />
-              <img src={"/icons/instagram.svg"} />
-              <img src={"/icons/youtube.svg"} />
-            </Box>
-          </Stack>
-          <Stack sx={{ ml: "288px" }} flexDirection={"row"}>
-            <Stack>
-              <Box>
-                <Box className={"foot-category-title"}>Bo'limlar</Box>
-                <Box className={"foot-category-link"}>
-                  <Link to="/">Home</Link>
-                  <Link to="/products">Products</Link>
-                  {authMember && <Link to="/orders">Orders</Link>}
-                  <Link to="/help">Help</Link>
-                </Box>
-              </Box>
-            </Stack>
-            <Stack sx={{ ml: "100px" }}>
-              <Box>
-                <Box className={"foot-category-title"}>Find us</Box>
-                <Box
-                  flexDirection={"column"}
-                  sx={{ mt: "20px" }}
-                  className={"foot-category-link"}
-                  justifyContent={"space-between"}
-                >
-                  <Box flexDirection={"row"} className={"find-us"}>
-                    <span>L.</span>
-                    <div>Downtown, Dubai</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>P.</span>
-                    <div>+971 4 554 7777</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>E.</span>
-                    <div>devexuz@gmail.com</div>
-                  </Box>
-                  <Box className={"find-us"}>
-                    <span>H.</span>
-                    <div>Visit 24 hours</div>
-                  </Box>
-                </Box>
-              </Box>
-            </Stack>
-          </Stack>
-        </Stack>
+      <Container maxWidth={false} sx={{ px: { xs: 2, md: 10 } }}>
         <Stack
-          style={{ border: "1px solid #C5C8C9", width: "100%", opacity: "0.2" }}
-          sx={{ mt: "80px" }}
-        ></Stack>
-        <Stack className={"copyright-txt"}>
-          © Copyright Devex Global, All rights reserved.
+          className="footer-container"
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          gap={6}
+        >
+          <Stack
+            className="footer-frame"
+            direction={{ xs: "column", md: "row" }}
+            justifyContent="space-between"
+            sx={{ width: "100%" }}
+            spacing={4}
+          >
+            <Stack className="footer-left">
+              <Box
+                sx={{ flex: 1, maxWidth: { md: 340 }, mb: { xs: 4, md: 0 } }}
+              >
+                <p className="logo-txt">Veloura</p>
+                <p className="subscribe-txt">Subscribe to Our Newsletter</p>
+                <p className="update-txt">
+                  Get the latest updates on new arrivals and exclusive offers!
+                </p>
+                <Box
+                  className="email-input-frame"
+                  sx={{ mt: 2, display: "flex" }}
+                >
+                  <input
+                    type="text"
+                    className="email-input"
+                    placeholder="Your Email Here"
+                    style={{ flex: 1, marginRight: 8 }}
+                  />
+                  <Button variant="contained" className="submit-button">
+                    Submit
+                  </Button>
+                </Box>
+                <Box
+                  className="sns-context"
+                  sx={{ mt: 3, display: "flex", gap: 2 }}
+                >
+                  <img src={"/icons/facebook.svg"} alt="Facebook" />
+                  <img src={"/icons/twitter.svg"} alt="Twitter" />
+                  <img src={"/icons/instagram.svg"} alt="Instagram" />
+                  <img src={"/icons/linkedin.svg"} alt="LinkedIn" />
+                </Box>
+              </Box>
+            </Stack>
+
+            <Stack
+              direction="row"
+              spacing={6}
+              sx={{ flex: 2, justifyContent: "space-between" }}
+              className="footer-right"
+            >
+              <Box className="footer-category">
+                <h3>Categories</h3>
+                <p>Fashion</p>
+                <p>Jewelry</p>
+                <p>Sports</p>
+                <p>Electronics</p>
+                <p>Indoor</p>
+              </Box>
+              <Box className="footer-shopping">
+                <h3>Shopping</h3>
+                <p>Payment</p>
+                <p>Delivery Options</p>
+                <p>Buyer Protection</p>
+              </Box>
+              <Box className="footer-customer-care">
+                <h3>Customer Care</h3>
+                <p>Help Center</p>
+                <p>Terms & Conditions</p>
+                <p>Privacy Policy</p>
+                <p>Returns & Refunds</p>
+                <p>Survey & Feedback</p>
+              </Box>
+              <Box className="footer-page">
+                <h3>Pages</h3>
+                <p>Home</p>
+                <p>About Us</p>
+                <p>Shop</p>
+                <p>Help</p>
+              </Box>
+            </Stack>
+          </Stack>
         </Stack>
+      </Container>
+
+      {/* Full-width Divider (before copyright) */}
+      <Box sx={{ width: "100vw", mt: 6 }}>
+        <hr
+          style={{
+            border: "1px solid #C5C8C9",
+            opacity: 0.2,
+            margin: 0,
+            marginBottom: "20px",
+          }}
+        />
+      </Box>
+
+      {/* Copyright */}
+      <Container maxWidth={false} sx={{ px: { xs: 2, md: 10 }, mt: 2 }}>
+        <Box sx={{ color: "#ccc", fontSize: 14, textAlign: "center" }}>
+          © 2025 Veloura. All rights reserved.
+        </Box>
       </Container>
     </Footers>
   );
