@@ -1,37 +1,45 @@
-const typography =  {
+const typography = {
 	h1: {
-		fontWeight: 500,
-		fontSize: 35,
-		letterSpacing: '-0.24px',
+	  fontWeight: 700,       // Bold for strong impact
+	  fontSize: 42,          // Larger size for elegance
+	  letterSpacing: '-0.5px', 
+	  fontFamily: '"Playfair Display", serif',  // Classic serif font for luxury
 	},
 	h2: {
-		fontWeight: 500,
-		fontSize: 29,
-		letterSpacing: '-0.24px',
+	  fontWeight: 600,
+	  fontSize: 34,
+	  letterSpacing: '-0.4px',
+	  fontFamily: '"Playfair Display", serif',
 	},
 	h3: {
-		fontWeight: 500,
-		fontSize: 24,
-		letterSpacing: '-0.06px',
+	  fontWeight: 600,
+	  fontSize: 28,
+	  letterSpacing: '-0.2px',
+	  fontFamily: '"Playfair Display", serif',
 	},
 	h4: {
-		fontWeight: 500,
-		fontSize: 20,
-		letterSpacing: '-0.06px',
+	  fontWeight: 500,
+	  fontSize: 22,
+	  letterSpacing: '-0.1px',
+	  fontFamily: '"Roboto", sans-serif',   // Clean sans-serif for balance
 	},
 	h5: {
-		fontWeight: 500,
-		fontSize: 16,
-		letterSpacing: '-0.05px',
+	  fontWeight: 500,
+	  fontSize: 18,
+	  letterSpacing: '-0.05px',
+	  fontFamily: '"Roboto", sans-serif',
 	},
 	h6: {
-		fontWeight: 500,
-		fontSize: 14,
-		letterSpacing: '-0.05px',
+	  fontWeight: 400,
+	  fontSize: 16,
+	  letterSpacing: '0px',
+	  fontFamily: '"Roboto", sans-serif',
 	},
 	overline: {
-		fontWeight: 500,
+	  fontWeight: 600,
+	  fontFamily: '"Roboto", sans-serif',
 	},
-};
-
-export default typography
+  };
+  
+  export default typography;
+  

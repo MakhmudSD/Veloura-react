@@ -34,7 +34,7 @@ function App() {
         <Route path="/help">
           <HelpPage />
         </Route>
-        <Route path="/">Home
+        <Route path="/">
           {" "}
           <HomePage />
         </Route>
