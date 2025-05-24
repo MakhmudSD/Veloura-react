@@ -1,29 +1,72 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: "Satoshi", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1236px;
+    margin: 0 auto;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+
 .homepage {
     width: 100%;
+    margin: 0;
+    padding: 0;
     background: #000;
 }
 
+/** HERO-BANNER */
+
 .homepage .hero-banner-container {
     display: flex;
-    justify-content: center;
-    background-color: #090909;
-    padding-top: 67px;
+    width: 1236px;
+    align-items: center;
+    gap: 53px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 
 .homepage .hero-banner-container .hero-banner-frame {
+    width: 100%;
+    max-width: 1236px;
+    padding: 0 16px;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 1236px;
     height: 739px;
     gap: 64px;
+    background: radial-gradient(circle, #1C1C1B 0%, #000000 100%);
+    border: none;
+    outline: none;
+    box-shadow: none;
+
 }
 
 .homepage .hero-banner-container .hero-banner-frame .hero-banner-left {
-    width: 752px;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    margin-left: 0;
+    padding-left: 16px;
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 14px;
 }
@@ -31,7 +74,7 @@
 .homepage .hero-banner-container .hero-banner-frame .hero-banner-left .hero-banner-left-up {
     width: 100%;
     color: #FFF;
-    font-family: "Satoshi Variable";
+    font-family: "Satoshi";
     font-size: 60px;
     font-style: normal;
     font-weight: 300;
@@ -41,7 +84,7 @@
 .homepage .hero-banner-container .hero-banner-frame .hero-banner-left .hero-banner-left-down {
     width: 530px;
     color: #a9a4a4;
-    font-family: "Satoshi Variable";
+    font-family: "Satoshi";
     font-size: 24px;
     font-style: normal;
     font-weight: 300;
@@ -56,10 +99,498 @@
     gap: 10px;
     border-radius: 10px;
     background: #AB572D;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.homepage .hero-banner-container .hero-banner-frame .hero-banner-left .hero-banner-left-shop:hover {
+    background: #d2994b;
 }
 
 .homepage .hero-banner-container .hero-banner-frame .hero-banner-right-img {
     width: 430.978px;
     height: 739px;
     background: url("/public/img/ariekoprasethio_perfume.png") center center / cover no-repeat;
+}
+
+/** WELCOME NOTE */
+
+.homepage .welcome-note-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 564px;
+    margin-top: 30px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: #000;
+}
+
+.homepage .welcome-note-container .welcome-note-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("/public/img/dartistana-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    z-index: 1.5;
+    pointer-events: none;
+}
+
+.homepage .welcome-note-container .welcome-note-frame {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1236px;
+    padding: 0 16px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.homepage .welcome-note-container .welcome-note-txt span {
+    color: #AB572D;
+    font-family: "Satoshi", sans-serif;
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 1.2;
+    display: block;
+    margin-top: -10px;
+    margin-bottom: 45px;
+}
+
+.homepage .welcome-note-container .welcome-note-txt p {
+    font-family: "Satoshi", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 746px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+/** OUR VALUES */
+
+.homepage .value-container {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 575px;
+    padding: 0 24px;
+    gap: 81px;
+    flex-shrink: 0;
+}
+
+.homepage .value-container .value-left {
+    width: 670px;
+    height: 573px;
+    background: url("/public/img/megaerica_Carbonated_perfume_in_a_bottle_6a49a0c4-198a-4f33-a2d6-a0c8eee0c9d8ddef\ 1.png") lightgray 0px 0px / 100% 116.928% no-repeat;
+}
+
+.homepage .value-container .value-right {
+    display: flex;
+    width: 587px;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.homepage .value-container .value-right span {
+    color: #AB572D;
+    font-family: "Satoshi";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.homepage .value-container .value-right p {
+    width: 588px;
+    color: #FFF;
+    font-family: "Satoshi";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/** BEST SELLING PRODUCTS */
+
+.homepage .best-seller-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 55px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.homepage .best-seller-container .best-seller-title {
+    color: #ab572d;
+    text-align: center;
+    font-family: "Satoshi Variable";
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.homepage .best-seller-container .best-seller-frame {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+}
+
+.homepage .best-seller-container .best-seller-frame .best-seller-products {
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.homepage .best-seller-container .best-seller-frame .best-seller-img.swiper-slide {
+    display: inline-flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 260px !important;
+    height: 442px;
+    flex-shrink: 0;
+}
+
+.homepage .best-seller-container .best-seller-frame .best-seller-img img {
+    width: 250px;
+    height: 360px;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+    background: #141414 0px -15px / 100% 104.167% no-repeat;
+}
+
+.homepage .best-seller-container .best-seller-frame .best-seller-img:hover img {
+    transform: scale(1.05);
+}
+
+.homepage .best-seller-container .best-seller-frame .best-seller-desc {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.homepage .best-seller-container .best-seller-frame .best-seller-desc span {
+    color: #fff;
+    font-family: "Satoshi";
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.homepage .best-seller-container .best-seller-frame .best-seller-desc p {
+    color: #ab572d;
+    font-family: "Satoshi";
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.homepage .best-seller-container .best-seller-frame .best-seller-desc p span {
+    color: #aea2a2;
+    font-family: "Satoshi";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.homepage .best-seller-container .best-seller-frame .swiper-button-prev,
+.homepage .best-seller-container .best-seller-frame .swiper-button-next {
+    color: #ab572d;
+    position: absolute;
+    top: 40%;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.homepage .best-seller-container .best-seller-frame .swiper-button-prev::after,
+.homepage .best-seller-container .best-seller-frame .swiper-button-next::after {
+    font-size: 20px;
+}
+
+.homepage .best-seller-container .best-seller-frame .swiper-button-prev {
+    left: -60px;
+}
+
+.homepage .best-seller-container .best-seller-frame .swiper-button-next {
+    right: -60px;
+}
+
+.homepage .best-seller-container .best-seller-frame .swiper-pagination-bullet {
+    background-color: #ab572d;
+    opacity: 0.5;
+}
+
+.homepage .best-seller-container .best-seller-frame .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+/** OUR COLLECTIONS */
+
+.homepage .collection-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 55px;
+    padding: 60px 0;
+}
+
+.homepage .collection-title span {
+    color: #AB572D;
+    text-align: center;
+    font-family: "Satoshi Variable";
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.homepage .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 46px;
+    width: 100%;
+    max-width: 1440px;
+    padding: 0 20px;
+}
+
+.homepage .collection-grid .collection-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.homepage .collection-grid .collection-item:nth-child(1),
+.homepage .collection-grid .collection-item:nth-child(2) {
+    grid-column: span 3;
+}
+
+.homepage .collection-grid .collection-item:nth-child(3),
+.homepage .collection-grid .collection-item:nth-child(4) {
+    grid-column: span 3;
+}
+
+.homepage .collection-grid .collection-item:nth-child(5),
+.homepage .collection-grid .collection-item:nth-child(6),
+.homepage .collection-grid .collection-item:nth-child(7) {
+    grid-column: span 2;
+}
+
+.homepage .collection-grid .collection-item .image-wrapper {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.homepage .collection-grid .collection-item .image-wrapper img {
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.homepage .collection-grid .collection-item:hover .image-wrapper img {
+    transform: scale(1.05);
+}
+
+.homepage .collection-grid .collection-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.homepage .collection-grid .collection-item p {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #FFF;
+    font-family: "Satoshi Variable";
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+/** SALE BANNER */
+.homepage .sale-banner-container {
+    position: relative;
+    width: 100%;
+    height: 538px;
+    flex-shrink: 0;
+    margin: 0 auto;
+}
+
+.homepage .sale-banner-container .sale-banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 538px;
+    background: url("/public/img/sale-banner.png") no-repeat center center;
+    background-size: cover;
+    z-index: 1;
+}
+
+.homepage .sale-banner-container .sale-banner-left {
+    position: absolute;
+    top: 90px;
+    left: 80px;
+    z-index: 2;
+    display: flex;
+    width: 604.023px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 68px;
+}
+
+.homepage .sale-banner-container .sale-banner-left .sale-banner-title {
+    width: 605px;
+    color: #FFF;
+    font-family: "Satoshi";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.homepage .sale-banner-container .sale-banner-left .sale-banner-txt {
+    width: 570px;
+    color: #FFF;
+    font-family: "Satoshi";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.homepage .sale-banner-container .sale-banner-left .sale-banner-know-more {
+    display: flex;
+    padding: 16px 36px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: #AB572D;
+    text-transform: none;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.homepage .sale-banner-container .sale-banner-left .sale-banner-know-more:hover {
+    background: #c7642f;
+    transform: translateY(-2px);
+}
+
+.homepage .sale-banner-container .sale-banner-left .sale-banner-know-more p {
+    color: #FFF;
+    font-family: "Satoshi Variable";
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+}
+
+/** LATEST NEWS */
+.homepage .news-container {
+    max-width: 1236px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    padding-bottom: 100px;
+}
+
+.homepage .news-container .news-title {
+    color: #AB572D;
+    font-family: "Satoshi";
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.homepage .news-container .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.homepage .news-container .article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.homepage .news-container .article img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+
+.homepage .news-container .article img:hover {
+    transform: scale(0.95);
+}
+
+.homepage .news-container .article-header {
+    color: #fff;
+    font-family: "Satoshi";
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.homepage .news-container .article-content {
+    color: #fff;
+    font-family: "Satoshi";
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.homepage .news-container .read-more {
+    width: 141px;
+    height: 36px;
+    padding: 8px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+    font-family: "Satoshi Variable";
+    font-size: 14px;
+    user-select: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.homepage .news-container .read-more:hover {
+    background-color: #AB572D;
+    color: #fff;
+    border-color: #AB572D;
 }

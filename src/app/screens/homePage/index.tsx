@@ -1,4 +1,3 @@
-import { Container } from "@mui/material";
 import HeroBanner from "./HeroBanner";
 import WelcomeNote from "./WelcomeNote";
 import BestSellingProducts from "./BestSellingProducts";
@@ -9,15 +8,15 @@ import SaleBanner from "./SaleBanner";
 import "../../../css/homepage.css";
 
 export default function HomePage() {
-    return  (
-        <div className="homepage">
-          <HeroBanner />
-          <WelcomeNote />
-          <OurValues />
-          <BestSellingProducts />
-          <OurCollections />
-          <SaleBanner />
-          <LatestNews />
-        </div>
-      );
+  return (
+    <div className="homepage">
+      <HeroBanner />
+      <WelcomeNote />
+      <OurValues />
+      <BestSellingProducts />
+      <OurCollections />
+      <SaleBanner />
+      <LatestNews />
+    </div>
+  );
 }
