@@ -1,5 +1,12 @@
-import { Container } from "@mui/material";
+import BestSellers from "./BestSellers";
+import SpecialOffers from "./SpecialOffers";
+import "../../../css/products.css";
 
 export default function ProductsPage() {
-    return <Container>ProductsPage</Container>
+  return (
+    <div className="products">
+      <BestSellers />
+      <SpecialOffers />
+    </div>
+  );
 }

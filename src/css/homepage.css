@@ -439,7 +439,6 @@ body {
     flex-shrink: 0;
     margin: 0 auto;
 }
-
 .homepage .sale-banner-container .sale-banner-img {
     position: absolute;
     top: 0;
@@ -447,10 +446,11 @@ body {
     width: 100%;
     height: 538px;
     background: url("/public/img/sale-banner.png") no-repeat center center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     z-index: 1;
+    animation: animateBanner 10s linear infinite alternate;
 }
-
 .homepage .sale-banner-container .sale-banner-left {
     position: absolute;
     top: 90px;
@@ -507,6 +507,15 @@ body {
     font-size: 18px;
     font-weight: 900;
     margin: 0;
+}
+
+@keyframes animateBanner {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 100% center;
+    }
 }
 
 /** LATEST NEWS */

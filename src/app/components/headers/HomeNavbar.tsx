@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Box, Button, Container, Stack } from "@mui/material";
+import { Avatar, Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
 
@@ -20,18 +20,25 @@ export default function HomeNavbar() {
           sx={{ height: 41 }}
         >
           {/* Left Side: Logo + Navigation Links */}
-          <Stack direction="row" spacing={4} alignItems="center" className="navbar-frame-left">
-            <Box>
-            <Box className="hover-line">
-              <NavLink to="/">
-                <div className="logo-txt">Veloura</div>
-              </NavLink>
-              </Box>
-            </Box>
+          <Stack
+            direction="row"
+            spacing={4}
+            alignItems="center"
+            className="navbar-frame-left"
+          >
+            {/* Remove hover-line wrapper from logo */}
+            <NavLink to="/" className="logo-link">
+              <div className="logo-txt">Veloura</div>
+            </NavLink>
 
-            <Stack direction="row" spacing={3} className="links" alignItems="center">
+            <Stack
+              direction="row"
+              spacing={3}
+              className="links"
+              alignItems="center"
+            >
               <Box className="hover-line">
-                <NavLink to="/" activeClassName="underline">
+                <NavLink to="/" exact activeClassName="underline">
                   Home
                 </NavLink>
               </Box>
@@ -87,11 +94,16 @@ export default function HomeNavbar() {
                 </Button>
               </>
             ) : (
-              <img
-                className="user-avatar"
-                src="/icons/default-user.svg"
-                alt="User"
-              />
+              <Avatar
+                sx={{
+                  width: 40,
+                  height: 40,
+                  fontWeight: "bold",
+                  background: "linear-gradient(135deg, #E0B0FF, #C084FC)",
+                  color: "white",
+                  boxShadow: "0 0 8px rgba(224, 176, 255, 0.5)",
+                }}
+              ></Avatar>
             )}
           </Stack>
         </Stack>
