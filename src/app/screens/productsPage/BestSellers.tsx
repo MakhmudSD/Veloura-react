@@ -1,27 +1,207 @@
-import { Box, Container, Stack } from "@mui/material";
+import React from "react";
+import {
+  Box,
+  Container,
+  Stack,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  IconButton,
+} from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 export function BestSellers() {
-    return <Container className="product-container">
+  const products = Array(12).fill({
+    imgSrc:
+      "/img/Old_fashion_balck_and_gold_color_perfume__3_-removebg-preview 1.png",
+    name: "Luxurious Elixir Rough",
+    price: 220,
+    volume: "100ml",
+  });
+
+  return (
+    <><Box className="background-circles" aria-hidden="true">
+      <Box className="circle circle1" />
+      <Box className="circle circle2" />
+      <Box className="circle circle3" />
+    </Box><Container className="product-container" >
         <Stack className="product-category">
-                <div className="product-title">Best Selling Products</div>
-                  <Box sx={{ width: "100vw", mt: 6 }}>
-                    <hr
-                      style={{
-                        border: "1px solid #C5C8C9",
-                        opacity: 0.2,
-                        margin: 0,
-                        marginBottom: "20px",
-                      }}
-                    />
-                  </Box>
-                  <Stack className="product-filter">
-                    <Box className="product-filter-left"></Box>
-                    <Box className="product-filter-right"></Box>
-                  </Stack>
+          <div className="product-title">Best Selling Products</div>
+          <Box className="product-divider">
+            <img src="/img/line.png" alt="" />
+          </Box>
+
+          <Box className="product-filter-row">
+            <Box className="product-filter-left">
+              <Typography className="filter-label">Filter By</Typography>
+
+              <FormControl
+                variant="outlined"
+                className="filter-control"
+                sx={formStyle}
+              >
+                <InputLabel>Category</InputLabel>
+                <Select label="Category" defaultValue="" MenuProps={menuProps}>
+                  <MenuItem value="all">All</MenuItem>
+                  <MenuItem value="perfume">Perfume</MenuItem>
+                  <MenuItem value="eau-de-toilette">Eau De Toilette</MenuItem>
+                  <MenuItem value="gift-set">Gift Set</MenuItem>
+                  <MenuItem value="accessory">Accessory</MenuItem>
+                  <MenuItem value="body-product">Body Product</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl
+                variant="outlined"
+                className="filter-control"
+                sx={formStyle}
+              >
+                <InputLabel>Gender</InputLabel>
+                <Select label="Gender" defaultValue="" MenuProps={menuProps}>
+                  <MenuItem value="unisex">Unisex</MenuItem>
+                  <MenuItem value="men">Men</MenuItem>
+                  <MenuItem value="women">Women</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl
+                variant="outlined"
+                className="filter-control"
+                sx={formStyle}
+              >
+                <InputLabel>Volume</InputLabel>
+                <Select label="Volume" defaultValue="" MenuProps={menuProps}>
+                  <MenuItem value="30ml">30ml</MenuItem>
+                  <MenuItem value="50ml">50ml</MenuItem>
+                  <MenuItem value="75ml">75ml</MenuItem>
+                  <MenuItem value="100ml">100ml</MenuItem>
+                  <MenuItem value="150ml">150ml</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl
+                variant="outlined"
+                className="filter-control"
+                sx={formStyle}
+              >
+                <InputLabel>Price</InputLabel>
+                <Select label="Price" defaultValue="" MenuProps={menuProps}>
+                  <MenuItem value="low-high">Low to High</MenuItem>
+                  <MenuItem value="high-low">High to Low</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+
+            <Box className="product-filter-right">
+              <FormControl
+                variant="outlined"
+                className="sort-control"
+                sx={formStyle}
+              >
+                <InputLabel>Sort By</InputLabel>
+                <Select label="Sort By" defaultValue="" MenuProps={menuProps}>
+                  <MenuItem value="popularity">Popularity</MenuItem>
+                  <MenuItem value="newest">Newest</MenuItem>
+                  <MenuItem value="rating">Rating</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Box>
         </Stack>
-        <Stack className="product-list"></Stack>
-        <Stack className="product-page"></Stack>
-    </Container>
+
+        {/* Product List */}
+        <Stack className="product-list">
+          <Stack className="product-frame">
+            {products.map((product, index) => (
+              <Box className="product-box" key={index}>
+                <Box className="product-image-wrapper">
+                  <img src={product.imgSrc} alt={product.name} />
+                  <IconButton
+                    className="view-icon"
+                    size="small"
+                    aria-label="view"
+                    sx={{ zIndex: 10 }}
+                  >
+                    <VisibilityIcon sx={{ color: "#fff" }} />
+                  </IconButton>
+                  <IconButton
+                    className="cart-icon"
+                    size="small"
+                    aria-label="add to cart"
+                    sx={{ zIndex: 10 }}
+                  >
+                    <ShoppingCartIcon sx={{ color: "#fff" }} />
+                  </IconButton>
+                </Box>
+                <Box className="product-desc">
+                  <Typography component="span">{product.name}</Typography>
+                  <Typography component="p" sx={{ mt: 0 }}>
+                    $ {product.price}.00{" "}
+                    <Box
+                      component="span"
+                      sx={{ color: "#AB572D", fontWeight: "700" }}
+                    >
+                      {product.volume}
+                    </Box>
+                  </Typography>
+                </Box>
+              </Box>
+            ))}
+          </Stack>
+        </Stack>
+      </Container></>
+  );
 }
 
-export default BestSellers
+const formStyle = {
+  minWidth: 180,
+  backgroundColor: "transparent",
+  "& .MuiOutlinedInput-root": {
+    color: "#fff",
+    borderColor: "#ab572d",
+    "& fieldset": {
+      borderColor: "#ab572d",
+      borderRadius: "12px",
+    },
+    "&:hover fieldset": {
+      borderColor: "#d17e4f",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#ab572d",
+    },
+  },
+  "& .MuiInputLabel-root": {
+    fontWeight: 500,
+    fontSize: "16px",
+    letterSpacing: "1px",
+    textAlign: "center", // fixed typo here
+    transition: "color 0.3s ease",
+    "&.Mui-focused": {
+      color: "#e8b14a",
+    },
+  },
+  "& .MuiSelect-select": {
+    fontFamily: "Satoshi",
+    fontSize: "18px",
+    paddingLeft: "8px",
+    whiteSpace: "nowrap",
+    overflow: "visible",
+    color: "#fff",
+  },
+};
+
+const menuProps = {
+  PaperProps: {
+    sx: {
+      bgcolor: "#2b2b2b",
+      color: "#fff",
+      fontFamily: "Satoshi",
+      fontSize: 16,
+    },
+  },
+};
+
+export default BestSellers;

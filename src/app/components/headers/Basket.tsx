@@ -90,7 +90,12 @@ export default function Basket() {
                 <img
                   src={"/img/fresh.webp"}
                   className="product-img"
-                  style={{ width: 50, height: 50, borderRadius: 4, marginRight: 10 }}
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 4,
+                    marginRight: 10,
+                  }}
                   alt="Kebab"
                 />
                 <Box sx={{ flexGrow: 1 }}>
@@ -100,15 +105,28 @@ export default function Basket() {
                   >
                     Kebab
                   </span>
-                  <p className="product-price" style={{ margin: 0, color: "#d7b686" }}>
+                  <p
+                    className="product-price"
+                    style={{ margin: 0, color: "#d7b686" }}
+                  >
                     $10 x 1
                   </p>
                 </Box>
                 <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                  <Button variant="outlined" size="small" className="remove" sx={{ minWidth: 30 }}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    className="remove"
+                    sx={{ minWidth: 30 }}
+                  >
                     -
                   </Button>
-                  <Button variant="outlined" size="small" className="add" sx={{ minWidth: 30 }}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    className="add"
+                    sx={{ minWidth: 30 }}
+                  >
                     +
                   </Button>
                   <IconButton
@@ -133,7 +151,10 @@ export default function Basket() {
               alignItems: "center",
             }}
           >
-            <span className="price" style={{ color: "#d7b686", fontWeight: "bold" }}>
+            <span
+              className="price"
+              style={{ color: "#d7b686", fontWeight: "bold" }}
+            >
               Total: $100 (98 + 2)
             </span>
             <Button

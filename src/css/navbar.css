@@ -29,6 +29,7 @@
   gap: 48px;
   height: 41px;
 }
+
 .home-navbar .logo-link,
 .other-navbar .logo-link {
   text-decoration: none;
@@ -60,17 +61,17 @@
   display: flex;
   align-items: center;
   height: 41px;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .home-navbar .navbar-frame-left .links,
 .other-navbar .navbar-frame-left .links {
   display: flex;
-  gap: 24px;
   align-items: center;
+  gap: 60px;
   color: #FFF;
   font-family: "Satoshi Variable", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
 }
@@ -82,7 +83,7 @@
   align-items: center;
   justify-content: flex-end;
   margin-right: 10px;
-  gap: 24px;
+  gap: 18px;
   height: 41px;
 }
 
@@ -90,7 +91,7 @@
 .other-navbar .login-button,
 .home-navbar .signup-button,
 .other-navbar .signup-button {
-  padding: 8px 10px;
+  padding: 10px 18px;
   font-size: 15px;
   font-weight: 500;
   font-family: "Satoshi Variable", sans-serif;
@@ -102,27 +103,49 @@
 
 .home-navbar .login-button,
 .other-navbar .login-button {
+  display: inline-flex; /* ensure horizontal layout */
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* prevent text from wrapping */
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Satoshi Variable", sans-serif;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
   background-color: transparent;
-  border: 2px solid #D7B686;
-  color: #D7B686;
+  border: 2px solid #B88A57;
+  color: #B88A57;
   font-weight: 600;
-  box-shadow: 0 0 8px rgba(215, 182, 134, 0.6);
+  box-shadow: 0 0 6px rgba(184, 138, 87, 0.6);
+  font-weight: 600;
 }
 
 .home-navbar .login-button:hover,
 .other-navbar .login-button:hover {
-  background-color: rgba(215, 182, 134, 0.15);
-  box-shadow: 0 0 12px rgba(215, 182, 134, 0.9);
+  background-color: rgba(184, 138, 87, 0.15);
   color: #fff;
+  box-shadow: 0 0 12px rgba(184, 138, 87, 0.9);
 }
 
 .home-navbar .signup-button,
 .other-navbar .signup-button {
+  display: inline-flex; /* ensure horizontal layout */
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* prevent text from wrapping */
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Satoshi Variable", sans-serif;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
   background-color: #D7B686;
   color: #000;
   border: 2px solid #D7B686;
   font-weight: 600;
-  box-shadow: 0 0 10px rgba(215, 182, 134, 0.8);
 }
 
 .home-navbar .signup-button:hover,
@@ -137,7 +160,8 @@
 .other-navbar .hover-line {
   display: inline-block;
   position: relative;
-  height: 41px; /* match logo & nav height */
+  height: 41px;
+  /* match logo & nav height */
 }
 
 .home-navbar .hover-line a,
@@ -147,7 +171,8 @@
   transition: color 250ms ease-in-out;
   display: inline-block;
   height: 100%;
-  line-height: 41px; /* vertically center text */
+  line-height: 41px;
+  /* vertically center text */
 }
 
 .home-navbar .hover-line:hover a,
@@ -174,13 +199,14 @@
 .other-navbar .hover-line:hover::after {
   transform: scaleX(1);
 }
+
 .home-navbar .hover-line a::after,
 .other-navbar .hover-line a::after {
   content: "";
   display: block;
   height: 2px;
   width: 100%;
-  background-color: gold; /* your gold underline */
+  background-color: gold;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -240,13 +266,13 @@
 }
 
 .basket-info-box .cancel-btn {
-  position: static !important; /* keep it inline */
+  position: static !important;
   color: #d7b686 !important;
   margin-left: 12px;
   width: 36px !important;
   height: 36px !important;
-  border-radius: 50% !important; /* makes it perfectly round */
-  background-color: #2c2c2c !important; /* subtle background */
+  border-radius: 50% !important;
+  background-color: #2c2c2c !important;
   display: flex !important;
   align-items: center;
   justify-content: center;

@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
 
-const authMember = false;
+const authMember = true;
 
 export default function HomeNavbar() {
   return (
