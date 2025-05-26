@@ -9,7 +9,9 @@ import {
   Select,
   MenuItem,
   IconButton,
+  Button,
 } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
@@ -23,11 +25,13 @@ export function BestSellers() {
   });
 
   return (
-    <><Box className="background-circles" aria-hidden="true">
-      <Box className="circle circle1" />
-      <Box className="circle circle2" />
-      <Box className="circle circle3" />
-    </Box><Container className="product-container" >
+    <>
+      <Box className="background-circles" aria-hidden="true">
+        <Box className="circle circle1" />
+        <Box className="circle circle2" />
+        <Box className="circle circle3" />
+      </Box>
+      <Container className="product-container">
         <Stack className="product-category">
           <div className="product-title">Best Selling Products</div>
           <Box className="product-divider">
@@ -152,7 +156,97 @@ export function BestSellers() {
             ))}
           </Stack>
         </Stack>
-      </Container></>
+        <Stack spacing={2} className="product-pagination">
+          <Pagination
+            count={10}
+            variant="outlined"
+            color="secondary"
+            sx={{
+              "& .MuiPaginationItem-root": {
+                fontSize: "20px",
+                width: "48px",
+                height: "48px",
+                fontFamily: "Satoshi",
+                borderRadius: "12px",
+                borderColor: "#ab572d",
+                color: "#fff", // default text color
+                backgroundColor: "#1c1c1c", // subtle background for contrast
+                "&:hover": {
+                  backgroundColor: "#333", // slightly brighter on hover
+                },
+              },
+              "& .Mui-selected": {
+                backgroundColor: "#ab572d !important", // active page
+                color: "#fff !important",
+                borderColor: "#ab572d",
+              },
+            }}
+          />
+        </Stack>
+
+    <Stack className="special-offers-section" spacing={0}>
+      <div className="special-title">
+        <h1>Special Offers</h1>
+      </div>
+
+      {/* Row 1: TEXT LEFT, IMAGE RIGHT */}
+      <Box className="special-content dark-teal">
+        <Box className="special-text-box">
+          <Box className="special-headline">
+            <h1>Limited Time Offer: 20% OFF on Aqua Serenity Perfume!</h1>
+          </Box>
+
+          <Box className="special-description">
+            <h3>
+              Aqua Serenity <br />
+              <span>Embrace the Tranquil Tides</span>
+            </h3>
+            <p>
+              Immerse yourself in the calming embrace of Aqua Serenity, a
+              captivating fragrance that evokes the essence of water.
+            </p>
+          </Box>
+
+          <Button variant="contained" className="special-button">
+            <p>Know More</p>
+          </Button>
+        </Box>
+
+        <Box className="special-image-box">
+          <img src="/img/kuroswan.png" alt="Aqua Serenity Perfume" />
+        </Box>
+      </Box>
+
+      {/* Row 2: IMAGE LEFT, TEXT RIGHT */}
+      <Box className="special-content deep-brown">
+        <Box className="special-image-box">
+          <img src="/img/thong_nguyen.png" alt="Golden Angel Perfume" />
+        </Box>
+
+        <Box className="special-text-box">
+          <Box className="special-headline">
+            <h1>Limited Time Offer: 25% OFF on Golden Angel Perfume!</h1>
+          </Box>
+
+          <Box className="special-description">
+            <h3>
+              Golden Angel <br />
+              <span className="highlight-text">Unleash Your Divine Glow</span>
+            </h3>
+            <p>
+              Indulge in the divine allure of Golden Angel, a fragrance that
+              embodies celestial elegance and radiance.
+            </p>
+          </Box>
+
+          <Button variant="contained" className="special-button">
+            <p>Know More</p>
+          </Button>
+        </Box>
+      </Box>
+    </Stack>
+      </Container>
+    </>
   );
 }
 
