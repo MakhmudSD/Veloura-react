@@ -1,16 +1,21 @@
-import BestSellers from "./BestSellers";
-import SpecialOffers from "./SpecialOffers";
+import Products from "./Products";
 import "../../../css/products.css";
+import { ChosenProduct } from "./ChosenProduct";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 export default function ProductsPage() {
-<<<<<<< HEAD
-=======
-  const { path } = useRouteMatch(); 
->>>>>>> 2ad18b3 (feat: product detail page developed)
+  const { path } = useRouteMatch(); // dynamically gets the matched base route
+
   return (
-    <div className="products">
-      <BestSellers />
-      <SpecialOffers />
+    <div className="products-page">
+      <Switch>
+        <Route path={`${path}/:productId`}>
+          <ChosenProduct />
+        </Route>
+        <Route exact path={path}>
+          <Products />
+        </Route>
+      </Switch>
     </div>
   );
 }

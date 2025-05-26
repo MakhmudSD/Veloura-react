@@ -15,7 +15,7 @@ import Pagination from "@mui/material/Pagination";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-export function BestSellers() {
+export function Products() {
   const products = Array(12).fill({
     imgSrc:
       "/img/Old_fashion_balck_and_gold_color_perfume__3_-removebg-preview 1.png",
@@ -298,4 +298,4 @@ const menuProps = {
   },
 };
 
-export default BestSellers;
+export default Products;

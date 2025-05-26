@@ -75,11 +75,7 @@ html, body {
 }
 
 /* PRODUCT SECTION */
-<<<<<<< HEAD
-.products {
-=======
 .products-page {
->>>>>>> 2ad18b3 (feat: product detail page developed)
   width: 100%;
   height: auto;
   background: #000;
@@ -493,8 +489,6 @@ html, body {
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
-<<<<<<< HEAD
-=======
 }
 
 .special-image-box img:hover {
@@ -666,5 +660,4 @@ html, body {
   margin: 0;
   white-space: nowrap;
   padding: 6px 12px;
->>>>>>> 2ad18b3 (feat: product detail page developed)
 }
