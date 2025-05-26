@@ -75,7 +75,11 @@ html, body {
 }
 
 /* PRODUCT SECTION */
+<<<<<<< HEAD
 .products {
+=======
+.products-page {
+>>>>>>> 2ad18b3 (feat: product detail page developed)
   width: 100%;
   height: auto;
   background: #000;
@@ -489,4 +493,178 @@ html, body {
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
+<<<<<<< HEAD
+=======
+}
+
+.special-image-box img:hover {
+  transition: 3s;
+  transform: scale(1.1);
+}
+
+/* CHOSEN PRODUCT */
+
+.chosen-product-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: #000;
+}
+
+.chosen-product-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.chosen-product-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chosen-product-container .chosen-product-wrapper .chosen-product-left img {
+  width: 532px;
+  height: 806.145px;
+  object-fit: contain;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 12px;
+  transition: transform 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.chosen-product-container .chosen-product-wrapper .chosen-product-left img:hover {
+  transform: scale(1.03);
+  background-color: #2e2e2e;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+.chosen-product-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 650px;
+}
+
+.chosen-product-title h1 {
+  color: #FFF;
+  font-family: "Satoshi";
+  font-size: 40px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.chosen-product-description p {
+  color: #FFF;
+  font-family: "Satoshi";
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.chosen-product-price {
+  color: #AB572D;
+  font-family: "Satoshi";
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.chosen-product-interaction-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0;
+}
+
+.chosen-product-calculate-form {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.chosen-product-quantity-label {
+  color: #FFF;
+  font-family: "Satoshi";
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: -20px;
+
+}
+
+.chosen-product-remove,
+.chosen-product-add,
+.chosen-product-number {
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 700;
+  color: #AB572D;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: -20px;
+}
+
+.chosen-product-calculate-add-button {
+  width: 381px;
+  height: 48px;
+  flex-shrink: 0;
+  background-color: #D9D9D9 !important;
+  color: #AB572D !important;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  border: 1px solid #FFF;
+  border-radius: 10px;
+  height: 48px;
+  padding: 0 32px;
+}
+
+.chosen-product-calculate-add-button span {
+  color: #AB572D;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20.946px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+
+.chosen-product-container .chosen-product-wrapper .chosen-product-right .chosen-product-img-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* align left */
+  align-items: center;
+  margin-right: 600px;
+  gap: 12px;
+}
+
+.chosen-product-container .chosen-product-wrapper .chosen-product-right .chosen-product-img-preview img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer
+}
+
+.chosen-product-container .chosen-product-wrapper .chosen-product-right .chosen-product-img-preview img:hover {
+  transform: scale(1.1) rotate(1deg);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+
+.chosen-product-container .chosen-product-wrapper .chosen-product-right .chosen-product-img-preview p {
+  color: #FFF;
+  text-align: justify;
+  border: 2px solid #7d4a0b;
+  font-family: "Satoshi Variable";
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+  padding: 6px 12px;
+>>>>>>> 2ad18b3 (feat: product detail page developed)
 }
