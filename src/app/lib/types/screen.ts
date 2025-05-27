@@ -1,6 +1,3 @@
-// Type Integration Creation 2 types | = via screen components || target-oriented
-/** REACT APP STATE */
-
 import { Member } from "./member";
 import { Order } from "./order";
 import { Product } from "./product";
@@ -20,7 +17,7 @@ export interface HomePageState {
 
 /** Products Screen Component related */
 export interface ProductsPageState {
-  restaurant: Member | null;
+  admin: Member | null;
   chosenProduct: Product | null;
   products: Product[];
 }

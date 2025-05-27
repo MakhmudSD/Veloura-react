@@ -1,77 +1,9 @@
-html, body {
+html,
+body {
   background-color: #161515;
   font-size: 16px;
   margin: 0;
   padding: 0;
-}
-
-/* BACKGROUND */
-.background-circles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: -1;
-  background: #1a1a1a;
-}
-
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 215, 0, 0.8),
-    rgba(255, 215, 0, 0.3)
-  );
-  box-shadow: 0 0 15px 4px rgba(255, 215, 0, 0.6);
-  opacity: 0.5;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-.circle1 {
-  width: 120px;
-  height: 120px;
-  top: 20%;
-  left: 10%;
-  animation-name: float1;
-  animation-duration: 12s;
-}
-
-.circle2 {
-  width: 80px;
-  height: 80px;
-  top: 60%;
-  left: 30%;
-  animation-name: float2;
-  animation-duration: 15s;
-}
-
-.circle3 {
-  width: 100px;
-  height: 100px;
-  top: 40%;
-  left: 80%;
-  animation-name: float3;
-  animation-duration: 18s;
-}
-
-@keyframes float1 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-20px) translateX(10px); }
-}
-
-@keyframes float2 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(15px) translateX(-10px); }
-}
-
-@keyframes float3 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-25px) translateX(-15px); }
 }
 
 /* PRODUCT SECTION */
@@ -314,9 +246,17 @@ html, body {
 
 /* ANIMATIONS */
 @keyframes shimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes fadeInUp {
@@ -331,26 +271,6 @@ html, body {
   }
 }
 
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .product-container .product-list .product-frame .product-box {
-    flex: 0 0 calc(33.333% - 20px);
-  }
-}
-
-@media (max-width: 768px) {
-  .product-container .product-list .product-frame .product-box {
-    flex: 0 0 calc(50% - 15px);
-    width: auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .product-container .product-list .product-frame .product-box {
-    flex: 0 0 100%;
-    width: auto;
-  }
-}
 
 .special-offers-section {
   width: 100%;
@@ -377,42 +297,37 @@ html, body {
   margin-bottom: 20px;
 }
 
-/* Row 1 - Cool sky blue gradient with subtle teal and turquoise */
 .dark-teal {
-  background: 
-    linear-gradient(
-      to right, 
-      rgba(2, 37, 44, 0.15),   /* light turquoise shimmer */
-      rgba(15, 140, 180, 0.2)    /* deeper sky blue */
+  background:
+    linear-gradient(to right,
+      rgba(2, 37, 44, 0.15),
+      rgba(15, 140, 180, 0.2)
     ),
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       rgba(0, 0, 0, 1) 0%,
-      #005f73 40%,       /* muted teal */
-      #101d22 80%, 
-      rgba(0, 0, 0, 1) 0%,     /* dark midnight teal */
-      #414a4e 100%       /* velvety near-black blue */
+      #005f73 40%,
+      #101d22 80%,
+      rgba(0, 0, 0, 1) 0%,
+      #414a4e 100%
     );
   border-radius: 20px 20px 0 0;
 }
 
-/* Row 2 - Warm brown & gold & black gradient for luxury feel */
 .deep-brown {
   background:
-    linear-gradient(
-      to right, 
-      rgba(255, 215, 0, 0.15),  /* gold shimmer */
-      rgba(139, 69, 19, 0.15)   /* saddle brown shimmer */
+    linear-gradient(to right,
+      rgba(255, 215, 0, 0.15),
+      rgba(139, 69, 19, 0.15)
     ),
-    linear-gradient(
-      135deg,
-      #3a1f0b 0%,         /* rich dark brown */
-      #6b4c17 40%,        /* warm brown-gold */
-      rgba(0, 0, 0, 0) 90%,  /* transparent near bottom */
-      rgba(0, 0, 0, 1) 100%  /* solid black at bottom */
+    linear-gradient(135deg,
+      #3a1f0b 0%,
+      #6b4c17 40%,
+      rgba(0, 0, 0, 0) 90%,
+      rgba(0, 0, 0, 1) 100%
     );
   border-radius: 0 0 20px 20px;
 }
+
 .special-text-box {
   flex: 1;
   display: flex;
@@ -443,7 +358,8 @@ html, body {
 }
 
 .special-description h3 span.highlight-text {
-  color: #EFA94B;;
+  color: #EFA94B;
+  ;
 }
 
 .special-description p {
@@ -630,7 +546,6 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* align left */
   align-items: center;
   margin-right: 600px;
   gap: 12px;
@@ -660,4 +575,83 @@ html, body {
   margin: 0;
   white-space: nowrap;
   padding: 6px 12px;
+}
+
+.search-bar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 500px;
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: #e0a676;
+  border: 1px solid #e0d6ce;
+  border-radius: 22px;
+  padding: 6px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.veloura-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  padding: 6px 0;
+  outline: none;
+  color: #2f2f2f;
+  font-family: inherit;
+}
+
+.veloura-search-input::placeholder {
+  color: #c5a773; 
+  opacity: 0.8;
+}
+
+.veloura-clear-icon {
+  color: #b8a29b;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.veloura-clear-icon:hover {
+  color: #a1877b;
+}
+
+.veloura-search-button {
+  background-color: #c3a38c !important;
+  color: #fff !important;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  text-transform: none;
+  font-size: 0.9rem;
+  min-width: auto;
+}
+
+.veloura-search-button:hover {
+  background-color: #b8957e !important;
+}
+
+
+.no-data-container {
+  margin: 120px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #a48c76; 
+}
+
+.no-data-icon {
+  font-size: 80px;
+  color: #d1b6a4;
+  margin-bottom: 16px;
+}
+
+.no-data-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #a48c76;
+  margin: 0;
 }

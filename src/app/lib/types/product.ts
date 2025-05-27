@@ -1,29 +1,62 @@
+import { ObjectId } from "mongoose";
 import {
+  ProductCategory,
+  ProductTier,
   ProductStatus,
-  ProductCollection,
-  ProductSize,
+  ProductTargetAudience,
 } from "../enums/products.enum";
 
 export interface Product {
-  _id: string;
+  _id: ObjectId;
   productStatus: ProductStatus;
-  productCollection: ProductCollection;
+  productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productLeftCount: number;
-  productSize: ProductSize;
-  productVolume: number;
+  productTier: ProductTier; 
+  productQuantity?: number;
   productDesc?: string;
   productImages: string[];
   productViews: number;
-  createdAt: Date;
-  updatedAt: Date;
+  productVolumeMl?: number; 
+  productTargetAudience?: ProductTargetAudience;
 }
 
 export interface ProductInquiry {
   order: string;
   page: number;
   limit: number;
-  productCollection?: ProductCollection;
+  productCategory?: ProductCategory;
   search?: string;
+  gender?: string
+  volume?: string ; 
+  sortBy?: "",
+}
+
+export interface ProductInput {
+  productStatus: ProductStatus;
+  productCategory: ProductCategory;
+  productName: string;
+  productPrice: number;
+  productTier?: ProductTier;
+  productQuantity?: number;
+  productDesc?: string;
+  productImages: string[];
+  productViews: number;
+  productVolumeMl?: number;
+  productTargetAudience?: ProductTargetAudience;
+}
+
+export interface ProductUpdateInput {
+  _id: ObjectId;
+  productStatus?: ProductStatus;
+  productCategory?: ProductCategory; 
+  productName?: string;
+  productPrice?: number;
+  productTier?: ProductTier;
+  productQuantity?: number;
+  productDesc?: string;
+  productImages?: string[];
+  productViews?: number;
+  productVolumeMl?: number; 
+  productTargetAudience?: ProductTargetAudience;
 }

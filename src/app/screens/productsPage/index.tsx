@@ -1,19 +1,25 @@
+import React from "react";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Products from "./Products";
+import ChosenProduct from "./ChosenProduct";
 import "../../../css/products.css";
-import { ChosenProduct } from "./ChosenProduct";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { CartItem } from "../../lib/types/search";
 
-export default function ProductsPage() {
-  const { path } = useRouteMatch(); // dynamically gets the matched base route
+interface ProductsPageProps {
+  onAdd: (item: CartItem) => void;
+}
 
+export default function ProductsPage(props: ProductsPageProps) {
+  const { onAdd } = props;
+  const products = useRouteMatch();
   return (
     <div className="products-page">
       <Switch>
-        <Route path={`${path}/:productId`}>
-          <ChosenProduct />
+        <Route path={`${products.path}/:productId`}>
+          <ChosenProduct onAdd={onAdd} />
         </Route>
-        <Route exact path={path}>
-          <Products />
+        <Route path={`${products.path}`}>
+          <Products onAdd={onAdd} />
         </Route>
       </Switch>
     </div>

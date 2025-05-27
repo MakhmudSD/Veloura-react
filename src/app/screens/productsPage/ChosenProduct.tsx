@@ -1,65 +1,174 @@
 import { Box, Button, Container, Stack } from "@mui/material";
+import { createSelector, Dispatch } from "@reduxjs/toolkit";
+import { setAdmin, setChosenProduct } from "./slice";
+import { Member } from "../../lib/types/member";
+import { Product } from "../../lib/types/product";
+import { retrieveAdmin, retrieveChosenProduct } from "./selector";
+import { CartItem } from "../../lib/types/search";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import ProductService from "../../services/ProductService";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 
-export function ChosenProduct() {
+const actionDispatch = (dispatch: Dispatch) => ({
+  setAdmin: (data: Member) => dispatch(setAdmin(data)),
+  setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
+});
+
+const chosenProductRetriever = createSelector(
+  retrieveChosenProduct,
+  (chosenProduct) => ({ chosenProduct })
+);
+
+const adminRetriever = createSelector(retrieveAdmin, (admin) => ({ admin }));
+
+interface ChosenProductProps {
+  onAdd: (item: CartItem) => void;
+}
+
+export function ChosenProduct(props: ChosenProductProps) {
+  const { onAdd } = props;
+  const [quantity, setQuantity] = useState(1);
+  const { productId } = useParams<{ productId: string }>();
+  const { setAdmin, setChosenProduct } = actionDispatch(useDispatch());
+  const { chosenProduct } = useSelector(chosenProductRetriever);
+  const { admin } = useSelector(adminRetriever);
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  const serverApi = process.env.REACT_APP_SERVER_API || "";
+
+  useEffect(() => {
+    if (!productId) return;
+
+    const productService = new ProductService();
+    productService
+      .getProduct(productId)
+      .then((data) => setChosenProduct(data))
+      .catch((err) => console.log("ERROR on setChosenProduct", err));
+  }, [productId, setChosenProduct, setAdmin]);
+
+  if (!chosenProduct) return null;
+
+  const handleChangeQuantity = (change: number) => {
+    const newQty = quantity + change;
+    if (newQty < 1) return;
+    setQuantity(newQty);
+  };
+
   return (
     <Container className="chosen-product-container">
       <Stack direction="row" spacing={4} className="chosen-product-wrapper">
         <Box className="chosen-product-left">
-          <img
-            src="/img/Old_fashion_balck_and_gold_color_perfume-removebg-preview 1.png"
-            alt="Black and gold luxury perfume bottle"
-            className="main-product-image"
-          />
+          <Swiper
+            loop={true}
+            navigation={true}
+            thumbs={{ swiper: thumbsSwiper }}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="main-product-image-swiper"
+          >
+            {(chosenProduct.productImages || []).map((ele, index) => {
+              const imagePath = `${serverApi}/${ele}`;
+              return (
+                <SwiperSlide key={index}>
+                  <img
+                    src={imagePath}
+                    alt="Black and gold luxury perfume bottle"
+                    className="main-product-image"
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </Box>
 
         <Stack className="chosen-product-right" spacing={2}>
           <Box className="chosen-product-title">
-            <h1>Luxurious Elixir</h1>
+            <h1>{chosenProduct.productName}</h1>
           </Box>
 
           <Box className="chosen-product-description">
-            <p>
-              Step into a world of unparalleled opulence with Luxurious Elixir,
-              an exquisite fragrance that weaves an enchanting symphony of gold
-              and luxury. This gilded elixir is a celebration of sophistication,
-              crafted with the finest essences and imbued with the allure of
-              precious golden hues.
-            </p>
-          </Box>
-          <Box className="chosen-product-img-preview">
-            <img
-              src="/img/Old_fashion_balck_and_gold_color_perfume-removebg-preview 1.png"
-              alt="Perfume preview"
-            />
-            <p>150 ml</p>
+            <p>{chosenProduct.productDesc || "No description"}</p>
           </Box>
 
-          <Box className="chosen-product-price">$250.00</Box>
+          <Box className="chosen-product-img-preview">
+            <img
+              src={
+                chosenProduct.productImages?.[0]
+                  ? `${serverApi}/${chosenProduct.productImages[0]}`
+                  : "/img/Old_fashion_balck_and_gold_color_perfume-removebg-preview 1.png"
+              }
+              alt="Perfume preview"
+            />
+            <p>{chosenProduct.productVolumeMl}</p>
+          </Box>
+
+          <Box className="chosen-product-price">${chosenProduct.productPrice}</Box>
 
           <Box className="chosen-product-calculate-form">
             <span className="chosen-product-quantity-label">Qty</span>
             <button
               className="chosen-product-remove"
               aria-label="Decrease quantity"
+              onClick={() => handleChangeQuantity(-1)}
             >
               -
             </button>
-            <span className="chosen-product-number">1</span>
+            <span className="chosen-product-number">{quantity}</span>
             <button
               className="chosen-product-add"
               aria-label="Increase quantity"
+              onClick={() => handleChangeQuantity(1)}
             >
               +
             </button>
           </Box>
 
-          <Button className="chosen-product-calculate-add-button">
+          <Button
+            className="chosen-product-calculate-add-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onAdd({
+                _id: chosenProduct._id,
+                quantity,
+                name: chosenProduct.productName,
+                price: chosenProduct.productPrice,
+                image: chosenProduct.productImages?.[0] || "",
+              });
+            }}
+          >
             <span>Add to Bag</span>
           </Button>
         </Stack>
+      </Stack>
+
+      <Stack className="chosen-product-slider">
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          loop={true}
+          spaceBetween={10}
+          slidesPerView={4}
+          freeMode={true}
+          watchSlidesProgress={true}
+          modules={[FreeMode, Navigation, Thumbs]}
+          className="swiper-area"
+        >
+          {(chosenProduct.productImages || []).map((ele, index) => {
+            const imagePath = `${serverApi}/${ele}`;
+            return (
+              <SwiperSlide key={index}>
+                <img className="slider-image" src={imagePath} alt="" />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </Stack>
     </Container>
   );
 }
 
 export default ChosenProduct;
+

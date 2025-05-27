@@ -1,11 +1,14 @@
-import { MemberType, MemberStatus } from "../enums/members.enum";
+import mongoose from "mongoose";
+import { MemberStatus, MemberType } from "../enums/members.enum";
+import { Session } from "express-session";
 
 export interface Member {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   memberType: MemberType;
   memberStatus: MemberStatus;
   memberNick: string;
   memberPhone: string;
+  memberEmail?: string;
   memberPassword?: string;
   memberAddress?: string;
   memberDesc?: string;
@@ -20,6 +23,7 @@ export interface MemberInput {
   memberStatus?: MemberStatus;
   memberNick: string;
   memberPhone: string;
+  memberEmail?: string;
   memberPassword: string;
   memberAddress?: string;
   memberDesc?: string;
@@ -28,8 +32,11 @@ export interface MemberInput {
 }
 
 export interface MemberUpdateInput {
-  memberNick?: string;
-  memberPhone?: string;
+  _id: mongoose.Types.ObjectId | undefined;
+  memberStatus?: MemberStatus;
+  memberNick: string;
+  memberPhone: string | undefined;
+  memberEmail?: string;
   memberPassword?: string;
   memberAddress?: string;
   memberDesc?: string;
@@ -40,3 +47,20 @@ export interface LoginInput {
   memberNick: string;
   memberPassword: string;
 }
+
+export interface AdminRequest extends Request {
+  member: Member;
+  session: Session & { member: Member };
+  file: Express.Multer.File;
+  files: Express.Multer.File[];
+}
+
+export interface ExtendedRequest extends Request {
+  query: any;
+  params: { id: any; };
+  cookies: any;
+  member: Member;
+  file: Express.Multer.File;
+  files: Express.Multer.File[];
+}
+

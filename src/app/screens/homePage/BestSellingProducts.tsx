@@ -1,6 +1,8 @@
 import { Box, Container, Stack } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
+import SwiperCore from "swiper";
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -43,14 +45,10 @@ export function BestSellingProducts() {
       <Stack className="best-seller-frame">
         <Swiper
           className="best-seller-products"
-          slidesPerView={4}
-          spaceBetween={30}
-          navigation={{
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          }}
-          pagination={{ clickable: true }}
+          modules={[Autoplay, Navigation, Pagination]}
           autoplay={{ delay: 3000 }}
+          navigation
+          pagination={{ clickable: true }}
           loop={true}
         >
           {products.map((item, index) => (
