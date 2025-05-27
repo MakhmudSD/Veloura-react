@@ -10,7 +10,6 @@ import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
 import  HelpPage  from "./screens/helpPage";
-import AboutUs from "./screens/aboutUs";
 
 
 function App() {
@@ -28,9 +27,7 @@ function App() {
         <Route path="/member-page">
           <UserPage />
         </Route>
-        <Route path="/aboutUs">
-          <AboutUs />
-        </Route>
+
         <Route path="/help">
           <HelpPage />
         </Route>
