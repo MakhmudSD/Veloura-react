@@ -10,9 +10,7 @@ export interface AppRootState {
 
 /** HomePage Screen Component related */
 export interface HomePageState {
-  popularDishes: Product[];
-  newDishes: Product[];
-  topUsers: Member[];
+  BestSellingProducts: any;
 }
 
 /** Products Screen Component related */

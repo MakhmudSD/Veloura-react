@@ -228,24 +228,6 @@ export function Products(props: ProductsProps) {
                   <MenuItem value="150ml">150ml</MenuItem>
                 </Select>
               </FormControl>
-
-              <FormControl
-                variant="outlined"
-                className="filter-control"
-                sx={formStyle}
-              >
-                <InputLabel>Price</InputLabel>
-                <Select
-                  label="Price"
-                  defaultValue=""
-                  value={productSearch.order}
-                  onChange={(e) => searchOrderHandler(e.target.value)}
-                  MenuProps={menuProps}
-                >
-                  <MenuItem value="low-high">Low to High</MenuItem>
-                  <MenuItem value="high-low">High to Low</MenuItem>
-                </Select>
-              </FormControl>
             </Box>
           </Box>
         </Stack>
@@ -312,83 +294,13 @@ export function Products(props: ProductsProps) {
             ) : (
               <Box className="no-data-container">
                 <SentimentDissatisfiedIcon className="no-data-icon" />
-                <p className="no-data-text">Products are not Available!</p>
+                <p className="no-data-text">Products are not available!</p>
               </Box>
             )}
           </Stack>
         </Stack>
 
-        <Stack className="special-offers-section" spacing={0}>
-          <div className="special-title">
-            <h1>Special Offers</h1>
-          </div>
-
-          {/* Row 1: TEXT LEFT, IMAGE RIGHT */}
-          <Box className="special-content dark-teal">
-            <Box className="special-text-box">
-              <Box className="special-headline">
-                <h1>Limited Time Offer: 20% OFF on Aqua Serenity Perfume!</h1>
-              </Box>
-
-              <Box className="special-description">
-                <h3>
-                  Aqua Serenity <br />
-                  <span>Embrace the Tranquil Tides</span>
-                </h3>
-                <p>
-                  Immerse yourself in the calming embrace of Aqua Serenity, a
-                  captivating fragrance that evokes the essence of water.
-                </p>
-              </Box>
-
-              <Button
-                variant="contained"
-                className="special-button"
-                onClick={() => handleKnowMore("golden-angel")}
-              >
-                <p>Know More</p>
-              </Button>
-            </Box>
-
-            <Box className="special-image-box">
-              <img src="/img/kuroswan.png" alt="Aqua Serenity Perfume" />
-            </Box>
-          </Box>
-
-          {/* Row 2: IMAGE LEFT, TEXT RIGHT */}
-          <Box className="special-content deep-brown">
-            <Box className="special-image-box">
-              <img src="/img/thong_nguyen.png" alt="Golden Angel Perfume" />
-            </Box>
-
-            <Box className="special-text-box">
-              <Box className="special-headline">
-                <h1>Limited Time Offer: 25% OFF on Golden Angel Perfume!</h1>
-              </Box>
-
-              <Box className="special-description">
-                <h3>
-                  Golden Angel <br />
-                  <span className="highlight-text">
-                    Unleash Your Divine Glow
-                  </span>
-                </h3>
-                <p>
-                  Indulge in the divine allure of Golden Angel, a fragrance that
-                  embodies celestial elegance and radiance.
-                </p>
-              </Box>
-
-              <Button
-                variant="contained"
-                className="special-button"
-                onClick={() => handleKnowMore("golden-angel")}
-              >
-                <p>Know More</p>
-              </Button>
-            </Box>
-          </Box>
-        </Stack>
+       
 
         <Stack className="special-offers-section" spacing={0}>
           <div className="special-title">

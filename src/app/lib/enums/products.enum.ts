@@ -21,9 +21,9 @@ export enum ProductSize {
 }
 
 export enum ProductStatus {
-  AVAILABLE = "AVAILABLE",
+  FINISH = "FINISH",
   PROCESS = "PROCESS",
-  UNAVAILABLE = "UNAVAILABLE",
+  PAUSE = "PAUSE",
 }
 
 export enum ProductTargetAudience {

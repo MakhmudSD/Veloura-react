@@ -9,18 +9,21 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import theme from "./app/MaterialTheme";
+import ContextProvider from "./app/context/ContextProvider";
 
 const container =   document.getElementById("root")!; // real dom
 const root = createRoot(container)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ContextProvider>
       <Router>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <App />
-        </ThemeProvider>
+        </ThemeProvider> 
       </Router>
+      </ContextProvider>
     </Provider>
   </React.StrictMode>, // virtual dom
 );

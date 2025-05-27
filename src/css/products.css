@@ -581,13 +581,13 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  max-width: 500px;
-  margin-bottom: 30px;
+  max-width: 400px; /* smaller width */
+  margin-bottom: 40px;
   width: 100%;
-  background-color: #e0a676;
+  background-color: #f5e8de; /* lighter background for better contrast */
   border: 1px solid #e0d6ce;
   border-radius: 22px;
-  padding: 6px 12px;
+  padding: 4px 10px; /* tighter padding */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -595,22 +595,24 @@ body {
   flex: 1;
   border: none;
   background: transparent;
-  font-size: 0.95rem;
-  padding: 6px 0;
+  font-size: 0.85rem; /* smaller font */
+  padding: 4px 0; /* reduced padding */
   outline: none;
   color: #2f2f2f;
   font-family: inherit;
+  min-width: 0; /* ensures it shrinks properly */
 }
 
 .veloura-search-input::placeholder {
-  color: #c5a773; 
-  opacity: 0.8;
+  color: #382111;
+  opacity: 0.7;
+  font-size: 16px;
 }
 
 .veloura-clear-icon {
-  color: #b8a29b;
+  color: #7f5649;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 22px; /* slightly smaller icon */
 }
 
 .veloura-clear-icon:hover {
@@ -621,10 +623,10 @@ body {
   background-color: #c3a38c !important;
   color: #fff !important;
   font-weight: 500;
-  padding: 6px 16px;
-  border-radius: 20px;
+  padding: 4px 8px; /* smaller button */
+  border-radius: 18px;
   text-transform: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   min-width: auto;
 }
 
@@ -634,24 +636,26 @@ body {
 
 
 .no-data-container {
-  margin: 120px auto;
+  margin: 160px auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #a48c76; 
+  color: #a48c76;
+  max-width: 600px;
 }
 
 .no-data-icon {
-  font-size: 80px;
-  color: #d1b6a4;
-  margin-bottom: 16px;
+  font-size: 160px !important;/* much larger icon */
+  color: #d1b6a4 !important;
+  margin-bottom: 24px;
 }
 
 .no-data-text {
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1.8rem; /* larger, more readable text */
+  font-weight: 600;
   color: #a48c76;
   margin: 0;
+  line-height: 1.5;
 }

@@ -37,7 +37,7 @@ export default function ProcessOrders(props: ProcessOrderProps) {
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
-        orderStatus: OrderStatus.AVAILABLE,
+        orderStatus: OrderStatus.FINISH,
       };
 
       const confirmation = window.confirm("Have you received your order?");

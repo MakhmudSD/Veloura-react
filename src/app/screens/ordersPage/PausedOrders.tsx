@@ -60,7 +60,7 @@ export default function PausedOrders(props: PausedOrderProps) {
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
-        orderStatus: OrderStatus.PROCESSING,
+        orderStatus: OrderStatus.PROCESS,
       };
 
       const confirmation = window.confirm(

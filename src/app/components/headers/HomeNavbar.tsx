@@ -109,13 +109,6 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                   Help
                 </NavLink>
               </Box>
-              <Basket
-                cartItems={cartItems}
-                onAdd={onAdd}
-                onRemove={onRemove}
-                onDelete={onDelete}
-                onDeleteAll={onDeleteAll}
-              />
             </Stack>
           </Stack>
 
@@ -126,6 +119,13 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             alignItems="center"
             className="navbar-frame-right"
           >
+                 <Basket
+                        cartItems={cartItems}
+                        onAdd={onAdd}
+                        onRemove={onRemove}
+                        onDelete={onDelete}
+                        onDeleteAll={onDeleteAll}
+                      />
             {!authMember ? (
               <>
                 <Button
