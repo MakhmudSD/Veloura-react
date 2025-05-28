@@ -24,12 +24,19 @@ export default function FinishedOrders() {
             <Box key={order._id.toString()} className="order-main-box">
               <Box className="order-box-scroll">
                 {order?.orderItems?.map((item: OrderItem) => {
-                  const product: Product = order.productData.filter(
-                    (ele: Product) => item.productId === ele._id
-                  )[0];
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
+                  const product: Product | undefined =
+                    order.productData?.filter(
+                      (ele: Product) => item.productId === ele._id
+                    )[0];
+
+                  const imagePath = product?.productImages?.[0]
+                    ? `${serverApi}/${product.productImages[0]}`
+                    : "/icons/noimage-list.svg";
                   return (
-                    <Box key={item._id.toString()} className="orders-name-price">
+                    <Box
+                      key={item._id.toString()}
+                      className="orders-name-price"
+                    >
                       <Box className="orders-name-price-box">
                         <img
                           src={imagePath}

@@ -30,8 +30,8 @@ export default function PausedOrders(props: PausedOrderProps) {
 
   /** HANDLERS */
   const deleteOrderHandler = async (e: T) => {
-    if (!authMember) throw new Error(Messages.error2);
     try {
+      if (!authMember) throw new Error(Messages.error2);
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
@@ -85,20 +85,25 @@ export default function PausedOrders(props: PausedOrderProps) {
             <Box key={order._id.toString()} className="order-main-box">
               <Box className="order-box-scroll">
                 {order?.orderItems?.map((item: OrderItem) => {
-                  const product: Product = order.productData.filter(
+                  const product: Product| undefined = order.productData?.filter(
                     (ele: Product) => item.productId === ele._id
                   )[0];
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
+                  const imagePath = product?.productImages?.[0]
+                  ? `${serverApi}/${product.productImages[0]}`
+                  : "/icons/noimage-list.svg";
                   return (
-                    <Box key={item._id.toString()} className="orders-name-price">
+                    <Box
+                      key={item._id.toString()}
+                      className="orders-name-price"
+                    >
                       <Box className="orders-name-price-box">
                         <img
                           src={imagePath}
                           alt="lavash"
-                          className="order-dish-img"
+                          className="order-img"
                         />
-                        <p className="title-dish">{product.productName}</p>
-                        <Box className="price-box">
+<p className="title-dish">{product?.productName || "Unknown product"}</p>
+<Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />
                           <p>${item.itemQuantity}</p>
@@ -155,7 +160,7 @@ export default function PausedOrders(props: PausedOrderProps) {
           );
         })}
 
-        {!pausedOrders ||
+         {!pausedOrders ||
           (pausedOrders.length === 0 && (
             <Box display="flex" flexDirection="row" justifyContent="center">
               <img

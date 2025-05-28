@@ -14,6 +14,7 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import MemberService from "../../services/MemberService";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setAdmin: (data: Member) => dispatch(setAdmin(data)),
@@ -35,21 +36,24 @@ export function ChosenProduct(props: ChosenProductProps) {
   const { onAdd } = props;
   const [quantity, setQuantity] = useState(1);
   const { productId } = useParams<{ productId: string }>();
-  const { setAdmin, setChosenProduct } = actionDispatch(useDispatch());
+  const { setChosenProduct } = actionDispatch(useDispatch());
   const { chosenProduct } = useSelector(chosenProductRetriever);
-  const { admin } = useSelector(adminRetriever);
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const serverApi = process.env.REACT_APP_SERVER_API || "";
 
   useEffect(() => {
-    if (!productId) return;
-
-    const productService = new ProductService();
-    productService
+    const product = new ProductService();
+    product
       .getProduct(productId)
       .then((data) => setChosenProduct(data))
-      .catch((err) => console.log("ERROR on setChosenProduct", err));
-  }, [productId, setChosenProduct, setAdmin]);
+      .catch((err) => console.log(err));
+
+    const member = new MemberService();
+    member
+      .getAdmin()
+      .then((data) => setAdmin(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   if (!chosenProduct) return null;
 
@@ -70,8 +74,8 @@ export function ChosenProduct(props: ChosenProductProps) {
             modules={[FreeMode, Navigation, Thumbs]}
             className="main-product-image-swiper"
           >
-            {(chosenProduct.productImages || []).map((ele, index) => {
-              const imagePath = `${serverApi}/${ele}`;
+            {chosenProduct?.productImages.map((ele: string, index: number) => {
+              const imagePath = "/img/ariekoprasethio_perfume.png";
               return (
                 <SwiperSlide key={index}>
                   <img
@@ -96,17 +100,15 @@ export function ChosenProduct(props: ChosenProductProps) {
 
           <Box className="chosen-product-img-preview">
             <img
-              src={
-                chosenProduct.productImages?.[0]
-                  ? `${serverApi}/${chosenProduct.productImages[0]}`
-                  : "/img/Old_fashion_balck_and_gold_color_perfume-removebg-preview 1.png"
-              }
+              src={"/img/ariekoprasethio_perfume.png"}
               alt="Perfume preview"
             />
-            <p>{chosenProduct.productVolumeMl}</p>
+            <p>{chosenProduct.productVolumeMl} ml</p>
           </Box>
 
-          <Box className="chosen-product-price">${chosenProduct.productPrice}</Box>
+          <Box className="chosen-product-price">
+            ${chosenProduct.productPrice}
+          </Box>
 
           <Box className="chosen-product-calculate-form">
             <span className="chosen-product-quantity-label">Qty</span>
@@ -171,4 +173,3 @@ export function ChosenProduct(props: ChosenProductProps) {
 }
 
 export default ChosenProduct;
-

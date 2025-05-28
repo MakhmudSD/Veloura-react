@@ -28,20 +28,27 @@ const useBasket = () => {
     }
   };
   const onRemove = (input: CartItem) => {
-    const exist: any = cartItems.find(
-      (item: CartItem) => item._id === input._id
-    );
-
+    const exist = cartItems.find((item) => item._id === input._id);
+  
+    if (!exist) return;
+  
     if (exist.quantity === 1) {
-      const cartUpdate = cartItems.filter((item: CartItem) =>
-        item._id !== input._id
-          ? { ...exist, quantity: exist.quantity - 1 }
+      // Remove the item entirely
+      const cartUpdate = cartItems.filter(item => item._id !== input._id);
+      setCartItems(cartUpdate);
+      localStorage.setItem("cartData", JSON.stringify(cartUpdate));
+    } else {
+      // Decrease quantity
+      const cartUpdate = cartItems.map(item =>
+        item._id === input._id
+          ? { ...item, quantity: item.quantity - 1 }
           : item
       );
       setCartItems(cartUpdate);
       localStorage.setItem("cartData", JSON.stringify(cartUpdate));
     }
   };
+  
 
   const onDelete = (input: CartItem) => {
     const cartUpdate = cartItems.filter(

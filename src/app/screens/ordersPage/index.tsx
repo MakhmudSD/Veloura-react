@@ -32,8 +32,8 @@ export default function OrdersPage() {
   const [value, setValue] = useState("1");
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
-    limit: 5,
-    orderStatus: OrderStatus.PAUSE,
+    limit: 12,
+    orderStatus: OrderStatus.PROCESS,
   });
   useEffect(() => {
     const order = new OrderService();
@@ -143,7 +143,7 @@ export default function OrdersPage() {
                 </Box>
               </Box>
               <Box className="order-card-box-4">
-                <div className="order-card-owner">Dustin Poirier</div>
+                <div className="order-card-owner">{authMember?.memberNick}</div>
               </Box>
               <Box className="order-payment-cards">
                 <div className="western-union">

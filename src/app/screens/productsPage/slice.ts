@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ProductsPageState } from "../../lib/types/screen";
 
 const initialState: ProductsPageState = {
-    products: [],
+  products: [],
   admin: null,
   chosenProduct: null,
 };

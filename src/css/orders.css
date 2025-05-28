@@ -1,0 +1,257 @@
+/* Background & typography */
+.order-page {
+    background-color: #faf9f7; /* light cream */
+    font-family: 'Montserrat', 'Commissioner', sans-serif;
+    color: #4a4a4a; /* dark gray text */
+    min-height: 100vh;
+    padding: 20px 0;
+  }
+  
+  /* Container */
+  .order-container {
+    display: flex;
+    width: 100%;
+    gap: 30px;
+      margin-top: 200px; 
+         align-items: flex-start; 
+  }
+  
+  /* Left side - Tabs and content */
+  .order-left {
+    flex: 3;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
+    padding: 20px;
+    margin-right: 200px;
+
+  }
+  
+  
+  /* Tabs nav frame */
+  .order-nav-frame {
+    margin-bottom: 20px;
+  border-bottom: 2px solid #e2ded8;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 8px;
+  }
+  
+  /* Tabs styling */
+  .table_list {
+    min-height: 40px;
+  }
+  
+  .muiTab {
+    text-transform: uppercase;
+  font-weight: 600;
+  color: #7e7e7e; /* muted gray */
+  font-size: 14px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px 6px 0 0;
+  user-select: none;
+  }
+  
+  .muiTab.Mui-selected {
+    color: #a97c50; /* Veloura gold */
+    border-bottom: 3px solid #a97c50;
+  }
+  
+  /* Main content area inside tabs */
+  .order-main-content {
+    min-height: 320px;
+  }
+  
+  /* Right side - user info and payment box */
+  .order-right {
+    flex: 1.4;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  /* User info box */
+  .order-info-box {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.08);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Member box with avatar and info */
+  .member-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .order-user-img {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin-bottom: 12px;
+  }
+  
+  .order-user-avatar {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #a97c50;
+  }
+  
+  .order-user-icon-box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #a97c50;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+  }
+  
+  .order-user-prof-img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+  }
+  
+  .order-user-name {
+    font-weight: 700;
+    font-size: 18px;
+    color: #3f3f3f;
+  }
+  
+  .order-user-prof {
+    font-size: 14px;
+    color: #9e9e9e;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  
+  /* Address box */
+  .liner {
+    border-top: 1px solid #e2ded8;
+    padding-top: 15px;
+  }
+  
+  .order-user-address {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #5a5a5a;
+  }
+  
+  .spec-address-text {
+    font-style: italic;
+  }
+  
+  /* Payment info box */
+  .order-payment-box {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.08);
+    padding: 20px;
+  }
+  
+  /* Card info container */
+  .order-payment-info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Card number style */
+  .order-card-box-1 {
+    font-weight: 600;
+    color: #3f3f3f;
+    font-size: 16px;
+  }
+  
+  .order-card-number {
+    letter-spacing: 2px;
+  }
+  
+  /* Card group: validity and cvv side by side */
+  .order-card-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .order-card-box-2,
+  .order-card-box-3 {
+    background: #faf9f7;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    color: #7a7a7a;
+    font-size: 14px;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .order-card-cvv {
+    color: #a97c50;
+    font-weight: 600;
+  }
+  
+  /* Card owner */
+  .order-card-box-4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4a4a4a;
+  }
+  
+  /* Payment card logos container */
+  .order-payment-cards {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  .order-payment-cards > div {
+    width: 48px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .order-payment-cards > div:hover {
+    transform: scale(1.1);
+  }
+  
+  .order-payment-cards img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .order-container {
+      flex-direction: column;
+      padding: 10px;
+    }
+    .order-left,
+    .order-right {
+      flex: unset;
+      width: 100%;
+    }
+  }
+  

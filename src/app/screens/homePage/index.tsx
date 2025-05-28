@@ -10,7 +10,7 @@ import "../../../css/homepage.css";
 export default function HomePage() {
   return (
     <div className="homepage">
-      <HeroBanner />
+      <HeroBanner product={{ _id: "6836bf44e1481ec7b6bd918d" }}  />
       <WelcomeNote />
       <OurValues />
       <BestSellingProducts />

@@ -1,6 +1,17 @@
 import { Box, Button, Container, Stack } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
-export function HeroBanner() {
+interface HeroBannerProps {
+  product: { _id: string };
+}
+
+export function HeroBanner({ product }: HeroBannerProps) {
+  const history = useHistory();
+
+  const chooseProductDetail = (id: string) => {
+    history.push(`/products/${id}`);
+  };
+
   return (
     <Container className="hero-banner-container">
       <Stack className="hero-banner-frame">
@@ -9,7 +20,7 @@ export function HeroBanner() {
             Elevate Your Spirit with Victory Scented Fragrances!
           </Box>
           <Box className="hero-banner-left-down">
-            Shop now and embrace the sweet smell of victory with Local Face.
+            Shop now and embrace the sweet smell of victory with Veloura.
           </Box>
           <Button
             variant="contained"
@@ -22,6 +33,7 @@ export function HeroBanner() {
               lineHeight: "normal",
             }}
             className="hero-banner-left-shop"
+            onClick={() => chooseProductDetail(product._id)}
           >
             Shop Now
           </Button>
@@ -33,5 +45,4 @@ export function HeroBanner() {
     </Container>
   );
 }
-
-export default HeroBanner;
+export default HeroBanner

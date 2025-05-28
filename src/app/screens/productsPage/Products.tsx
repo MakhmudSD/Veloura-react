@@ -43,13 +43,7 @@ interface ProductsProps {
   onAdd: (item: CartItem) => void;
 }
 
-const products = Array(12).fill({
-  imgSrc:
-    "/img/Old_fashion_balck_and_gold_color_perfume__3_-removebg-preview 1.png",
-  name: "Luxurious Elixir Rough",
-  price: 220,
-  volume: "100ml",
-});
+
 
 export function Products(props: ProductsProps) {
   const { onAdd } = props;
@@ -77,44 +71,45 @@ export function Products(props: ProductsProps) {
   }, [productSearch]);
   useEffect(() => {
     if (searchText === "") {
-      productSearch.search = "";
-      setProductSearch({ ...productSearch });
+      setProductSearch((prev) => ({
+        ...prev,
+        search: "",
+        page: 1,
+      }));
     }
   }, [searchText]);
 
   /** HANDLERS  */
-  const searchCategoryHandler = (category: ProductCategory) => {
+  const chooseProductDetail = (id: string) => {
+    history.push(`/products/${id}`);
+  };
+ 
+  const handleCategoryChange = (collection: ProductCategory) => {
     productSearch.page = 1;
-    productSearch.productCategory = category;
+    productSearch.productCategory = collection;
     setProductSearch({ ...productSearch });
   };
 
-  const searchOrderHandler = (order: string) => {
-    productSearch.page = 1;
-    productSearch.order = order;
-    setProductSearch({ ...productSearch });
+  const handleVolumeChange = (event: SelectChangeEvent<string>) => {
+    setProductSearch((prev) => ({
+      ...prev,
+      page: 1,
+      volume: event.target.value,
+    }));
   };
 
-  const searchVolumeHandler = (event: SelectChangeEvent<string>) => {
-    const volume = event.target.value;
-    setProductSearch({ ...productSearch, page: 1, volume });
+  const handleGenderChange = (gender: string) => {
+    setProductSearch((prev) => ({ ...prev, page: 1, gender }));
   };
 
-  const searchGenderHandler = (gender: string) => {
-    productSearch.page = 1;
-    productSearch.gender = gender;
-    setProductSearch({ ...productSearch });
+  const handleSearch = () => {
+    setProductSearch((prev) => ({ ...prev, search: searchText }));
   };
 
-  const searchProductHandler = () => {
-    productSearch.search = searchText;
-    setProductSearch({ ...productSearch });
+  const handlePaginationChange = (e: ChangeEvent<unknown>, value: number) => {
+    setProductSearch((prev) => ({ ...prev, page: value }));
   };
 
-  const paginationHandler = (e: ChangeEvent<any>, value: number) => {
-    productSearch.page = value;
-    setProductSearch({ ...productSearch });
-  };
   const handleKnowMore = (productId: string) => {
     history.push(`/products/${productId}`);
   };
@@ -135,9 +130,7 @@ export function Products(props: ProductsProps) {
               name="singleResearch"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") searchProductHandler();
-              }}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
             {searchText && (
               <ClearIcon
@@ -147,7 +140,7 @@ export function Products(props: ProductsProps) {
             )}
             <Button
               variant="contained"
-              onClick={searchProductHandler}
+              onClick={handleSearch}
               endIcon={<SearchIcon className="icon" />}
               className="veloura-search-button"
             >
@@ -171,7 +164,7 @@ export function Products(props: ProductsProps) {
                   MenuProps={menuProps}
                   value={productSearch.productCategory || ""}
                   onChange={(e) =>
-                    searchCategoryHandler(e.target.value as ProductCategory)
+                    handleCategoryChange(e.target.value as ProductCategory)
                   }
                 >
                   <MenuItem value={ProductCategory.ALL}>All</MenuItem>
@@ -199,7 +192,7 @@ export function Products(props: ProductsProps) {
                   label="Gender"
                   defaultValue=""
                   value={productSearch.gender || ""}
-                  onChange={(e) => searchGenderHandler(e.target.value)}
+                  onChange={(e) => handleGenderChange(e.target.value)}
                   MenuProps={menuProps}
                 >
                   <MenuItem value="unisex">Unisex</MenuItem>
@@ -218,7 +211,7 @@ export function Products(props: ProductsProps) {
                   label="Volume"
                   defaultValue=""
                   value={productSearch.volume || ""}
-                  onChange={searchVolumeHandler}
+                  onChange={handleVolumeChange}
                   MenuProps={menuProps}
                 >
                   <MenuItem value="30ml">30ml</MenuItem>
@@ -251,7 +244,7 @@ export function Products(props: ProductsProps) {
                         {product.productViews}
                         <VisibilityIcon
                           sx={{
-                            color: product.productViews > 0 ? "gray" : "white",
+                            color: product.productViews > 0 ? "gold" : "white",
                           }}
                         />
                       </IconButton>
@@ -271,21 +264,15 @@ export function Products(props: ProductsProps) {
                           e.stopPropagation();
                         }}
                       >
-                        <ShoppingCartIcon sx={{ color: "#fff" }} />
+                        <ShoppingCartIcon sx={{ color: "gold" }} />
                       </IconButton>
                     </Box>
                     <Box className="product-desc">
                       <Typography component="span">
-                        {product.productDesc}
+                        {product.productName}
                       </Typography>
                       <Typography component="p" sx={{ mt: 0 }}>
                         $ {product.productPrice}.00{" "}
-                        <Box
-                          component="span"
-                          sx={{ color: "#AB572D", fontWeight: "700" }}
-                        >
-                          {product.productVolumeMl}
-                        </Box>
                       </Typography>
                     </Box>
                   </Box>
@@ -300,7 +287,49 @@ export function Products(props: ProductsProps) {
           </Stack>
         </Stack>
 
-       
+        <Stack spacing={2} className="product-pagination">
+          <Pagination
+            count={
+              products.length !== 0
+                ? productSearch.page + 1
+                : productSearch.page
+            }
+            page={productSearch.page}
+            onChange={handlePaginationChange}
+            renderItem={(item) => (
+              <PaginationItem
+                components={{
+                  previous: ArrowBackIcon,
+                  next: ArrowForwardIcon,
+                }}
+                {...item}
+                color="secondary"
+              />
+            )}
+            variant="outlined"
+            color="secondary"
+            sx={{
+              "& .MuiPaginationItem-root": {
+                fontSize: "20px",
+                width: "48px",
+                height: "48px",
+                fontFamily: "Satoshi",
+                borderRadius: "12px",
+                borderColor: "#ab572d",
+                color: "#fff",
+                backgroundColor: "#1c1c1c",
+                "&:hover": {
+                  backgroundColor: "#333",
+                },
+              },
+              "& .Mui-selected": {
+                backgroundColor: "#ab572d !important",
+                color: "#fff !important",
+                borderColor: "#ab572d",
+              },
+            }}
+          />
+        </Stack>
 
         <Stack className="special-offers-section" spacing={0}>
           <div className="special-title">
@@ -325,7 +354,7 @@ export function Products(props: ProductsProps) {
                 </p>
               </Box>
 
-              <Button variant="contained" className="special-button">
+              <Button variant="contained" className="special-button" onClick={() => chooseProductDetail("")}>
                 <p>Know More</p>
               </Button>
             </Box>
@@ -364,50 +393,6 @@ export function Products(props: ProductsProps) {
               </Button>
             </Box>
           </Box>
-        </Stack>
-
-        <Stack spacing={2} className="product-pagination">
-          <Pagination
-            count={
-              products.length !== 0
-                ? productSearch.page + 1
-                : productSearch.page
-            }
-            page={productSearch.page}
-            onChange={paginationHandler}
-            renderItem={(item) => (
-              <PaginationItem
-                components={{
-                  previous: ArrowBackIcon,
-                  next: ArrowForwardIcon,
-                }}
-                {...item}
-                color="secondary"
-              />
-            )}
-            variant="outlined"
-            color="secondary"
-            sx={{
-              "& .MuiPaginationItem-root": {
-                fontSize: "20px",
-                width: "48px",
-                height: "48px",
-                fontFamily: "Satoshi",
-                borderRadius: "12px",
-                borderColor: "#ab572d",
-                color: "#fff",
-                backgroundColor: "#1c1c1c",
-                "&:hover": {
-                  backgroundColor: "#333",
-                },
-              },
-              "& .Mui-selected": {
-                backgroundColor: "#ab572d !important",
-                color: "#fff !important",
-                borderColor: "#ab572d",
-              },
-            }}
-          />
         </Stack>
       </Container>
     </div>
