@@ -84,7 +84,7 @@
     gap: 15px;
   }
   
-  /* Member box with avatar and info */
+
   .member-box {
     display: flex;
     flex-direction: column;
