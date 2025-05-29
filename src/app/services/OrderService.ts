@@ -21,7 +21,9 @@ class OrderService {
         return {
           itemQuantity: cartItem.quantity,
           itemPrice: cartItem.price,
-          productId: cartItem._id,
+          productId: typeof cartItem._id === 'string'
+      ? cartItem._id
+      : cartItem._id,
         };
       });
       const url = this.path + "/order/create";

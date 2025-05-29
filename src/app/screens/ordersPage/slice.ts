@@ -12,7 +12,6 @@ const orderPageSlice = createSlice({
   initialState,
   reducers: {
     setPausedOrders: (state, action) => {
-      // data comes in payload of action
       state.pausedOrders = action.payload;
     },
     setProcessOrders: (state, action) => {

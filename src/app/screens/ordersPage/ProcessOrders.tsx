@@ -1,49 +1,50 @@
 import React from "react";
 import { Box, Stack, Button } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
+import moment from "moment";
 
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { retrievePausedOrders } from "./selector";
+import { retrieveProcessOrders } from "./selector";
 import { Messages, serverApi } from "../../lib/config";
 import { Product } from "../../lib/types/product";
 import { Order, OrderItem, OrderUpdateInput } from "../../lib/types/order";
+import { useGlobals } from "../../hooks/useGlobals";
+import { OrderStatus } from "../../lib/enums/orders.enum";
 import { sweetErrorHandling } from "../../lib/sweetAlert";
 import { T } from "../../lib/types/common";
-import { OrderStatus } from "../../lib/enums/orders.enum";
-import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderService";
 
-const pausedOrdersRetriever = createSelector(
-  retrievePausedOrders,
-  (pausedOrders) => ({ pausedOrders })
+const processOrdersRetriever = createSelector(
+  retrieveProcessOrders,
+  (processOrders) => ({ processOrders })
 );
 
-interface PausedOrderProps {
+interface ProcessOrderProps {
   setValue: (input: string) => void;
 }
 
-export default function PausedOrders(props: PausedOrderProps) {
+export default function ProcessOrders(props: ProcessOrderProps) {
   const { authMember, setOrderBuilder } = useGlobals();
-  const { pausedOrders } = useSelector(pausedOrdersRetriever);
+  const { processOrders } = useSelector(processOrdersRetriever);
   const { setValue } = props;
 
   /** HANDLERS */
-  const deleteOrderHandler = async (e: T) => {
+  const finishOrderHandler = async (e: T) => {
     if (!authMember) throw new Error(Messages.error2);
+
     try {
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
-        orderStatus: OrderStatus.DELETE,
+        orderStatus: OrderStatus.FINISH,
       };
 
-      const confirmation = window.confirm(
-        "Do you really want to delete your order?"
-      );
+      const confirmation = window.confirm("Have you received your order?");
       if (confirmation) {
         const order = new OrderService();
         await order.updateOrder(input);
+        setValue("3");
         setOrderBuilder(new Date());
       }
     } catch (err) {
@@ -52,49 +53,38 @@ export default function PausedOrders(props: PausedOrderProps) {
     }
   };
 
-  const processOrderHandler = async (e: T) => {
-    if (!authMember) throw new Error(Messages.error2);
-    // PAYMENT PROCESS
-
-    try {
-      const orderId = e.target.value;
-      const input: OrderUpdateInput = {
-        orderId: orderId,
-        orderStatus: OrderStatus.PROCESS,
-      };
-
-      const confirmation = window.confirm(
-        "Do you really want to proceed with payment?"
-      );
-      if (confirmation) {
-        const order = new OrderService();
-        await order.updateOrder(input);
-        setValue("2");
-        setOrderBuilder(new Date());
-      }
-    } catch (err) {
-      console.log(err);
-      sweetErrorHandling(err).then();
-    }
-  };
   return (
-    <TabPanel value="1">
+    <TabPanel value="2">
       <Stack sx={{ maxHeight: "800px", overflowY: "auto" }}>
-        {pausedOrders?.map((order: Order) => {
-          return (
-            <Box key={order._id.toString()} className="order-main-box">
+        {processOrders && processOrders.length > 0 ? (
+          processOrders.map((order: Order) => (
+            <Box key={order._id} className="order-main-box">
               <Box className="order-box-scroll">
                 {order?.orderItems?.map((item: OrderItem) => {
-                  const product: Product = order.productData.filter(
-                    (ele: Product) => item.productId === ele._id
-                  )[0];
+                  const product: Product | undefined = (
+                    order.productData ?? []
+                  ).find((ele: Product) => item.productId === ele._id);
+
+                  if (
+                    !product ||
+                    !product.productImages ||
+                    product.productImages.length === 0
+                  ) {
+                    return (
+                      <Box key={item._id} className="orders-name-price">
+                        <p>Product or product images not found.</p>
+                      </Box>
+                    );
+                  }
+
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
+
                   return (
-                    <Box key={item._id.toString()} className="orders-name-price">
+                    <Box key={item._id} className="orders-name-price">
                       <Box className="orders-name-price-box">
                         <img
                           src={imagePath}
-                          alt="lavash"
+                          alt="kebab"
                           className="order-dish-img"
                         />
                         <p className="title-dish">{product.productName}</p>
@@ -131,40 +121,36 @@ export default function PausedOrders(props: PausedOrderProps) {
                     />
                     <p>Total</p>
                     <p>${order.orderTotal}</p>
+                    <p className="data-compl">
+                      {moment().format("YY-MM-DD HH-mm")}
+                    </p>
+                    <Button
+                      value={order._id}
+                      variant="contained"
+                      className="verify-btn"
+                      onClick={finishOrderHandler}
+                    >
+                      Verify to fulfill
+                    </Button>
                   </Box>
-                  <Button
-                    value={order._id.toString()}
-                    variant="contained"
-                    color="secondary"
-                    className="cancel-btn"
-                    onClick={deleteOrderHandler}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-  value={order._id.toString()}
-  variant="contained"
-  className="pay-btn"
-  onClick={processOrderHandler}
->
-  Payment
-</Button>
                 </Box>
               </Box>
             </Box>
-          );
-        })}
-
-        {!pausedOrders ||
-          (pausedOrders.length === 0 && (
-            <Box display="flex" flexDirection="row" justifyContent="center">
-              <img
-                src="/icons/noimage-list.svg"
-                alt="noimage"
-                style={{ width: 300, height: 300 }}
-              />
-            </Box>
-          ))}
+          ))
+        ) : (
+          <Box
+            display={"flex"}
+            flexDirection={"row"}
+            justifyContent={"center"}
+            className="no-data-compl"
+          >
+            <img
+              src="/icons/noimage-list.svg"
+              alt="noimage"
+              style={{ width: 300, height: 300 }}
+            />
+          </Box>
+        )}
       </Stack>
     </TabPanel>
   );

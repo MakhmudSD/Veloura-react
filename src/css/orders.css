@@ -1,257 +1,553 @@
-/* Background & typography */
 .order-page {
-    background-color: #faf9f7; /* light cream */
-    font-family: 'Montserrat', 'Commissioner', sans-serif;
-    color: #4a4a4a; /* dark gray text */
-    min-height: 100vh;
-    padding: 20px 0;
-  }
-  
-  /* Container */
-  .order-container {
-    display: flex;
-    width: 100%;
-    gap: 30px;
-      margin-top: 200px; 
-         align-items: flex-start; 
-  }
-  
-  /* Left side - Tabs and content */
-  .order-left {
-    flex: 3;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
-    padding: 20px;
-    margin-right: 200px;
-
-  }
-  
-  
-  /* Tabs nav frame */
-  .order-nav-frame {
-    margin-bottom: 20px;
-  border-bottom: 2px solid #e2ded8;
+  position: relative;
+  width: 100%;
+  height: 1364px;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  padding-left: 8px;
-  }
-  
-  /* Tabs styling */
-  .table_list {
-    min-height: 40px;
-  }
-  
-  .muiTab {
-    text-transform: uppercase;
-  font-weight: 600;
-  color: #7e7e7e; /* muted gray */
+}
+
+.order-page .order-container {
+  display: flex;
+  flex-direction: row; /* <-- changed from column to row */
+  align-items: flex-start; /* align to top */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 32px;
+}
+
+.order-page .order-container .order-left {
+  width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: flex-end;
+}
+
+.order-page .order-container .order-left .order-main-content {
+width: 100%;
+display: flex;
+flex-direction: row; 
+justify-content: center;
+align-items: flex-start;
+gap: 24px; 
+flex-wrap: nowrap;
+}
+
+.order-page .order-container .order-left .order-nav-frame {
+width: 100%;
+max-width: 800px; 
+margin: 23px auto 23px;
+}
+
+.order-page .order-container .order-left .order-nav-frame .table_list .muiTab {
+  display: flex;
+  /* width: 100%; */
+  height: 23px;
+  flex-direction: row;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: "Commissioner";
   font-size: 14px;
+  font-style: bold;
+  font-weight: 900;
+  line-height: 36px;
+  /* 257.143% */
+  /* Gold */
   transition: color 0.3s ease;
   cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 6px 6px 0 0;
-  user-select: none;
-  }
-  
-  .muiTab.Mui-selected {
-    color: #a97c50; /* Veloura gold */
-    border-bottom: 3px solid #a97c50;
-  }
-  
-  /* Main content area inside tabs */
-  .order-main-content {
-    min-height: 320px;
-  }
-  
-  /* Right side - user info and payment box */
-  .order-right {
-    flex: 1.4;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-  
-  /* User info box */
-  .order-info-box {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgb(0 0 0 / 0.08);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
+}
 
-  .member-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .order-user-img {
-    position: relative;
-    width: 90px;
-    height: 90px;
-    margin-bottom: 12px;
-  }
-  
-  .order-user-avatar {
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #a97c50;
-  }
-  
-  .order-user-icon-box {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: #a97c50;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid white;
-  }
-  
-  .order-user-prof-img {
-    width: 16px;
-    height: 16px;
-    filter: brightness(0) invert(1);
-  }
-  
-  .order-user-name {
-    font-weight: 700;
-    font-size: 18px;
-    color: #3f3f3f;
-  }
-  
-  .order-user-prof {
-    font-size: 14px;
-    color: #9e9e9e;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-  }
-  
-  /* Address box */
-  .liner {
-    border-top: 1px solid #e2ded8;
-    padding-top: 15px;
-  }
-  
-  .order-user-address {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #5a5a5a;
-  }
-  
-  .spec-address-text {
-    font-style: italic;
-  }
-  
-  /* Payment info box */
-  .order-payment-box {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgb(0 0 0 / 0.08);
-    padding: 20px;
-  }
-  
-  /* Card info container */
-  .order-payment-info-box {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  /* Card number style */
-  .order-card-box-1 {
-    font-weight: 600;
-    color: #3f3f3f;
-    font-size: 16px;
-  }
-  
-  .order-card-number {
-    letter-spacing: 2px;
-  }
-  
-  /* Card group: validity and cvv side by side */
-  .order-card-group {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  
-  .order-card-box-2,
-  .order-card-box-3 {
-    background: #faf9f7;
-    padding: 8px 12px;
+.order-page .order-container .order-left .order-nav-frame .table_list .muiTab:hover {
+  color: #fff;
+  background-color: #554a0f;
+}
+
+/** PAUSED ORDERS **/
+
+
+.order-page .order-container .order-left .order-main-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #F8F8FE;
+  box-shadow: -12px 12px 4px 0px #BABABF, 0px 4px 10px 9px #D3D3E7 inset, 0px 4px 16px 0px rgba(242, 189, 87, 0.04) inset;
+  overflow: hidden;  /* Hide content that overflows */
+  text-overflow: ellipsis;  /* Add ellipsis for overflowing text */
+  white-space: nowrap;  
+}
+
+.order-page .order-container .order-left .order-main-box .order-box-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 8px;
+  max-height: 350px;
+}
+
+.order-page .order-container .order-left .order-main-box .order-box-scroll .orders-name-price {
+  width: 821px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.order-page .order-container .order-left .order-main-box .order-box-scroll .orders-name-price-box {
+  width: 610px;
+  height: 110px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.order-page .order-container .order-left .order-main-box  .order-box-scroll .orders-name-price .orders-name-price-box .order-dish-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 20px;
+  margin-left: 16px;
+  flex-shrink: 0;
+  border-radius: 29px;
+  background: lightgray 50% / cover no-repeat;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.order-page .order-container .order-left .order-main-box .order-box-scroll .orders-name-price .orders-name-price-box .title-dish {
+  width: 300px;
+  margin-right: 70px;
+  color: #000;
+  font-family: "Commissioner";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  /* 163.636% */
+}
+
+.order-page .order-container .order-left .order-main-box .order-box-scroll .price-box {
+  display: flex;
+align-items: center;
+gap: 8px;
+font-size: 14px;
+}
+
+.order-page .order-container .order-left .order-main-box .total-price-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  padding: 16px 24px;
+  border-radius: 16px;
+  z-index: 10;
+  gap: 24px; /* space between price and buttons */
+}
+
+.order-page .order-container .order-left .order-main-box .total-price-box .MuiBox-root.css-0  {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: row;
+}
+
+.order-page .order-container .order-left .order-main-box .total-price-box .total-box {
+  display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+font-size: 14px;
+width: 100%;
+flex-wrap: nowrap;
+}
+
+.order-page .order-container .order-left .order-main-box .total-price-box .pay-btn {
+  display: flex;
+  margin-top: 7px;
+  margin-left: 30px;
+  width: 90px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #70B45B;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: #FFF;
+  font-family: Commissioner;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.order-page .order-container .order-left .order-main-box .total-price-box .cancel-btn {
+    width: 93.105px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #D2B68C;
+    margin-top: 7px;
+    margin-left: 30px;
     border-radius: 8px;
-    font-weight: 500;
-    color: #7a7a7a;
-    font-size: 14px;
-    flex: 1;
-    text-align: center;
-  }
-  
-  .order-card-cvv {
-    color: #a97c50;
-    font-weight: 600;
-  }
-  
-  /* Card owner */
-  .order-card-box-4 {
-    font-size: 15px;
-    font-weight: 600;
-    color: #4a4a4a;
-  }
-  
-  /* Payment card logos container */
-  .order-payment-cards {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-  }
-  
-  .order-payment-cards > div {
-    width: 48px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  
-  .order-payment-cards > div:hover {
-    transform: scale(1.1);
-  }
-  
-  .order-payment-cards img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  /* Responsive */
-  @media (max-width: 1024px) {
-    .order-container {
-      flex-direction: column;
-      padding: 10px;
-    }
-    .order-left,
-    .order-right {
-      flex: unset;
-      width: 100%;
-    }
-  }
-  
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/** User section **/
+
+.order-page .order-container .order-right {
+  width: 350px;
+  margin-top: 130px;
+  min-width: 300px;
+  flex-shrink: 0;      
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.order-page .order-container .order-right .order-info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 372px;
+  height: 308px;
+  margin-bottom: 30px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #F8F8FE;
+  box-shadow: 14px 14px 5px 0px #BBBBBF, 0px 1px 11px 12px #D3D3E7 inset, 0px 4px 16px 0px rgba(242, 189, 87, 0.04) inset;
+}
+
+.order-page .order-container .order-right .order-info-box .member-box {
+  width: 100%;
+  height: auto;
+}
+
+.order-page .order-container .order-right .order-info-box .member-box .order-user-img {
+  width: 117px;
+  height: 112px;
+  border-radius: 37px;
+  margin-left: 128px;
+  margin-top: 28px;
+  background: #F8F8FE;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.order-page .order-container .order-right .order-info-box .member-box .order-user-img .order-user-avatar {
+  width: 117px;
+  height: 112px;
+  flex-shrink: 0;
+}
+
+.order-page .order-container .order-right .order-info-box .member-box .order-user-img .order-user-icon-box {
+  width: 25px;
+  height: 25px;
+  margin-left: 94px;
+  margin-top: -23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 37px;
+  background: rgba(0, 0, 0, 0.33);
+}
+
+
+.order-page .order-container .order-right .order-info-box .member-box .order-user-img .order-user-icon-box .order-user-prof-img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 37px;
+  background: lightgray 50% / cover no-repeat;
+}
+
+
+.order-page .order-container .order-right .order-info-box .member-box .order-user-name {
+  width: 76px;
+  height: 37px;
+  margin-left: 148px;
+  margin-top: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: "Commissioner";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  /* 128.571% */
+  color: #08090D;
+}
+
+.order-page .order-container .order-right .order-info-box .member-box .order-user-prof {
+  width: 53px;
+  height: 37px;
+  margin-top: -5px;
+  margin-left: 158px;
+  margin-bottom: 57px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: "Commissioner";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* 180% */
+  color: #A1A1A1;
+}
+.order-page .order-container .order-right .order-info-box .liner {
+  width: 100%;
+  height: 2px;
+  margin-bottom: 10px;
+  background: #A1A1A1;
+}
+
+.order-page .order-container .order-right .order-info-box .liner .order-user-address {
+  width: 255px;
+  height: 22px;
+  display: flex;
+  align-items:flex-start;
+  justify-content: center;
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  /* 150% */
+  color: #000;
+}
+
+/** Payment section **/
+
+
+.order-page .order-container .order-right .order-payment-box {
+  width: 100%;
+  padding: 16px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 23px;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-info-box {
+  width: 372px;
+  height: 308px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #F8F8FE;
+  box-shadow: 14px 14px 5px 0px #BBBBBF, 0px 1px 11px 12px #D3D3E7 inset, 0px 4px 16px 0px rgba(242, 189, 87, 0.04) inset;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-info-box .order-card-box-1 {
+  width: 332px;
+  height: 40px;
+  margin-top: 30px;
+  margin-left: 27px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid #B4AAAA;
+  background: #F5F5F5;
+}
+
+
+.order-page .order-container .order-right .order-payment-box .order-payment-info-box .order-card-box-1 .order-card-number {
+  width: 325px;
+  height: 40px;
+  flex-shrink: 0;
+  font-family: "Commissioner";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  /* 240% */
+  color: #777;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-info-box .order-card-group {
+  display: flex;
+  gap: 20px;
+  /* Optional spacing between box 2 and 3 */
+  margin-top: 10px;
+}
+
+
+.order-page .order-container .order-right .order-payment-box .order-payment-info-box .order-card-group .order-card-box-2 {
+  width: 162px;
+  height: 40px;
+  margin-left: 26px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid #B4AAAA;
+  background: #F5F5F5;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-info-box .order-card-group .order-card-box-2 .order-card-validity {
+  font-family: "Commissioner";
+  font-size: 14px;
+  margin-left: 7px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #777;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-info-box .order-card-group .order-card-box-3 {
+  width: 152px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid #B4AAAA;
+  background: #F5F5F5;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-info-box .order-card-group.order-card-box-3 .order-card-cvv {
+  font-family: "Commissioner";
+  font-size: 15px;
+  font-style: normal;
+  margin-left: 7px;
+  font-weight: 500;
+  line-height: 36px;
+  /* 240% */
+  color: #777;
+}
+
+
+.order-page .order-container .order-right .order-payment-box .order-card-box-4 {
+  width: 332px;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 26px;
+  margin-bottom: 112px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid #B4AAAA;
+  background: #F5F5F5;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-card-box-4 .order-card-owner {
+  width: 135px;
+  height: 40px;
+  flex-shrink: 0;
+  margin-left: 7px;
+  font-family: "Commissioner";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  /* 240% */
+  color: #777;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-cards {
+  width: 243px;
+  height: 25.678px;
+  margin-top: -10px;
+  margin-left: 65px;
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-cards .western-union {
+  width: 38px;
+  height: 25.678px;
+  flex-shrink: 0;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-cards .visa-card {
+  width: 38px;
+  height: 25.678px;
+  flex-shrink: 0;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-cards .paypal-card {
+  width: 38px;
+  height: 25.678px;
+  flex-shrink: 0;
+}
+
+.order-page .order-container .order-right .order-payment-box .order-payment-cards .master-card {
+  width: 38px;
+  height: 25.678px;
+  flex-shrink: 0;
+}
+
+
+
+/** Process Orders **/
+
+.order-page .order-container .order-left .order-main-box .total-price-box .data-compl {
+  width: 130px;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: "Commissioner";
+  font-size: 15px;
+  font-style: bold;
+  font-weight: 600;
+  line-height: normal;
+  color: #003366;
+  border: 1px solid #B0B0B0;  /* Slight border color */
+  border-radius: 4px;  /* Optional: Add rounded corners for a smoother look */
+  padding: 0 5px;
+}
+
+.order-page .order-container .order-left .order-main-box .total-price-box .verify-btn {
+height: auto;
+flex-shrink: 0;
+padding: 10px;
+margin-left: 40px;
+color: #FFF;
+font-family: "Commissioner";
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+border-radius: 10px;
+background: #3A87CB;
+}
+
+.order-page .order-container .order-left .no-data-compl {
+  margin-top: 40px;
+  text-align: center;
+  opacity: 0.6;
+}

@@ -13,13 +13,6 @@ export enum ProductVolume {
   ONE_FIFTY_ML = 150,
 }
 
-export enum ProductSize {
-  SMALL = "SMALL", 
-  MEDIUM = "MEDIUM", 
-  LARGE = "LARGE", 
-  SET = "SET", 
-}
-
 export enum ProductStatus {
   FINISH = "FINISH",
   PROCESS = "PROCESS",

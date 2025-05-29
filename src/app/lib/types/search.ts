@@ -1,12 +1,10 @@
-import { ObjectId } from "mongoose";
 
 export interface CartItem {
-    _id: string | ObjectId;
+    _id: string;
     quantity: number;
     name: string;
     price: number;
     image: string
     gender?: string
     volume?: string
-    sortBy?: string
 }

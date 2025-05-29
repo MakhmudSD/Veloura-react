@@ -25,13 +25,13 @@ interface PausedOrderProps {
 
 export default function PausedOrders(props: PausedOrderProps) {
   const { authMember, setOrderBuilder } = useGlobals();
-  const { pausedOrders } = useSelector(pausedOrdersRetriever);
+  const { pausedOrders = [] } = useSelector(pausedOrdersRetriever);
   const { setValue } = props;
 
   /** HANDLERS */
   const deleteOrderHandler = async (e: T) => {
+    if (!authMember) throw new Error(Messages.error2);
     try {
-      if (!authMember) throw new Error(Messages.error2);
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
@@ -79,31 +79,36 @@ export default function PausedOrders(props: PausedOrderProps) {
   };
   return (
     <TabPanel value="1">
-      <Stack sx={{ maxHeight: "800px", overflowY: "auto" }}>
-        {pausedOrders?.map((order: Order) => {
-          return (
-            <Box key={order._id.toString()} className="order-main-box">
+      {(!pausedOrders || pausedOrders.length === 0) ? (
+        <Box display="flex" justifyContent="center">
+          <img
+            src="/icons/noimage-list.svg"
+            alt="no-data"
+            style={{ width: 300, height: 300 }}
+          />
+        </Box>
+      ) : (
+        <Stack sx={{ maxHeight: "800px", overflowY: "auto" }}>
+          {pausedOrders.map((order: Order) => (
+            <Box key={order._id} className="order-main-box">
               <Box className="order-box-scroll">
                 {order?.orderItems?.map((item: OrderItem) => {
-                  const product: Product| undefined = order.productData?.filter(
+                  const product: Product | undefined = order.productData?.find(
                     (ele: Product) => item.productId === ele._id
-                  )[0];
-                  const imagePath = product?.productImages?.[0]
-                  ? `${serverApi}/${product.productImages[0]}`
-                  : "/icons/noimage-list.svg";
+                  );
+                  if (!product) return null;
+  
+                  const imagePath = `${serverApi}/uploads/${product.productImages[0]}`;
                   return (
-                    <Box
-                      key={item._id.toString()}
-                      className="orders-name-price"
-                    >
+                    <Box key={item._id} className="orders-name-price">
                       <Box className="orders-name-price-box">
                         <img
                           src={imagePath}
-                          alt="lavash"
-                          className="order-img"
+                          alt={product.productName}
+                          className="order-dish-img"
                         />
-<p className="title-dish">{product?.productName || "Unknown product"}</p>
-<Box className="price-box">
+                        <p className="title-dish">{product.productName}</p>
+                        <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />
                           <p>${item.itemQuantity}</p>
@@ -117,28 +122,22 @@ export default function PausedOrders(props: PausedOrderProps) {
                   );
                 })}
               </Box>
+  
               <Box className="total-price-box">
                 <Box>
                   <Box className="total-box">
                     <p>Product Price</p>
                     <p>${order.orderTotal - order.orderDelivery}</p>
-                    <img
-                      src="/icons/plus.svg"
-                      alt="plus-icon"
-                      style={{ marginLeft: "20px" }}
-                    />
+                    <img src="/icons/plus.svg" alt="plus-icon" style={{ marginLeft: "20px" }} />
                     <p>Delivery Cost</p>
                     <p>${order.orderDelivery}</p>
-                    <img
-                      src="/icons/pause.svg"
-                      alt="pause-icon"
-                      style={{ marginLeft: "20px" }}
-                    />
+                    <img src="/icons/pause.svg" alt="pause-icon" style={{ marginLeft: "20px" }} />
                     <p>Total</p>
                     <p>${order.orderTotal}</p>
                   </Box>
+  
                   <Button
-                    value={order._id.toString()}
+                    value={order._id}
                     variant="contained"
                     color="secondary"
                     className="cancel-btn"
@@ -147,7 +146,7 @@ export default function PausedOrders(props: PausedOrderProps) {
                     Cancel
                   </Button>
                   <Button
-                    value={order._id.toString()}
+                    value={order._id}
                     variant="contained"
                     className="pay-btn"
                     onClick={processOrderHandler}
@@ -157,20 +156,10 @@ export default function PausedOrders(props: PausedOrderProps) {
                 </Box>
               </Box>
             </Box>
-          );
-        })}
-
-         {!pausedOrders ||
-          (pausedOrders.length === 0 && (
-            <Box display="flex" flexDirection="row" justifyContent="center">
-              <img
-                src="/icons/noimage-list.svg"
-                alt="noimage"
-                style={{ width: 300, height: 300 }}
-              />
-            </Box>
           ))}
-      </Stack>
+        </Stack>
+      )}
     </TabPanel>
   );
+  
 }

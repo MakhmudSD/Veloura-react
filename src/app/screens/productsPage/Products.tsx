@@ -113,6 +113,10 @@ export function Products(props: ProductsProps) {
   const handleKnowMore = (productId: string) => {
     history.push(`/products/${productId}`);
   };
+
+  const goToProductDetail = (id: string) => {
+    history.push(`/products/${id}`);
+  };
   return (
     <div className="product-container">
       <Container>
@@ -233,7 +237,8 @@ export function Products(props: ProductsProps) {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <Box className="product-box" key={product._id.toString()}>
-                    <Box className="product-image-wrapper">
+                    <Box className="product-image-wrapper"   onClick={() => goToProductDetail(product._id)}
+                    >
                       <img src={imagePath} alt={product.productName} />
                       <IconButton
                         className="view-icon"
