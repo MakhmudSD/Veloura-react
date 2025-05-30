@@ -511,7 +511,6 @@ margin: 23px auto 23px;
 }
 
 
-
 /** Process Orders **/
 
 .order-page .order-container .order-left .order-main-box .total-price-box .data-compl {
@@ -520,4 +519,35 @@ margin: 23px auto 23px;
     display: flex;
     align-items: center;
     justify-content: center;
-  
+    flex-shrink: 0;
+    font-family: "Commissioner";
+    font-size: 15px;
+    font-style: bold;
+    font-weight: 600;
+    line-height: normal;
+    color: #003366;
+    border: 1px solid #B0B0B0;  /* Slight border color */
+    border-radius: 4px;  /* Optional: Add rounded corners for a smoother look */
+    padding: 0 5px;
+}
+
+.order-page .order-container .order-left .order-main-box .total-price-box .verify-btn {
+height: auto;
+flex-shrink: 0;
+padding: 10px;
+margin-left: 40px;
+color: #FFF;
+font-family: "Commissioner";
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+border-radius: 10px;
+background: #3A87CB;
+}
+
+.order-page .order-container .order-left .no-data-compl {
+    margin-top: 40px;
+    text-align: center;
+    opacity: 0.6;
+}

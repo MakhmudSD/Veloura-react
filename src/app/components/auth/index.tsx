@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {
+import { styled } from '@mui/system';
+import { // ... other imports
   Modal,
   Backdrop,
   Fade,
@@ -7,10 +8,9 @@ import {
   Stack,
   TextField,
   Box,
+  BoxProps
 } from "@mui/material";
-import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
-import { T } from "../../lib/types/common";
 import { Messages } from "../../lib/config";
 import { LoginInput, MemberInput } from "../../lib/types/member";
 import MemberService from "../../services/MemberService";
@@ -20,12 +20,13 @@ import {
 } from "../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 
-const ModalImg = styled.img`
-  width: 50%;
-  height: 100%;
-  border-radius: 20px 0 0 20px;
-  object-fit: cover;
-`;
+// Corrected ModalImg definition
+const ModalImg = styled('img')({
+  width: '50%',
+  height: '100%',
+  borderRadius: '20px 0 0 20px',
+  objectFit: 'cover',
+});
 
 const FormContainer = styled(Stack)`
   background-color: #ffffff;
@@ -36,15 +37,19 @@ const FormContainer = styled(Stack)`
   width: 50%;
 `;
 
-const StyledModalBox = styled(Box)`
-  display: flex;
-  width: 800px;
-  height: 450px;
-  background: #fff;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
-`;
+const StyledModalBox = styled(Box)<BoxProps>(({ theme }) => ({
+  display: 'flex',
+  width: '800px',
+  height: '450px',
+  background: '#fff',
+  borderRadius: '20px',
+  overflow: 'hidden',
+  boxShadow: '0px 0px 25px rgba(0, 0, 0, 0.2)',
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+}));
 
 interface AuthenticationModalProps {
   signupOpen: boolean;
@@ -60,11 +65,11 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const [memberPassword, setMemberPassword] = useState<string>("");
   const { setAuthMember } = useGlobals();
 
-  const handleUsername = (e: T) => setMemberNick(e.target.value);
-  const handlePhone = (e: T) => setMemberPhone(e.target.value);
-  const handlePassword = (e: T) => setMemberPassword(e.target.value);
+  const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => setMemberNick(e.target.value);
+  const handlePhone = (e: React.ChangeEvent<HTMLInputElement>) => setMemberPhone(e.target.value);
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => setMemberPassword(e.target.value);
 
-  const handlePasswordKeyDown = (e: T) => {
+  const handlePasswordKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       signupOpen ? handleSignupRequest() : handleLoginRequest();
     }
@@ -171,7 +176,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
         slotProps={{ backdrop: { timeout: 500 } }}
       >
         <Fade in={loginOpen}>
-          <StyledModalBox sx={{ width: "700px" }}>
+          <StyledModalBox>
             <ModalImg src="/img/auth.webp" alt="Login" />
             <FormContainer>
               <h2 style={{ marginBottom: "20px" }}>Login</h2>

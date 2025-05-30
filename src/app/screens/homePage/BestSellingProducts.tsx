@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Box, Container, Stack } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

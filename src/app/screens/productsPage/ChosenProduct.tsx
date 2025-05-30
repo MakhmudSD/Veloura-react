@@ -4,7 +4,6 @@ import {
   Container,
   IconButton,
   Stack,
-  Tooltip,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -22,7 +21,7 @@ import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Thumbs } from "swiper/modules";
+import { Navigation, Thumbs } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
@@ -47,7 +46,7 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
   const { productId } = useParams<{ productId: string }>();
   const { setAdmin, setChosenProduct } = actionDispatch(dispatch);
   const { chosenProduct } = useSelector(chosenProductRetriever);
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  const [thumbsSwiper] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
   const serverApi = process.env.REACT_APP_API_URL || "";
 
@@ -336,7 +335,7 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
 
           <Button
             className="chosen-product-calculate-add-button"
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               onAdd({
                 _id: chosenProduct._id,

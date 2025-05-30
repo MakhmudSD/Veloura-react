@@ -1,4 +1,6 @@
-import { Route, Switch, useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React from "react";
 import HomePage from "./screens/homePage";
 import ProductsPage from "./screens/productsPage";
 import UserPage from "./screens/userPage";

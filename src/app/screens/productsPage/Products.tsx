@@ -263,7 +263,7 @@ export function Products(props: ProductsProps) {
                         size="small"
                         aria-label="add to cart"
                         sx={{ zIndex: 10 }}
-                        onClick={(e) => {
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                           onAdd({
                             _id: product._id,
                             quantity: 1,
