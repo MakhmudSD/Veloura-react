@@ -43,17 +43,15 @@ interface ProductsProps {
   onAdd: (item: CartItem) => void;
 }
 
-
-
 export function Products(props: ProductsProps) {
   const { onAdd } = props;
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
-    limit: 12,
+    limit: 8,
     order: "createdAt",
-    productCategory: ProductCategory.PERFUME,
+    productCategory: ProductCategory.ALL,
     search: "",
     gender: "",
     volume: "",
@@ -83,13 +81,14 @@ export function Products(props: ProductsProps) {
   const chooseProductDetail = (id: string) => {
     history.push(`/products/${id}`);
   };
- 
-  const handleCategoryChange = (collection: ProductCategory) => {
-    productSearch.page = 1;
-    productSearch.productCategory = collection;
-    setProductSearch({ ...productSearch });
-  };
 
+  const handleCategoryChange = (category: ProductCategory) => {
+    setProductSearch((prev) => ({
+      ...prev,
+      page: 1,
+      productCategory: category,
+    }));
+  };
   const handleVolumeChange = (event: SelectChangeEvent<string>) => {
     setProductSearch((prev) => ({
       ...prev,
@@ -99,7 +98,11 @@ export function Products(props: ProductsProps) {
   };
 
   const handleGenderChange = (gender: string) => {
-    setProductSearch((prev) => ({ ...prev, page: 1, gender }));
+    setProductSearch((prev) => ({
+      ...prev,
+      page: 1,
+      gender,
+    }));
   };
 
   const handleSearch = () => {
@@ -237,7 +240,9 @@ export function Products(props: ProductsProps) {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <Box className="product-box" key={product._id.toString()}>
-                    <Box className="product-image-wrapper"   onClick={() => goToProductDetail(product._id)}
+                    <Box
+                      className="product-image-wrapper"
+                      onClick={() => goToProductDetail(product._id)}
                     >
                       <img src={imagePath} alt={product.productName} />
                       <IconButton
@@ -359,7 +364,11 @@ export function Products(props: ProductsProps) {
                 </p>
               </Box>
 
-              <Button variant="contained" className="special-button" onClick={() => chooseProductDetail("")}>
+              <Button
+                variant="contained"
+                className="special-button"
+                onClick={() => chooseProductDetail("")}
+              >
                 <p>Know More</p>
               </Button>
             </Box>

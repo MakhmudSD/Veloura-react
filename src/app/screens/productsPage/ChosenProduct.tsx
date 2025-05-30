@@ -75,49 +75,101 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
 
   return (
     <Container className="chosen-product-container">
-      <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginTop: "-12px",
-                  marginBottom: "20px",
-                  cursor: "pointer",
-                  width: "100%",
-                }}
-              >
-                <IconButton
-                  onClick={() => history.push("/products")}
-                  sx={{
-                    color: '#AB572D',
-                    backgroundColor: 'rgba(255, 0, 0, 0.15)',
-                    borderRadius: '50%',
-                    padding: '6px',
-                    boxShadow: '0 0 10px rgba(171, 87, 45, 0.7)',
-                    transition: 'all 0.3s',
-                    '&:hover': {
-                      backgroundColor: 'rgba(171, 87, 45, 0.2)',
-                      boxShadow: '0 0 15px rgba(171, 87, 45, 1)',
-                    },
-                  }}
-                  aria-label="Back to product list"
-                >
-                  <ArrowBackIosNewIcon fontSize="large" />
-                </IconButton>
-                <Box
-                component="span"
-                sx={{
-                  marginLeft: '6px',
-                  color: '#AB572D',
-                  fontWeight: '600',
-                  fontSize: '16px',
-                  fontFamily: '"Satoshi", sans-serif',
-                  userSelect: 'none',
-                  textShadow: '0 0 5px rgba(171, 87, 45, 0.7)',
-                  }}
-                >
-                  Back to Products
-                </Box>
-              </Box>
+<Box
+  sx={{
+    display: "flex",    // flex container to place children side by side
+    gap: "16px",        // spacing between the two buttons
+    justifyContent: "flex-start", // align to left; optional
+    marginBottom: "20px",
+  }}
+>
+  {/* First button */}
+  <Box
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      cursor: "pointer",
+      width: "auto",   // let width fit content
+    }}
+  >
+    <IconButton
+      onClick={() => history.push("/")}
+      sx={{
+        color: '#AB572D',
+        backgroundColor: 'rgba(255, 0, 0, 0.15)',
+        borderRadius: '50%',
+        padding: '6px',
+        boxShadow: '0 0 10px rgba(171, 87, 45, 0.7)',
+        transition: 'all 0.3s',
+        '&:hover': {
+          backgroundColor: 'rgba(171, 87, 45, 0.2)',
+          boxShadow: '0 0 15px rgba(171, 87, 45, 1)',
+        },
+      }}
+      aria-label="Back to product list"
+    >
+      <ArrowBackIosNewIcon fontSize="large" />
+    </IconButton>
+    <Box
+      component="span"
+      sx={{
+        marginLeft: '6px',
+        color: '#AB572D',
+        fontWeight: '600',
+        fontSize: '16px',
+        fontFamily: '"Satoshi", sans-serif',
+        userSelect: 'none',
+        textShadow: '0 0 5px rgba(171, 87, 45, 0.7)',
+      }}
+    >
+      Back to Homepage
+    </Box>
+  </Box>
+
+  {/* Second button */}
+  <Box
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      cursor: "pointer",
+      width: "auto",
+    }}
+  >
+    <IconButton
+      onClick={() => history.push("/products")}
+      sx={{
+        color: '#AB572D',
+        backgroundColor: 'rgba(255, 0, 0, 0.15)',
+        borderRadius: '50%',
+        padding: '6px',
+        boxShadow: '0 0 10px rgba(171, 87, 45, 0.7)',
+        transition: 'all 0.3s',
+        '&:hover': {
+          backgroundColor: 'rgba(171, 87, 45, 0.2)',
+          boxShadow: '0 0 15px rgba(171, 87, 45, 1)',
+        },
+      }}
+      aria-label="Back to product list"
+    >
+      <ArrowBackIosNewIcon fontSize="large" />
+    </IconButton>
+    <Box
+      component="span"
+      sx={{
+        marginLeft: '6px',
+        color: '#AB572D',
+        fontWeight: '600',
+        fontSize: '16px',
+        fontFamily: '"Satoshi", sans-serif',
+        userSelect: 'none',
+        textShadow: '0 0 5px rgba(171, 87, 45, 0.7)',
+      }}
+    >
+      Back to Products
+    </Box>
+  </Box>
+</Box>
+
       <Stack direction="row" spacing={4} className="chosen-product-wrapper">
         
         {/* Left Images */}

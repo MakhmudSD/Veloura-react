@@ -1,10 +1,10 @@
 import HeroBanner from "./HeroBanner";
 import WelcomeNote from "./WelcomeNote";
 import BestSellingProducts from "./BestSellingProducts";
-import OurCollections from "./OurCollections";
 import OurValues from "./OurValues";
 import LatestNews from "./LatestNews";
 import SaleBanner from "./SaleBanner";
+import OurLatestProducts from "./OurCollections";
 import "../../../css/homepage.css";
 
 export default function HomePage() {
@@ -13,8 +13,10 @@ export default function HomePage() {
       <HeroBanner product={{ _id: "6836bf44e1481ec7b6bd918d" }}  />
       <WelcomeNote />
       <OurValues />
-      <BestSellingProducts />
-      <OurCollections />
+      <BestSellingProducts product={{
+        _id: ""
+      }}/>
+      <OurLatestProducts />
       <SaleBanner />
       <LatestNews />
     </div>

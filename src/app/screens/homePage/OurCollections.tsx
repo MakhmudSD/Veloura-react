@@ -1,69 +1,69 @@
+import React, { useEffect } from "react";
 import { Box, Container } from "@mui/material";
+import { useHistory } from "react-router-dom";
+import { createSelector, Dispatch } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { retrieveProducts } from "../productsPage/selector";
+import { setProducts } from "../productsPage/slice";
+import { Product } from "../../lib/types/product";
+import ProductService from "../../services/ProductService";
+import { ProductCategory } from "../../lib/enums/products.enum";
+import { serverApi } from "../../lib/config";
 
-export function OurCollections() {
+const actionDispatch = (dispatch: Dispatch) => ({
+  setProducts: (data: Product[]) => dispatch(setProducts(data)),
+});
+
+const productsRetriever = createSelector(retrieveProducts, (products) => ({
+  products,
+}));
+
+export function OurLatestProducts() {
+  const history = useHistory();
+  const { setProducts } = actionDispatch(useDispatch());
+  const { products } = useSelector(productsRetriever);
+
+  useEffect(() => {
+    const productService = new ProductService();
+    productService
+      .getProducts({
+        page: 1,
+        limit: 7,
+        order: "createdAt", // optional
+        productCategory: ProductCategory.ALL, // or your relevant category
+        search: "",
+        gender: "",
+        volume: "",
+      })
+      .then((data) => setProducts(data))
+      .catch((err) => console.log("Error fetching collections products", err));
+  }, []);
+
+  const chooseProductDetail = (id: string) => {
+    history.push(`/products/${id}`);
+  };
+
   return (
     <Container className="collection-container homepage">
       <Box className="collection-title">
-        <span>Our Collections</span>
+        <span>Our Latest Products</span>
       </Box>
       <Box className="collection-grid">
-        <Box className="collection-item">
-          <div className="image-wrapper">
-            <img src="/img/DarkStar.png" alt="Designer Delights Collection" />
-          </div>
-          <p>Designer Delights Collection</p>
-        </Box>
-        <Box className="collection-item">
-          <div className="image-wrapper">
-            <img
-              src="/img/TravelEssentialCollection.png"
-              alt="Travel Essentials Collection"
-            />
-          </div>
-          <p>Travel Essentials Collection</p>
-        </Box>
-        <Box className="collection-item">
-          <div className="image-wrapper">
-            <img
-              src="/img/special-occasions.png"
-              alt="Special Occasions Collection"
-            />
-          </div>
-          <p>Special Occasions Collection</p>
-        </Box>
-        <Box className="collection-item">
-          <div className="image-wrapper">
-            <img src="/img/seasonal.png" alt="Seasonal Sensations Collection" />
-          </div>
-          <p>Seasonal Sensations Collection</p>
-        </Box>
-        <Box className="collection-item">
-          <div className="image-wrapper">
-            <img src="/img/vintage.png" alt="Vintage Treasures Collection" />
-          </div>
-          <p>Vintage Treasures Collection</p>
-        </Box>
-        <Box className="collection-item">
-          <div className="image-wrapper">
-            <img
-              src="/img/limited-edition-collection.png"
-              alt="Limited Edition Treasures"
-            />
-          </div>
-          <p>Limited Edition Treasures</p>
-        </Box>
-        <Box className="collection-item">
-          <div className="image-wrapper">
-            <img
-              src="/img/modern-classic.png"
-              alt="Modern Classics Collection"
-            />
-          </div>
-          <p>Modern Classics Collection</p>
-        </Box>
+        {products.slice(0, 7).map((item, index) => (
+          <Box className="collection-item" key={index}>
+            <div className="image-wrapper">
+              <img
+                src={`${serverApi}/${item.productImages[0]}`}
+                alt={item.productName}
+                onClick={() => chooseProductDetail(item._id)}
+              />
+            </div>
+            <p>{item.productName}</p>
+          </Box>
+        ))}
       </Box>
     </Container>
   );
 }
 
-export default OurCollections;
+export default OurLatestProducts;
