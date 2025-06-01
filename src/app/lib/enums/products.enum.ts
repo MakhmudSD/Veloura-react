@@ -31,5 +31,4 @@ export enum ProductCategory {
   GIFT_SET = "GIFT_SET", 
   ACCESSORY = "ACCESSORY", 
   BODY_PRODUCT = "BODY_PRODUCT",
-  ALL = "ALL", 
 }

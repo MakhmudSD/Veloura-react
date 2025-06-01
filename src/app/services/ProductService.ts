@@ -13,10 +13,12 @@ class ProductService {
     try {
       console.log("getProducts here");
       let url = `${this.path}/product/all?order=${input.order}&page=${input.page}&limit=${input.limit}`;
+  
       if (input.productCategory)
-        url += `&productCollection=${input.productCategory}`;
-      if (input.search) url += `&search=${input.search}`;
-
+        url += `&productCategory=${input.productCategory}`;
+      if (input.search)
+        url += `&search=${input.search}`;
+  
       const result = await axios.get(url);
       console.log("result:", result);
       return result.data;
@@ -25,7 +27,7 @@ class ProductService {
       throw err;
     }
   }
-
+  
   public async getProduct(productId: string): Promise<Product> {
     try{
       const url = `${this.path}/product/${productId}`

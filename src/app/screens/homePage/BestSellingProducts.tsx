@@ -41,8 +41,6 @@ export function BestSellingProducts(props: BestSellingProductsProps) {
         order: "soldCount", // 👈 sort by best-selling
         productCategory: ProductCategory.PERFUME, // or set to your default category
         search: "",
-        gender: "",
-        volume: "",
       })
       .then((data) => setProducts(data))
       .catch((err) => console.log("Error fetching best-selling products", err));

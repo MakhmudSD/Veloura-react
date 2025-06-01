@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  IconButton,
-  Stack,
-} from "@mui/material";
+import { Box, Button, Container, IconButton, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -60,7 +54,7 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
       .catch(console.error);
 
     memberService.getAdmin().then(setAdmin).catch(console.error);
-  }, [productId, setAdmin, setChosenProduct]);
+  }, []);
 
   if (!chosenProduct) return null;
 
@@ -74,106 +68,101 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
 
   return (
     <Container className="chosen-product-container">
-<Box
-  sx={{
-    display: "flex",    // flex container to place children side by side
-    gap: "16px",        // spacing between the two buttons
-    justifyContent: "flex-start", // align to left; optional
-    marginBottom: "20px",
-  }}
->
-  {/* First button */}
-  <Box
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      cursor: "pointer",
-      width: "auto",   // let width fit content
-    }}
-  >
-    <IconButton
-      onClick={() => history.push("/")}
-      sx={{
-        color: '#AB572D',
-        backgroundColor: 'rgba(255, 0, 0, 0.15)',
-        borderRadius: '50%',
-        padding: '6px',
-        boxShadow: '0 0 10px rgba(171, 87, 45, 0.7)',
-        transition: 'all 0.3s',
-        '&:hover': {
-          backgroundColor: 'rgba(171, 87, 45, 0.2)',
-          boxShadow: '0 0 15px rgba(171, 87, 45, 1)',
-        },
-      }}
-      aria-label="Back to product list"
-    >
-      <ArrowBackIosNewIcon fontSize="large" />
-    </IconButton>
-    <Box
-      component="span"
-      sx={{
-        marginLeft: '6px',
-        color: '#AB572D',
-        fontWeight: '600',
-        fontSize: '16px',
-        fontFamily: '"Satoshi", sans-serif',
-        userSelect: 'none',
-        textShadow: '0 0 5px rgba(171, 87, 45, 0.7)',
-      }}
-    >
-      Back to Homepage
-    </Box>
-  </Box>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "16px",
+          justifyContent: "flex-start",
+          marginBottom: "20px",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            width: "auto",
+          }}
+        >
+          <IconButton
+            onClick={() => history.push("/")}
+            sx={{
+              color: "#AB572D",
+              backgroundColor: "rgba(255, 0, 0, 0.15)",
+              borderRadius: "50%",
+              padding: "6px",
+              boxShadow: "0 0 10px rgba(171, 87, 45, 0.7)",
+              transition: "all 0.3s",
+              "&:hover": {
+                backgroundColor: "rgba(171, 87, 45, 0.2)",
+                boxShadow: "0 0 15px rgba(171, 87, 45, 1)",
+              },
+            }}
+            aria-label="Back to product list"
+          >
+            <ArrowBackIosNewIcon fontSize="large" />
+          </IconButton>
+          <Box
+            component="span"
+            sx={{
+              marginLeft: "6px",
+              color: "#AB572D",
+              fontWeight: "600",
+              fontSize: "16px",
+              fontFamily: '"Satoshi", sans-serif',
+              userSelect: "none",
+              textShadow: "0 0 5px rgba(171, 87, 45, 0.7)",
+            }}
+          >
+            Back to Homepage
+          </Box>
+        </Box>
 
-  {/* Second button */}
-  <Box
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      cursor: "pointer",
-      width: "auto",
-    }}
-  >
-    <IconButton
-      onClick={() => history.push("/products")}
-      sx={{
-        color: '#AB572D',
-        backgroundColor: 'rgba(255, 0, 0, 0.15)',
-        borderRadius: '50%',
-        padding: '6px',
-        boxShadow: '0 0 10px rgba(171, 87, 45, 0.7)',
-        transition: 'all 0.3s',
-        '&:hover': {
-          backgroundColor: 'rgba(171, 87, 45, 0.2)',
-          boxShadow: '0 0 15px rgba(171, 87, 45, 1)',
-        },
-      }}
-      aria-label="Back to product list"
-    >
-      <ArrowBackIosNewIcon fontSize="large" />
-    </IconButton>
-    <Box
-      component="span"
-      sx={{
-        marginLeft: '6px',
-        color: '#AB572D',
-        fontWeight: '600',
-        fontSize: '16px',
-        fontFamily: '"Satoshi", sans-serif',
-        userSelect: 'none',
-        textShadow: '0 0 5px rgba(171, 87, 45, 0.7)',
-      }}
-    >
-      Back to Products
-    </Box>
-  </Box>
-</Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            width: "auto",
+          }}
+        >
+          <IconButton
+            onClick={() => history.push("/products")}
+            sx={{
+              color: "#AB572D",
+              backgroundColor: "rgba(255, 0, 0, 0.15)",
+              borderRadius: "50%",
+              padding: "6px",
+              boxShadow: "0 0 10px rgba(171, 87, 45, 0.7)",
+              transition: "all 0.3s",
+              "&:hover": {
+                backgroundColor: "rgba(171, 87, 45, 0.2)",
+                boxShadow: "0 0 15px rgba(171, 87, 45, 1)",
+              },
+            }}
+            aria-label="Back to product list"
+          >
+            <ArrowBackIosNewIcon fontSize="large" />
+          </IconButton>
+          <Box
+            component="span"
+            sx={{
+              marginLeft: "6px",
+              color: "#AB572D",
+              fontWeight: "600",
+              fontSize: "16px",
+              fontFamily: '"Satoshi", sans-serif',
+              userSelect: "none",
+              textShadow: "0 0 5px rgba(171, 87, 45, 0.7)",
+            }}
+          >
+            Back to Products
+          </Box>
+        </Box>
+      </Box>
 
       <Stack direction="row" spacing={4} className="chosen-product-wrapper">
-        
-        {/* Left Images */}
         <Box className="chosen-product-left">
-          
           <Swiper
             loop
             navigation
@@ -195,8 +184,8 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
               </SwiperSlide>
             ))}
           </Swiper>
-          </Box>
-        {/* Right Info */}
+        </Box>
+
         <Stack className="chosen-product-right" spacing={3}>
           <Box className="chosen-product-title">
             <h1>{chosenProduct.productName}</h1>
@@ -222,50 +211,46 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
               )}
             </Box>
             <Stack direction="row" alignItems="center" spacing={1}>
-  <Box
-    className="product-view"
-    sx={{
-      marginTop: '6px',
-      display: 'flex',
-      alignItems: 'center',
-      backgroundColor: 'rgba(221, 193, 179, 0.05)', // soft highlight background
-      padding: '4px 8px',
-      borderRadius: '8px',
-      boxShadow: '0 0 5px rgba(171, 87, 45, 0.2)',
-    }}
-  >
-    <RemoveRedEyeIcon
-      sx={{
-        fontSize: 25,
-        color: '#AB572D',
-        mr: 1,
-      }}
-    />
-    <span
-      style={{
-        fontSize: '35px',
-        fontWeight: '600',
-        color: '#fff',
-        fontFamily: '"Satoshi", sans-serif',
-      }}
-    >
-      {chosenProduct.productViews}
-    </span>
-  </Box>
-</Stack>
-
+              <Box
+                className="product-view"
+                sx={{
+                  marginTop: "6px",
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "rgba(221, 193, 179, 0.05)",
+                  padding: "4px 8px",
+                  borderRadius: "8px",
+                  boxShadow: "0 0 5px rgba(171, 87, 45, 0.2)",
+                }}
+              >
+                <RemoveRedEyeIcon
+                  sx={{
+                    fontSize: 25,
+                    color: "#AB572D",
+                    mr: 1,
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: "35px",
+                    fontWeight: "600",
+                    color: "#fff",
+                    fontFamily: '"Satoshi", sans-serif',
+                  }}
+                >
+                  {chosenProduct.productViews}
+                </span>
+              </Box>
+            </Stack>
           </Stack>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
             <Box sx={{ position: "relative" }}>
-              
-
               <img
                 src={`${serverApi}/${chosenProduct.productImages?.[0]}`}
                 alt="Perfume preview"
                 style={{ width: 150, borderRadius: 8 }}
               />
-
               {!isGiftOrAccessory && (
                 <p
                   style={{
@@ -357,11 +342,16 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
 const buttonStyle = {
   fontFamily: "Inter",
   fontSize: 20,
-  fontWeight: 700,
-  color: "#AB572D",
-  background: "none",
-  border: "none",
+  fontWeight: 600,
+  color: "#FFF",
+  backgroundColor: "transparent",
+  border: "1px solid #FFF",
+  borderRadius: 4,
+  width: 30,
+  height: 30,
+  textAlign: "center" as const,
+  lineHeight: "28px",
   cursor: "pointer",
 };
 
-export default ChosenProduct;
+export default ChosenProduct

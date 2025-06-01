@@ -26,6 +26,4 @@ export interface ProductInquiry {
   limit: number;
   productCategory?: ProductCategory;
   search?: string;
-  gender?: string
-  volume?: string ; 
 }

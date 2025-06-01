@@ -9,16 +9,16 @@ import {
   Select,
   MenuItem,
   IconButton,
-  Button,
-  SelectChangeEvent,
   PaginationItem,
+  Pagination,
 } from "@mui/material";
+import Button from "@mui/material/Button";
+
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Close"; // import this if you're using MUI icons
-import Pagination from "@mui/material/Pagination";
+import ClearIcon from "@mui/icons-material/Close";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { createSelector, Dispatch } from "@reduxjs/toolkit";
@@ -35,6 +35,7 @@ import { serverApi } from "../../lib/config";
 const actionDispatch = (dispatch: Dispatch) => ({
   setProducts: (data: Product[]) => dispatch(setProducts(data)),
 });
+
 const productsRetriever = createSelector(retrieveProducts, (products) => ({
   products,
 }));
@@ -43,30 +44,43 @@ interface ProductsProps {
   onAdd: (item: CartItem) => void;
 }
 
-export function Products(props: ProductsProps) {
-  const { onAdd } = props;
+const menuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: 48 * 4.5 + 8,
+      width: 250,
+      backgroundColor: "#1c1c1c",
+      color: "#fff",
+    },
+  },
+};
+
+export function Products({ onAdd }: ProductsProps) {
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
+  const history = useHistory();
+
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 8,
     order: "createdAt",
-    productCategory: ProductCategory.ALL,
+    productCategory: ProductCategory.PERFUME,
     search: "",
-    gender: "",
-    volume: "",
   });
 
   const [searchText, setSearchText] = useState<string>("");
-  const history = useHistory();
 
   useEffect(() => {
-    const product = new ProductService();
-    product
-      .getProducts(productSearch)
-      .then((data) => setProducts(data))
-      .catch((err) => console.log("ERROR on useEffect of getProducts"));
+    const timer = setTimeout(() => {
+      const productService = new ProductService();
+      productService
+        .getProducts(productSearch)
+        .then((data) => setProducts(data))
+        .catch(() => console.log("ERROR on useEffect of getProducts"));
+    }, 500);
+    return () => clearTimeout(timer);
   }, [productSearch]);
+
   useEffect(() => {
     if (searchText === "") {
       setProductSearch((prev) => ({
@@ -77,59 +91,52 @@ export function Products(props: ProductsProps) {
     }
   }, [searchText]);
 
-  /** HANDLERS  */
-  const chooseProductDetail = (id: string) => {
-    history.push(`/products/${id}`);
-  };
-
-  const handleCategoryChange = (category: ProductCategory) => {
+  const handleCategoryChange = (value: string) => {
     setProductSearch((prev) => ({
       ...prev,
       page: 1,
-      productCategory: category,
-    }));
-  };
-  const handleVolumeChange = (event: SelectChangeEvent<string>) => {
-    setProductSearch((prev) => ({
-      ...prev,
-      page: 1,
-      volume: event.target.value,
-    }));
-  };
-
-  const handleGenderChange = (gender: string) => {
-    setProductSearch((prev) => ({
-      ...prev,
-      page: 1,
-      gender,
+      productCategory: value as ProductCategory,
     }));
   };
 
   const handleSearch = () => {
-    setProductSearch((prev) => ({ ...prev, search: searchText }));
+    setProductSearch((prev) => ({ ...prev, search: searchText, page: 1 }));
   };
 
-  const handlePaginationChange = (e: ChangeEvent<unknown>, value: number) => {
+  const handlePaginationChange = (
+    event: ChangeEvent<unknown>,
+    value: number
+  ) => {
     setProductSearch((prev) => ({ ...prev, page: value }));
   };
 
-  const handleKnowMore = (productId: string) => {
-    history.push(`/products/${productId}`);
+  const searchOrderHandler = (order: string) => {
+    productSearch.page = 1;
+    productSearch.order = order;
+    setProductSearch({ ...productSearch });
   };
 
   const goToProductDetail = (id: string) => {
     history.push(`/products/${id}`);
   };
+
   return (
     <div className="product-container">
       <Container>
         <Stack className="product-category">
-          <div className="product-title">Best Selling Products</div>
-          <Box className="product-divider">
-            <img src="/img/line.png" alt="" />
+          <Typography variant="h4" className="product-title" gutterBottom>
+            Best Selling Products
+          </Typography>
+          <Box className="product-divider" mb={2}>
+            <img src="/img/line.png" alt="divider line" />
           </Box>
 
-          <Box className="search-bar-wrapper">
+          <Box
+            className="search-bar-wrapper"
+            display="flex"
+            alignItems="center"
+            mb={3}
+          >
             <input
               className="veloura-search-input"
               type="text"
@@ -138,43 +145,69 @@ export function Products(props: ProductsProps) {
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              style={{
+                flexGrow: 1,
+                padding: "8px 12px",
+                borderRadius: "12px",
+                border: "1px solid #ab572d",
+                color: "#000",
+                fontFamily: "Satoshi",
+                fontSize: "16px",
+              }}
             />
             {searchText && (
               <ClearIcon
                 className="veloura-clear-icon"
                 onClick={() => setSearchText("")}
+                sx={{
+                  cursor: "pointer",
+                  color: "#ab572d",
+                  marginLeft: "-32px",
+                  zIndex: 10,
+                }}
               />
             )}
             <Button
               variant="contained"
               onClick={handleSearch}
-              endIcon={<SearchIcon className="icon" />}
-              className="veloura-search-button"
+              endIcon={<SearchIcon />}
+              sx={{
+                marginLeft: 2,
+                backgroundColor: "#ab572d",
+                fontFamily: "Satoshi",
+                fontWeight: 600,
+                borderRadius: "12px",
+                "&:hover": { backgroundColor: "#d17e4f" },
+              }}
             >
               Search
             </Button>
           </Box>
 
-          <Box className="product-filter-row">
-            <Box className="product-filter-left">
-              <Typography className="filter-label">Filter By</Typography>
-
-              <FormControl
-                variant="outlined"
-                className="filter-control"
-                sx={formStyle}
+          <Box className="product-filter-row" mb={4}>
+            <Box
+              className="product-filter-left"
+              display="flex"
+              gap={2}
+              flexWrap="wrap"
+              marginTop="20px"
+            >
+              <Typography
+                className="filter-label"
+                sx={{ color: "#fff", fontWeight: 600 }}
               >
-                <InputLabel>Category</InputLabel>
+                Filter By
+              </Typography>
+
+              <FormControl variant="outlined" sx={formStyle}>
+                <InputLabel id="category-label">Category</InputLabel>
                 <Select
+                  labelId="category-label"
                   label="Category"
-                  defaultValue=""
+                  value={productSearch.productCategory}
+                  onChange={(e) => handleCategoryChange(e.target.value)}
                   MenuProps={menuProps}
-                  value={productSearch.productCategory || ""}
-                  onChange={(e) =>
-                    handleCategoryChange(e.target.value as ProductCategory)
-                  }
                 >
-                  <MenuItem value={ProductCategory.ALL}>All</MenuItem>
                   <MenuItem value={ProductCategory.PERFUME}>Perfume</MenuItem>
                   <MenuItem value={ProductCategory.EAU_DE_TOILETTE}>
                     Eau De Toilette
@@ -188,47 +221,50 @@ export function Products(props: ProductsProps) {
                   </MenuItem>
                 </Select>
               </FormControl>
-
-              <FormControl
-                variant="outlined"
-                className="filter-control"
-                sx={formStyle}
-              >
-                <InputLabel>Gender</InputLabel>
-                <Select
-                  label="Gender"
-                  defaultValue=""
-                  value={productSearch.gender || ""}
-                  onChange={(e) => handleGenderChange(e.target.value)}
-                  MenuProps={menuProps}
-                >
-                  <MenuItem value="unisex">Unisex</MenuItem>
-                  <MenuItem value="men">Men</MenuItem>
-                  <MenuItem value="women">Women</MenuItem>
-                </Select>
-              </FormControl>
-
-              <FormControl
-                variant="outlined"
-                className="filter-control"
-                sx={formStyle}
-              >
-                <InputLabel>Volume</InputLabel>
-                <Select
-                  label="Volume"
-                  defaultValue=""
-                  value={productSearch.volume || ""}
-                  onChange={handleVolumeChange}
-                  MenuProps={menuProps}
-                >
-                  <MenuItem value="30ml">30ml</MenuItem>
-                  <MenuItem value="50ml">50ml</MenuItem>
-                  <MenuItem value="75ml">75ml</MenuItem>
-                  <MenuItem value="100ml">100ml</MenuItem>
-                  <MenuItem value="150ml">150ml</MenuItem>
-                </Select>
-              </FormControl>
             </Box>
+
+            <Stack className="perfume-filter-section">
+              <Stack className="product-category">
+                <div className="category-main">
+                  <Button
+                    variant="contained"
+                    color={
+                      productSearch.order === "createdAt"
+                        ? "primary"
+                        : "secondary"
+                    }
+                    className="order"
+                    onClick={() => searchOrderHandler("createdAt")}
+                  >
+                    New
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color={
+                      productSearch.order === "productPrice"
+                        ? "primary"
+                        : "secondary"
+                    }
+                    className="order"
+                    onClick={() => searchOrderHandler("productPrice")}
+                  >
+                    Price
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color={
+                      productSearch.order === "productViews"
+                        ? "primary"
+                        : "secondary"
+                    }
+                    className="order"
+                    onClick={() => searchOrderHandler("productViews")}
+                  >
+                    Views
+                  </Button>
+                </div>
+              </Stack>
+            </Stack>
           </Box>
         </Stack>
 
@@ -367,7 +403,7 @@ export function Products(props: ProductsProps) {
               <Button
                 variant="contained"
                 className="special-button"
-                onClick={() => chooseProductDetail("")}
+                onClick={() => goToProductDetail("6837b8f0b7febcf9fa347265")}
               >
                 <p>Know More</p>
               </Button>
@@ -402,7 +438,11 @@ export function Products(props: ProductsProps) {
                 </p>
               </Box>
 
-              <Button variant="contained" className="special-button">
+              <Button
+                variant="contained"
+                className="special-button"
+                onClick={() => goToProductDetail("683c070fa00db9689b2fdf15")}
+              >
                 <p>Know More</p>
               </Button>
             </Box>
@@ -447,17 +487,6 @@ const formStyle = {
     whiteSpace: "nowrap",
     overflow: "visible",
     color: "#fff",
-  },
-};
-
-const menuProps = {
-  PaperProps: {
-    sx: {
-      bgcolor: "#2b2b2b",
-      color: "#fff",
-      fontFamily: "Satoshi",
-      fontSize: 16,
-    },
   },
 };
 

@@ -7,7 +7,7 @@ import { retrieveProducts } from "../productsPage/selector";
 import { setProducts } from "../productsPage/slice";
 import { Product } from "../../lib/types/product";
 import ProductService from "../../services/ProductService";
-import { ProductCategory } from "../../lib/enums/products.enum";
+import { ProductCategory} from "../../lib/enums/products.enum";
 import { serverApi } from "../../lib/config";
 
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -30,10 +30,8 @@ export function OurLatestProducts() {
         page: 1,
         limit: 7,
         order: "createdAt", // optional
-        productCategory: ProductCategory.ALL, // or your relevant category
+        productCategory: ProductCategory.PERFUME, // or your relevant category
         search: "",
-        gender: "",
-        volume: "",
       })
       .then((data) => setProducts(data))
       .catch((err) => console.log("Error fetching collections products", err));
