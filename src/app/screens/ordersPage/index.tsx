@@ -93,7 +93,7 @@ export default function OrdersPage() {
                   src={
                     authMember?.memberImage
                       ? `${serverApi}/${authMember.memberImage}`
-                      : "/icons/default-user.svg"
+                      : "/icons/user-badge.png"
                   }
                   className="order-user-avatar"
                   alt="user-avatar"
@@ -102,7 +102,7 @@ export default function OrdersPage() {
                   <img
                     src={
                       authMember?.memberType === MemberType.ADMIN
-                        ? "/icons/restaurant.svg"
+                        ? "/icons/admin.svg"
                         : "/icons/user-badge.svg"
                     }
                     className="order-user-prof-img"
@@ -143,7 +143,7 @@ export default function OrdersPage() {
                 </Box>
               </Box>
               <Box className="order-card-box-4">
-                <div className="order-card-owner">Dustin Poirier</div>
+                <div className="order-card-owner">{authMember?.memberNick}</div>
               </Box>
               <Box className="order-payment-cards">
                 <div className="western-union">

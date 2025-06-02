@@ -17,7 +17,7 @@ export function Settings() {
   const [memberImage, setMemberImage] = useState<string>(
     authMember?.memberImage
       ? `${serverApi}/${authMember.memberImage}`
-      : "/icons/default-user.svg"
+      : "/icons/user-badge.png"
   );
   const [memberUpdateInput, setMemberUpdateInput] = useState<MemberUpdateInput>({
     _id: authMember?._id,
@@ -98,12 +98,13 @@ export function Settings() {
         <img src={memberImage} className={"mb-image"} alt="" />
         <div className={"media-change-box"}>
           <span>Upload image</span>
-          <p>JPG, JPEG, PNG, and WEBP formats only!</p>
-          <div className={"up-del-box"}>
-            <Button component="label" onChange={handleImageViewver}>
+          <Button component="label" onChange={handleImageViewver}>
               <CloudDownloadIcon />
               <input type="file" hidden />
             </Button>
+          <p>JPG, JPEG, PNG, and WEBP formats only!</p>
+          <div className={"up-del-box"}>
+         
           </div>
         </div>
       </Box>

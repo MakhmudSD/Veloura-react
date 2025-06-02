@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Stack, Button } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
-
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrievePausedOrders } from "./selector";
@@ -25,7 +24,7 @@ interface PausedOrderProps {
 
 export default function PausedOrders(props: PausedOrderProps) {
   const { authMember, setOrderBuilder } = useGlobals();
-  const { pausedOrders = [] } = useSelector(pausedOrdersRetriever);
+  const { pausedOrders } = useSelector(pausedOrdersRetriever);
   const { setValue } = props;
 
   /** HANDLERS */
@@ -89,25 +88,30 @@ export default function PausedOrders(props: PausedOrderProps) {
         </Box>
       ) : (
         <Stack sx={{ maxHeight: "800px", overflowY: "auto" }}>
-          {pausedOrders.map((order: Order) => (
-            <Box key={order._id} className="order-main-box">
-              <Box className="order-box-scroll">
-                {order?.orderItems?.map((item: OrderItem) => {
-                  const product: Product | undefined = order.productData?.find(
-                    (ele: Product) => item.productId === ele._id
-                  );
+      {pausedOrders.map((order: Order) => (
+  <Box key={order._id} className="order-main-box">
+    <Box className="order-box-scroll">
+      {order?.orderItems?.map((item: OrderItem) => {
+        const product = order.productData?.find((ele: Product) => {
+          return item.productId?.toString() === ele._id?.toString();
+        });
+
+        if (!product) {
+          return <p key={item._id}>Product not found</p>;
+        }
+
                   if (!product) return null;
   
-                  const imagePath = `${serverApi}/uploads/${product.productImages[0]}`;
+                  const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
                     <Box key={item._id} className="orders-name-price">
                       <Box className="orders-name-price-box">
                         <img
                           src={imagePath}
-                          alt={product.productName}
-                          className="order-dish-img"
+                          className="order-item-img"
+                          alt=""
                         />
-                        <p className="title-dish">{product.productName}</p>
+                        <p className="title-item">{product.productName}</p>
                         <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />
@@ -126,20 +130,19 @@ export default function PausedOrders(props: PausedOrderProps) {
               <Box className="total-price-box">
                 <Box>
                   <Box className="total-box">
-                    <p>Product Price</p>
+                    <p>Product Price:</p>
                     <p>${order.orderTotal - order.orderDelivery}</p>
                     <img src="/icons/plus.svg" alt="plus-icon" style={{ marginLeft: "20px" }} />
-                    <p>Delivery Cost</p>
+                    <p>Delivery Cost:</p>
                     <p>${order.orderDelivery}</p>
                     <img src="/icons/pause.svg" alt="pause-icon" style={{ marginLeft: "20px" }} />
-                    <p>Total</p>
+                    <p>Total:</p>
                     <p>${order.orderTotal}</p>
                   </Box>
   
                   <Button
                     value={order._id}
                     variant="contained"
-                    color="secondary"
                     className="cancel-btn"
                     onClick={deleteOrderHandler}
                   >

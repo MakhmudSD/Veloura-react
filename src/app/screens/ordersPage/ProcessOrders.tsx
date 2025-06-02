@@ -63,7 +63,7 @@ export default function ProcessOrders(props: ProcessOrderProps) {
                 {order?.orderItems?.map((item: OrderItem) => {
                   const product: Product | undefined = (
                     order.productData ?? []
-                  ).find((ele: Product) => item.productId === ele._id);
+                  ).find((ele: Product) => item.productId.toString() === ele._id.toString());
 
                   if (
                     !product ||
@@ -84,10 +84,10 @@ export default function ProcessOrders(props: ProcessOrderProps) {
                       <Box className="orders-name-price-box">
                         <img
                           src={imagePath}
-                          alt="kebab"
-                          className="order-dish-img"
+                          alt=""
+                          className="order-item-img"
                         />
-                        <p className="title-dish">{product.productName}</p>
+                        <p className="title-item">{product.productName}</p>
                         <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />

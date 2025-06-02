@@ -1,15 +1,15 @@
 import { Box, Container, Stack } from "@mui/material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Settings } from "./Settings";
 import { serverApi } from "../../lib/config";
 import { MemberType } from "../../lib/enums/members.enum";
 import "../../../css/userpage.css";
+import { useGlobals } from "../../hooks/useGlobals";
+import { useHistory } from "react-router-dom";
 
 export default function UserPage() {
- const authMember = null;
+  const history = useHistory();
+  const { authMember } = useGlobals();
+  if (!authMember) history.push("/");
   return (
     <div className={"user-page"}>
       <Container>
@@ -32,25 +32,51 @@ export default function UserPage() {
               >
                 <div className={"order-user-img"}>
                   <img
-                    src={authMember ? `${serverApi}/${authMember}` : "/icons/default-user.svg"}
+                    src={
+                      authMember?.memberImage
+                        ? `${serverApi}/${authMember.memberImage}`
+                        : "/icons/user-badge.png"
+                    }
                     className={"order-user-avatar"}
                     alt=""
                   />
                   <div className={"order-user-icon-box"}>
-                    <img src={authMember === MemberType.ADMIN ? "/icons/restaurant.svg" : "/icons/user-badge.svg"} alt="" />
+                    <img
+                      src={
+                        authMember?.memberType === MemberType.ADMIN
+                          ? "/icons/restaurant.svg"
+                          : "/icons/user-badge.png"
+                      }
+                      alt=""
+                    />
                   </div>
                 </div>
-                <span className={"order-user-name"}>{authMember}</span>
-                <span className={"order-user-prof"}>{authMember}</span>
-                <span className={"order-user-prof"}>{authMember ? authMember : "No Address"}</span>
+                <span className={"order-user-name"}>
+                  {authMember?.memberNick}
+                </span>
+                <span className={"order-user-prof"}>
+                  {authMember?.memberType}
+                </span>
+                <span className={"order-user-prof"}>
+                  {authMember?.memberAddress
+                    ? authMember.memberAddress
+                    : "No Address"}
+                </span>
               </Box>
-              <Box className={"user-media-box"}>
-                <FacebookIcon />
-                <InstagramIcon />
-                <TelegramIcon />
-                <YouTubeIcon />
+              <Box
+                className={"user-media-box"}
+                sx={{ mt: 3, display: "flex", gap: 2 }}
+              >
+                <img src={"/icons/facebook.svg"} alt="Facebook" />
+                <img src={"/icons/twitter.svg"} alt="Twitter" />
+                <img src={"/icons/instagram.svg"} alt="Instagram" />
+                <img src={"/icons/linkedin.svg"} alt="LinkedIn" />
               </Box>
-              <p className={"user-desc"}>{authMember ? authMember : "No description"}</p>
+              <p className={"user-desc"}>
+                {authMember?.memberDesc
+                  ? authMember.memberDesc
+                  : "No description"}
+              </p>
             </Box>
           </Stack>
         </Stack>

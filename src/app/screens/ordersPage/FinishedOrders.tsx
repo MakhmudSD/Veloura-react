@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Stack } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -22,13 +23,29 @@ export default function FinishedOrders() {
       <Stack sx={{ maxHeight: "800px", overflowY: "auto" }}>
         {finishedOrders?.length > 0 ? (
           finishedOrders.map((order: Order) => (
-            <Box key={order._id} className="order-main-box">
+            <Box
+              key={order._id}
+              className="order-main-box"
+              sx={{
+                position: "relative",
+                mb: 3,
+              }}
+            >
+              <TaskAltIcon
+                sx={{
+                  position: "absolute",
+                  top: 12,               
+                  right: 16,             
+                  fontSize: 40,          
+                  color: "#F2BD57", 
+                }}
+              />
+
               <Box className="order-box-scroll">
                 {order?.orderItems?.map((item: OrderItem) => {
                   const product: Product | undefined = order.productData?.find(
                     (ele: Product) => item.productId === ele._id
                   );
-
                   if (!product) return null;
 
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
@@ -38,9 +55,9 @@ export default function FinishedOrders() {
                         <img
                           src={imagePath}
                           alt="product"
-                          className="order-dish-img"
+                          className="order-item-img"
                         />
-                        <p className="title-dish">{product.productName}</p>
+                        <p className="title-item">{product.productName}</p>
                         <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-icon" />
@@ -58,7 +75,7 @@ export default function FinishedOrders() {
 
               <Box className="total-price-box">
                 <Box>
-                  <Box className="total-box" sx={{ marginLeft: "170px" }}>
+                  <Box className="total-box" sx={{ ml: "170px" }}>
                     <p>Product Price</p>
                     <p>${order.orderTotal - order.orderDelivery}</p>
                     <img
@@ -82,10 +99,10 @@ export default function FinishedOrders() {
           ))
         ) : (
           <Box
-            display={"flex"}
-            flexDirection={"row"}
-            justifyContent={"center"}
-            alignItems={"center"}
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
             className="no-data-compl"
           >
             <img
