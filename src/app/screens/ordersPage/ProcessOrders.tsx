@@ -2,8 +2,7 @@ import React from "react";
 import { Box, Stack, Button } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
 import moment from "moment";
-
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"; 
 import { createSelector } from "reselect";
 import { retrieveProcessOrders } from "./selector";
 import { Messages, serverApi } from "../../lib/config";
@@ -14,6 +13,7 @@ import { OrderStatus } from "../../lib/enums/orders.enum";
 import { sweetErrorHandling } from "../../lib/sweetAlert";
 import { T } from "../../lib/types/common";
 import OrderService from "../../services/OrderService";
+import { moveOrderToFinish } from "./slice";
 
 const processOrdersRetriever = createSelector(
   retrieveProcessOrders,
@@ -28,10 +28,14 @@ export default function ProcessOrders(props: ProcessOrderProps) {
   const { authMember, setOrderBuilder } = useGlobals();
   const { processOrders } = useSelector(processOrdersRetriever);
   const { setValue } = props;
+  const dispatch = useDispatch();
 
   /** HANDLERS */
   const finishOrderHandler = async (e: T) => {
-    if (!authMember) throw new Error(Messages.error2);
+    if (!authMember) {
+      sweetErrorHandling(Messages.error2).then();
+      return;
+    }
 
     try {
       const orderId = e.target.value;
@@ -42,8 +46,9 @@ export default function ProcessOrders(props: ProcessOrderProps) {
 
       const confirmation = window.confirm("Have you received your order?");
       if (confirmation) {
-        const order = new OrderService();
-        await order.updateOrder(input);
+        const orderService = new OrderService();
+        await orderService.updateOrder(input);
+        dispatch(moveOrderToFinish(orderId));
         setValue("3");
         setOrderBuilder(new Date());
       }
@@ -91,7 +96,7 @@ export default function ProcessOrders(props: ProcessOrderProps) {
                         <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />
-                          <p>${item.itemQuantity}</p>
+                          <p>{item.itemQuantity}</p>
                           <img src="/icons/pause.svg" alt="pause-img" />
                           <p style={{ marginLeft: "7px" }}>
                             ${item.itemQuantity * item.itemPrice}

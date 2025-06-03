@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Stack, Button } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"; 
 import { createSelector } from "reselect";
 import { retrievePausedOrders } from "./selector";
 import { Messages, serverApi } from "../../lib/config";
@@ -12,6 +12,7 @@ import { T } from "../../lib/types/common";
 import { OrderStatus } from "../../lib/enums/orders.enum";
 import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderService";
+import { deleteOrder, moveOrderToProcess } from "./slice";
 
 const pausedOrdersRetriever = createSelector(
   retrievePausedOrders,
@@ -26,10 +27,14 @@ export default function PausedOrders(props: PausedOrderProps) {
   const { authMember, setOrderBuilder } = useGlobals();
   const { pausedOrders } = useSelector(pausedOrdersRetriever);
   const { setValue } = props;
+  const dispatch = useDispatch();
 
   /** HANDLERS */
   const deleteOrderHandler = async (e: T) => {
-    if (!authMember) throw new Error(Messages.error2);
+    if (!authMember) {
+      sweetErrorHandling(Messages.error2).then();
+      return;
+    }
     try {
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
@@ -41,8 +46,9 @@ export default function PausedOrders(props: PausedOrderProps) {
         "Do you really want to delete your order?"
       );
       if (confirmation) {
-        const order = new OrderService();
-        await order.updateOrder(input);
+        const orderService = new OrderService();
+        await orderService.updateOrder(input);
+        dispatch(deleteOrder(orderId));
         setOrderBuilder(new Date());
       }
     } catch (err) {
@@ -52,9 +58,10 @@ export default function PausedOrders(props: PausedOrderProps) {
   };
 
   const processOrderHandler = async (e: T) => {
-    if (!authMember) throw new Error(Messages.error2);
-    // PAYMENT PROCESS
-
+    if (!authMember) {
+      sweetErrorHandling(Messages.error2).then();
+      return;
+    }
     try {
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
@@ -66,8 +73,9 @@ export default function PausedOrders(props: PausedOrderProps) {
         "Do you really want to proceed with payment?"
       );
       if (confirmation) {
-        const order = new OrderService();
-        await order.updateOrder(input);
+        const orderService = new OrderService();
+        await orderService.updateOrder(input);
+        dispatch(moveOrderToProcess(orderId));
         setValue("2");
         setOrderBuilder(new Date());
       }
@@ -76,6 +84,7 @@ export default function PausedOrders(props: PausedOrderProps) {
       sweetErrorHandling(err).then();
     }
   };
+
   return (
     <TabPanel value="1">
       {(!pausedOrders || pausedOrders.length === 0) ? (
@@ -115,7 +124,7 @@ export default function PausedOrders(props: PausedOrderProps) {
                         <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />
-                          <p>${item.itemQuantity}</p>
+                          <p>{item.itemQuantity}</p>
                           <img src="/icons/pause.svg" alt="pause-img" />
                           <p style={{ marginLeft: "7px" }}>
                             ${item.itemQuantity * item.itemPrice}
