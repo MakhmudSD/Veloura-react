@@ -36,6 +36,10 @@ export default function ProcessOrders(props: ProcessOrderProps) {
       sweetErrorHandling(Messages.error2).then();
       return;
     }
+    if (!authMember) {
+      sweetErrorHandling(Messages.error2).then();
+      return;
+    }
 
     try {
       const orderId = e.target.value;
@@ -101,6 +105,7 @@ export default function ProcessOrders(props: ProcessOrderProps) {
                         <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />
+                          <p>{item.itemQuantity}</p>
                           <p>{item.itemQuantity}</p>
                           <img src="/icons/pause.svg" alt="pause-img" />
                           <p style={{ marginLeft: "7px" }}>

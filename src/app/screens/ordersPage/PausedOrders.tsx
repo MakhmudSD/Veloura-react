@@ -35,6 +35,10 @@ export default function PausedOrders(props: PausedOrderProps) {
       sweetErrorHandling(Messages.error2).then();
       return;
     }
+    if (!authMember) {
+      sweetErrorHandling(Messages.error2).then();
+      return;
+    }
     try {
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
@@ -62,6 +66,10 @@ export default function PausedOrders(props: PausedOrderProps) {
       sweetErrorHandling(Messages.error2).then();
       return;
     }
+    if (!authMember) {
+      sweetErrorHandling(Messages.error2).then();
+      return;
+    }
     try {
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
@@ -84,6 +92,7 @@ export default function PausedOrders(props: PausedOrderProps) {
       sweetErrorHandling(err).then();
     }
   };
+
 
   return (
     <TabPanel value="1">
@@ -122,6 +131,7 @@ export default function PausedOrders(props: PausedOrderProps) {
                         <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />
+                          <p>{item.itemQuantity}</p>
                           <p>{item.itemQuantity}</p>
                           <img src="/icons/pause.svg" alt="pause-img" />
                           <p style={{ marginLeft: "7px" }}>
