@@ -1,10 +1,9 @@
 import { Box, Container, Stack } from "@mui/material";
 import { Settings } from "./Settings";
 import { serverApi } from "../../lib/config";
-import { MemberType } from "../../lib/enums/members.enum";
-import "../../../css/userpage.css";
 import { useGlobals } from "../../hooks/useGlobals";
 import { useHistory } from "react-router-dom";
+import "../../../css/userpage.css";
 
 export default function UserPage() {
   const history = useHistory();
@@ -40,16 +39,6 @@ export default function UserPage() {
                     className={"order-user-avatar"}
                     alt=""
                   />
-                  <div className={"order-user-icon-box"}>
-                    <img
-                      src={
-                        authMember?.memberType === MemberType.ADMIN
-                          ? "/icons/restaurant.svg"
-                          : "/icons/user-badge.png"
-                      }
-                      alt=""
-                    />
-                  </div>
                 </div>
                 <span className={"order-user-name"}>
                   {authMember?.memberNick}

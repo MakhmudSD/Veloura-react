@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Products from "./Products";
 import ChosenProduct from "./ChosenProduct";
-import "../../../css/products.css";
 import { CartItem } from "../../lib/types/search";
+import "../../../css/products.css";
 
 interface ProductsPageProps {
   onAdd: (item: CartItem) => void;

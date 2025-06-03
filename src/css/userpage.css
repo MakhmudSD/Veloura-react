@@ -2,131 +2,164 @@
 .user-page {
 	width: 100%;
 	min-height: 100vh;
-	background: linear-gradient(135deg, #f9e8c9, #fff8e1); /* Soft gold gradient background */
+	background: #161515;
 	display: flex;
-	flex-direction: row; /* row layout */
+	flex-direction: row;
 	justify-content: center;
 	align-items: flex-start;
 	padding: 40px 20px;
-	font-family: 'Poppins', sans-serif;
+	font-family: "Poppins", sans-serif;
 	box-sizing: border-box;
-  }
-  
-  /* Tabs container with vertical orientation (if still needed) */
-  .user-page .css-heg063-MuiTabs-flexContainer {
-	flex-direction: column;
-  }
-  
-  /* Hide indicator line for clean look */
-  .user-page .css-mn3ro6-MuiTabs-indicator {
-	display: none;
-  }
-  
-  .user-page .css-1ujnqem-MuiTabs-root {
-	width: 100%;
-  }
+}
 
-  .mb-image {
-	width: 150px;            /* Adjust size as needed */
-	height: 150px;           /* Adjust size as needed */
-	border-radius: 50%;      /* Makes it a circle */
-	object-fit: cover;       /* Ensures it doesn't stretch or distort */
-	border: 2px solid #ccc;  /* Optional: adds a border for clarity */
-	display: block;          /* Ensures it stays as a block element */
-  }
-  
-  /* Main frame container (row layout) */
-  .user-page .my-page-frame {
+
+.user-page .css-heg063-MuiTabs-flexContainer {
+	flex-direction: column;
+}
+
+.user-page .css-mn3ro6-MuiTabs-indicator {
+	display: none;
+}
+
+.user-page .css-1ujnqem-MuiTabs-root {
+	width: 100%;
+}
+
+.mb-image {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid #d4af37;
+	display: block;
+}
+
+/* Main frame container (row layout) */
+.user-page .my-page-frame {
 	display: flex;
-	flex-direction: row;
+	flex-direction: row-reverse;
 	flex-wrap: wrap;
 	justify-content: center;
 	width: 100%;
 	max-width: 1400px;
 	gap: 30px;
-  }
-  
-  /* Left section */
-  .my-page-left {
+}
+
+/* Left section (now visually on the right) */
+.my-page-left {
 	flex: 1 1 65%;
 	display: flex;
 	flex-direction: column;
-	background: #ffffff;
+	background: #1a1a1a;
 	border-radius: 16px;
-	box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+	box-shadow:
+		0 4px 15px rgba(212, 175, 55, 0.15),
+		0 4px 15px rgba(0, 0, 0, 0.2);
 	padding: 30px;
-  }
-  
-  /* Menu name */
-  .my-page-left .menu-name {
+}
+
+/* Menu name */
+.my-page-left .menu-name {
 	font-size: 40px;
 	font-weight: 700;
-	color: #5c2d91; /* Veloura brand purple */
+	color: #d4af37;
 	text-align: center;
-	border-bottom: 2px solid #f0e6ff;
+	border-bottom: 2px solid #b8862b;
 	padding-bottom: 15px;
-  }
-  
-  /* Right section */
-  .my-page-right {
+}
+
+/* Right section (now visually on the left) */
+.my-page-right {
 	flex: 1 1 30%;
-	background: #ffffff;
+	background: #1a1a1a;
 	border-radius: 16px;
 	padding: 40px;
-	box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  }
-  
-  /* User info box */
-  .user-page .order-info-box {
-	background: #fdfbff;
+	box-shadow:
+		0 4px 15px rgba(212, 175, 55, 0.15),
+		0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* User info box */
+.user-page .order-info-box {
+	background: #2b2b2b;
 	border-radius: 16px;
 	padding: 50px;
 	text-align: center;
-	box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+	box-shadow:
+		0 4px 15px rgba(212, 175, 55, 0.15),
+		0 4px 15px rgba(0, 0, 0, 0.2);
 	position: relative;
-  }
-  
-  /* Settings button */
-  .user-page .order-info-box .settings-btn {
+}
+
+/* Settings button */
+.user-page .order-info-box .settings-btn {
 	position: absolute;
 	top: 15px;
 	right: 20px;
 	cursor: pointer;
-  }
-  
-  /* User avatar */
-  .order-user-avatar {
+	color: #f5f5dc;
+}
+
+/* User avatar */
+.order-user-avatar {
 	width: 150px;
 	height: 150px;
 	border-radius: 50%;
 	object-fit: cover;
-	box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-  
-  /* User name and profession */
-  .order-user-name {
+	box-shadow:
+		0 4px 10px rgba(212, 175, 55, 0.1),
+		0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.settings,
+.settings * {
+	color: #ffffff;
+	font-family: "Commissioner", sans-serif;
+}
+
+.settings a {
+	color: #d4af37;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.settings a:hover {
+	text-decoration: underline;
+}
+
+.settings button:focus,
+.settings .verify-btn:focus,
+.settings .pay-btn:focus,
+.settings .cancel-btn:focus {
+	outline: 2px solid #d4af37;
+	outline-offset: 2px;
+}
+
+/* User name and profession */
+.order-user-name {
 	font-size: 24px;
 	font-weight: 600;
-	color: #5c2d91;
+	color: #d4af37;
 	margin-top: 15px;
-  }
-  
-  .order-user-prof {
+}
+
+/* User profession */
+.order-user-prof {
 	font-size: 18px;
-	color: #9a8bbf;
+	color: #f5f5dc;
 	margin-bottom: 15px;
-  }
-  
-  /* User description */
-  .user-desc {
+}
+
+/* User description */
+.user-desc {
 	font-size: 16px;
-	color: #4f547b;
+	color: #f5f5dc;
 	margin: 20px 0;
 	line-height: 1.5;
-  }
+}
 
-  /* Social media icons */
-  .user-page .user-media-box {
+/* Social media icons */
+.user-page .user-media-box {
 	width: fit-content;
 	height: 2.25rem;
 	margin-top: 0.75rem;
@@ -134,81 +167,85 @@
 	justify-self: center;
 	align-items: center;
 	gap: 0.75rem;
-  }
-  
-  .user-page .user-media-box a {
+}
+
+.user-page .user-media-box a {
 	width: 2.25rem;
 	height: 2.25rem;
 	border-radius: 50%;
 	object-fit: cover;
 	background-color: transparent;
 	display: block;
-  }
-  
-  .user-page .user-media-box a:hover {
+}
+
+.user-page .user-media-box a:hover {
 	transform: scale(1.1);
-  }
-  
-  /* Example: Instagram */
-  .user-page .user-media-box .instagram {
-	background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
-  }
-  
-  /* Example: YouTube */
-  .user-page .user-media-box .youtube {
-	background: #ff0000;
-  }
-  
-  /* Settings section */
-  .user-page .settings {
+}
+
+/* Example: Instagram */
+.user-page .user-media-box .instagram {
+	background: linear-gradient(45deg,
+			#d4af37 0%,
+			#b8860b 50%,
+			#f2bd57 100%);
+}
+
+/* Example: YouTube */
+.user-page .user-media-box .youtube {
+	background: #b8860b;
+}
+
+/* Settings section */
+.user-page .settings {
 	margin-top: 20px;
-  }
-  
-  .user-page .settings .spec-label {
+}
+
+.user-page .settings .spec-label {
 	font-weight: 600;
-	color: #5c2d91;
+	color: #d4af37;
 	margin-top: 15px;
-  }
-  
-  .user-page .settings .spec-input,
-  .user-page .settings .spec-textarea {
+}
+
+.user-page .settings .spec-input,
+.user-page .settings .spec-textarea {
 	width: 100%;
-	background: #f7f7f7;
+	background: #1a1a1a;
 	border-radius: 8px;
-	border: none;
+	border: 1px solid #b8862b;
 	padding: 15px;
 	font-size: 16px;
-	color: #4f547b;
-	box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+	color: #f5f5dc;
+	box-shadow: inset 0 2px 4px rgba(212, 175, 55, 0.05);
 	transition: all 0.2s ease;
-  }
-  
-  .user-page .settings .spec-input:focus,
-  .user-page .settings .spec-textarea:focus {
+}
+
+.user-page .settings .spec-input:focus,
+.user-page .settings .spec-textarea:focus {
 	outline: none;
-	box-shadow: 0 0 0 3px rgba(92, 45, 145, 0.2);
-  }
-  
-  /* Save button container */
-  .user-page .settings .save-box {
+	box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4);
+}
+
+/* Save button container */
+.user-page .settings .save-box {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 20px;
-  }
-  
-  /* Save button */
-  .user-page .settings .css-1e3kzd4-MuiButtonBase-root-MuiButton-root {
-	background: #5c2d91;
-	color: #ffffff;
+}
+
+/* Save button */
+.user-page .settings .css-1e3kzd4-MuiButtonBase-root-MuiButton-root {
+	background: linear-gradient(90deg, #d4af37 0%, #ffdf5e 100%);
+	color: #1a1a1a;
 	border-radius: 8px;
 	font-size: 18px;
 	font-weight: 600;
 	padding: 10px 20px;
 	text-transform: none;
 	transition: background 0.3s ease;
-  }
-  
-  .user-page .settings .css-1e3kzd4-MuiButtonBase-root-MuiButton-root:hover {
-	background: #7e48c7;
-  }
-  
+	box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+}
+
+.user-page .settings .css-1e3kzd4-MuiButtonBase-root-MuiButton-root:hover {
+	background: linear-gradient(90deg, #b8860b 0%, #d4af37 100%);
+	box-shadow: 0 6px 12px rgba(212, 175, 55, 0.4);
+}

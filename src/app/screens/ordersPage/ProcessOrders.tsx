@@ -2,8 +2,7 @@ import React from "react";
 import { Box, Stack, Button } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
 import moment from "moment";
-
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveProcessOrders } from "./selector";
 import { Messages, serverApi } from "../../lib/config";
@@ -14,6 +13,7 @@ import { OrderStatus } from "../../lib/enums/orders.enum";
 import { sweetErrorHandling } from "../../lib/sweetAlert";
 import { T } from "../../lib/types/common";
 import OrderService from "../../services/OrderService";
+import { moveOrderToFinish } from "./slice";
 
 const processOrdersRetriever = createSelector(
   retrieveProcessOrders,
@@ -28,10 +28,14 @@ export default function ProcessOrders(props: ProcessOrderProps) {
   const { authMember, setOrderBuilder } = useGlobals();
   const { processOrders } = useSelector(processOrdersRetriever);
   const { setValue } = props;
+  const dispatch = useDispatch(); // Initialize useDispatch
 
   /** HANDLERS */
   const finishOrderHandler = async (e: T) => {
-    if (!authMember) throw new Error(Messages.error2);
+    if (!authMember) {
+      sweetErrorHandling(Messages.error2).then();
+      return;
+    }
 
     try {
       const orderId = e.target.value;
@@ -42,8 +46,9 @@ export default function ProcessOrders(props: ProcessOrderProps) {
 
       const confirmation = window.confirm("Have you received your order?");
       if (confirmation) {
-        const order = new OrderService();
-        await order.updateOrder(input);
+        const orderService = new OrderService();
+        await orderService.updateOrder(input);
+        dispatch(moveOrderToFinish(orderId));
         setValue("3");
         setOrderBuilder(new Date());
       }
@@ -63,7 +68,10 @@ export default function ProcessOrders(props: ProcessOrderProps) {
                 {order?.orderItems?.map((item: OrderItem) => {
                   const product: Product | undefined = (
                     order.productData ?? []
-                  ).find((ele: Product) => item.productId.toString() === ele._id.toString());
+                  ).find(
+                    (ele: Product) =>
+                      item.productId.toString() === ele._id.toString()
+                  );
 
                   if (
                     !product ||
@@ -72,7 +80,9 @@ export default function ProcessOrders(props: ProcessOrderProps) {
                   ) {
                     return (
                       <Box key={item._id} className="orders-name-price">
-                        <p>Product or product images not found.</p>
+                        <p style={{ color: "#f5f5dc" }}>
+                          Product or product images not found.
+                        </p>
                       </Box>
                     );
                   }
@@ -91,7 +101,7 @@ export default function ProcessOrders(props: ProcessOrderProps) {
                         <Box className="price-box">
                           <p>${item.itemPrice}</p>
                           <img src="/icons/close.svg" alt="close-img" />
-                          <p>${item.itemQuantity}</p>
+                          <p>{item.itemQuantity}</p>
                           <img src="/icons/pause.svg" alt="pause-img" />
                           <p style={{ marginLeft: "7px" }}>
                             ${item.itemQuantity * item.itemPrice}
@@ -105,21 +115,21 @@ export default function ProcessOrders(props: ProcessOrderProps) {
               <Box className="total-price-box">
                 <Box>
                   <Box className="total-box">
-                    <p>Product Price</p>
+                    <p>Product Price:</p>
                     <p>${order.orderTotal - order.orderDelivery}</p>
                     <img
                       src="/icons/plus.svg"
                       alt="plus-icon"
-                      style={{ marginLeft: "20px" }}
+                      style={{ marginLeft: "10px", marginRight: "8px" }}
                     />
-                    <p>Delivery Cost</p>
+                    <p>Delivery Cost:</p>
                     <p>${order.orderDelivery}</p>
                     <img
                       src="/icons/pause.svg"
                       alt="pause-icon"
-                      style={{ marginLeft: "20px" }}
+                      style={{ marginLeft: "10px" }}
                     />
-                    <p>Total</p>
+                    <p>Total:</p>
                     <p>${order.orderTotal}</p>
                     <p className="data-compl">
                       {moment().format("YY-MM-DD HH-mm")}
@@ -140,15 +150,13 @@ export default function ProcessOrders(props: ProcessOrderProps) {
         ) : (
           <Box
             display={"flex"}
-            flexDirection={"row"}
-            justifyContent={"center"}
+            flexDirection={"column"}
+            justifyContent={"flex-start"}
+            alignItems={"flex-end"}
             className="no-data-compl"
           >
-            <img
-              src="/icons/noimage-list.svg"
-              alt="noimage"
-              style={{ width: 300, height: 300 }}
-            />
+            <img src="/icons/noimage-list.svg" alt="noimage" />
+            <p>No process orders found</p>
           </Box>
         )}
       </Stack>

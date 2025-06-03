@@ -130,7 +130,6 @@ export function Products({ onAdd }: ProductsProps) {
           <Box className="product-divider" mb={2}>
             <img src="/img/line.png" alt="divider line" />
           </Box>
-
           <Box
             className="search-bar-wrapper"
             display="flex"
@@ -147,12 +146,12 @@ export function Products({ onAdd }: ProductsProps) {
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               style={{
                 flexGrow: 1,
-                padding: "8px 12px",
+                padding: "10px 14px",
                 borderRadius: "12px",
-                border: "1px solid #ab572d",
                 color: "#000",
                 fontFamily: "Satoshi",
                 fontSize: "16px",
+                width: "100%",
               }}
             />
             {searchText && (
@@ -167,21 +166,10 @@ export function Products({ onAdd }: ProductsProps) {
                 }}
               />
             )}
-            <Button
-              variant="contained"
+            <SearchIcon
+              className="veloura-search-button"
               onClick={handleSearch}
-              endIcon={<SearchIcon />}
-              sx={{
-                marginLeft: 2,
-                backgroundColor: "#ab572d",
-                fontFamily: "Satoshi",
-                fontWeight: 600,
-                borderRadius: "12px",
-                "&:hover": { backgroundColor: "#d17e4f" },
-              }}
-            >
-              Search
-            </Button>
+            />
           </Box>
 
           <Box className="product-filter-row" mb={4}>

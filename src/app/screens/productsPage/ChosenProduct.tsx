@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { createSelector } from "@reduxjs/toolkit";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-
 import { setAdmin, setChosenProduct } from "./slice";
 import { retrieveChosenProduct } from "./selector";
 import { Member } from "../../lib/types/member";
@@ -13,7 +12,6 @@ import { Product } from "../../lib/types/product";
 import { CartItem } from "../../lib/types/search";
 import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
 import "swiper/css";
@@ -76,48 +74,6 @@ export function ChosenProduct({ onAdd }: ChosenProductProps) {
           marginBottom: "20px",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            cursor: "pointer",
-            width: "auto",
-          }}
-        >
-          <IconButton
-            onClick={() => history.push("/")}
-            sx={{
-              color: "#AB572D",
-              backgroundColor: "rgba(255, 0, 0, 0.15)",
-              borderRadius: "50%",
-              padding: "6px",
-              boxShadow: "0 0 10px rgba(171, 87, 45, 0.7)",
-              transition: "all 0.3s",
-              "&:hover": {
-                backgroundColor: "rgba(171, 87, 45, 0.2)",
-                boxShadow: "0 0 15px rgba(171, 87, 45, 1)",
-              },
-            }}
-            aria-label="Back to product list"
-          >
-            <ArrowBackIosNewIcon fontSize="large" />
-          </IconButton>
-          <Box
-            component="span"
-            sx={{
-              marginLeft: "6px",
-              color: "#AB572D",
-              fontWeight: "600",
-              fontSize: "16px",
-              fontFamily: '"Satoshi", sans-serif',
-              userSelect: "none",
-              textShadow: "0 0 5px rgba(171, 87, 45, 0.7)",
-            }}
-          >
-            Back to Homepage
-          </Box>
-        </Box>
-
         <Box
           sx={{
             display: "flex",
@@ -354,4 +310,4 @@ const buttonStyle = {
   cursor: "pointer",
 };
 
-export default ChosenProduct
+export default ChosenProduct;

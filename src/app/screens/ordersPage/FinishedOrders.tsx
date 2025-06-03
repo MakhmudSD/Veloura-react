@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Stack } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveFinishedOrders } from "./selector";
@@ -34,10 +33,10 @@ export default function FinishedOrders() {
               <TaskAltIcon
                 sx={{
                   position: "absolute",
-                  top: 12,               
-                  right: 16,             
-                  fontSize: 40,          
-                  color: "#F2BD57", 
+                  top: 12,
+                  right: 6,
+                  fontSize: 40,
+                  color: "#F2BD57",
                 }}
               />
 
@@ -46,7 +45,13 @@ export default function FinishedOrders() {
                   const product: Product | undefined = order.productData?.find(
                     (ele: Product) => item.productId === ele._id
                   );
-                  if (!product) return null;
+                  if (!product) {
+                    return (
+                      <Box key={item._id} className="orders-name-price">
+                        <p style={{ color: "#f5f5dc" }}>Product not found.</p>
+                      </Box>
+                    );
+                  }
 
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
@@ -76,21 +81,21 @@ export default function FinishedOrders() {
               <Box className="total-price-box">
                 <Box>
                   <Box className="total-box" sx={{ ml: "170px" }}>
-                    <p>Product Price</p>
+                    <p>Product Price:</p>
                     <p>${order.orderTotal - order.orderDelivery}</p>
                     <img
                       src="/icons/plus.svg"
                       alt="plus-icon"
-                      style={{ marginLeft: "20px" }}
+                      style={{ marginLeft: "10px", marginRight: "8px" }}
                     />
-                    <p>Delivery Cost</p>
+                    <p>Delivery Cost:</p>
                     <p>${order.orderDelivery}</p>
                     <img
                       src="/icons/pause.svg"
                       alt="pause-icon"
-                      style={{ marginLeft: "20px" }}
+                      style={{ marginLeft: "10px" }}
                     />
-                    <p>Total</p>
+                    <p>Total:</p>
                     <p>${order.orderTotal}</p>
                   </Box>
                 </Box>
@@ -100,16 +105,13 @@ export default function FinishedOrders() {
         ) : (
           <Box
             display="flex"
-            flexDirection="row"
+            flexDirection="column"
             justifyContent="center"
             alignItems="center"
             className="no-data-compl"
           >
-            <img
-              src="/icons/noimage-list.svg"
-              alt="noimage"
-              style={{ width: 500, height: 500 }}
-            />
+            <img src="/icons/noimage-list.svg" alt="noimage" />
+            <p>No finished orders found</p>
           </Box>
         )}
       </Stack>

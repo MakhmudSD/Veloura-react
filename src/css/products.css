@@ -713,6 +713,7 @@ body {
 
 .veloura-search-input {
   flex: 1;
+  width: 100%;
   border: none;
   background: transparent;
   font-size: 0.85rem;
@@ -720,13 +721,12 @@ body {
   outline: none;
   color: #2f2f2f;
   font-family: inherit;
-  min-width: 0;
 }
 
 .veloura-search-input::placeholder {
   color: #382111;
   opacity: 0.7;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .veloura-clear-icon {
@@ -740,18 +740,14 @@ body {
 }
 
 .veloura-search-button {
-  background-color: #c3a38c !important;
-  color: #fff !important;
-  font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 18px;
-  text-transform: none;
-  font-size: 0.85rem;
-  min-width: auto;
+  color: #ab572d;
+  cursor: pointer;
+  font-size: 24px;
+  margin-left: 8px;
 }
 
 .veloura-search-button:hover {
-  background-color: #b8957e !important;
+  color: #d17e4f;
 }
 
 

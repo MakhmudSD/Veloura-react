@@ -8,7 +8,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PausedOrders from "./PausedOrders";
 import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
-import "../../../css/orders.css";
 import { setPausedOrders, setProcessOrders, setFinishedOrders } from "./slice";
 import { Order, OrderInquiry } from "../../lib/types/order";
 import { useDispatch } from "react-redux";
@@ -18,6 +17,7 @@ import { useGlobals } from "../../hooks/useGlobals";
 import { useHistory } from "react-router-dom";
 import { serverApi } from "../../lib/config";
 import { MemberType } from "../../lib/enums/members.enum";
+import "../../../css/orders.css";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
@@ -118,7 +118,10 @@ export default function OrdersPage() {
                 <div style={{ display: "flex", marginTop: "6px" }}>
                   <LocationOnIcon />
                 </div>
-                <div className="spec-address-text" style={{marginLeft: "10px", marginTop: "6px"}}>
+                <div
+                  className="spec-address-text"
+                  style={{ marginLeft: "10px", marginTop: "6px" }}
+                >
                   {" "}
                   {authMember?.memberAddress
                     ? authMember.memberAddress
