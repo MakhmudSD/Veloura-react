@@ -17,11 +17,11 @@ body {
 .footer-container .footer-frame {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
   flex-wrap: wrap;
-  gap: 12rem;
+  gap: 2rem;
 }
 
 .footer-container .footer-frame .footer-left {
@@ -123,19 +123,20 @@ body {
 
 .footer-container .footer-frame .footer-right {
   display: flex;
+  flex-direction: row; /* horizontal alignment */
   align-items: flex-start;
-  gap: 108px;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 60px; /* reduce gap so they fit better */
+  flex-wrap: nowrap; /* prevent wrapping to next line */
   flex: 1;
   min-width: 0;
   margin-left: 0;
 }
 
-.footer-container .footer-frame .footer-right>div {
-  min-width: 8.75rem;
-  max-width: 11.25rem;
+.footer-container .footer-frame .footer-right > div {
+  flex: 1 1 auto; /* allow flexible shrinking/growing */
+  min-width: 7rem; /* allow smaller than before */
+  max-width: 10rem;
   word-break: break-word;
   overflow-wrap: break-word;
 }
@@ -148,14 +149,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 30px;
+  gap: 20px;
   padding: 10px;
 }
 
 .footer-container .footer-frame .footer-right h3 {
   color: #dd713c;
   font-family: "Satoshi Variable";
-  font-size: clamp(1.3rem, 1.25vw, 1.125rem);
+  font-size: clamp(1.1rem, 1.1vw, 1.125rem);
   font-weight: 700;
   line-height: 1.625rem;
   cursor: pointer;
@@ -164,7 +165,7 @@ body {
 .footer-container .footer-frame .footer-right p {
   color: #FFF;
   font-family: "Satoshi Variable";
-  font-size: clamp(0.9375rem, 1vw, 1rem);
+  font-size: clamp(0.875rem, 0.95vw, 1rem);
   font-weight: 400;
   line-height: normal;
   word-break: break-word;
