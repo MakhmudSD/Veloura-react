@@ -9,7 +9,7 @@ import { store } from "./app/store";
 import theme from "./app/MaterialTheme";
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
-export {}
+import { SocketProvider } from "./app/context/SocketContext";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container)
@@ -17,12 +17,14 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <ContextProvider>
+                <SocketProvider>
                 <BrowserRouter>
                     <ThemeProvider theme={theme}>
                         <CssBaseline/>
                             <App/>
                     </ThemeProvider>
                 </BrowserRouter>
+                </SocketProvider>
             </ContextProvider>
         </Provider>
     </React.StrictMode>
