@@ -5,9 +5,10 @@ git reset --hard
 git checkout master
 git pull origin master
 
-npm i
-npm run build
-pm2 start process.config.js --env production
+npm i yarn -g
+yarn add global serve
+yarn run build
+pm2 start "yarn run start:prod" --name=VELOURA-PERFUME
 
 # # DEVELOPMENT
 # git reset --hard
