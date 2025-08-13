@@ -1,6 +1,5 @@
-import { Box } from "@mui/material";
+import { Box, Button} from "@mui/material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import Button from "@mui/material/Button";
 import { useGlobals } from "../../hooks/useGlobals";
 import { useState } from "react";
 import { MemberUpdateInput } from "../../lib/types/member";

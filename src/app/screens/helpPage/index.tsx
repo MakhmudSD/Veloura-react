@@ -1,12 +1,11 @@
 import React from "react";
-import { Box, Container, Stack, Tabs } from "@mui/material";
+import { Box, Container, Stack, Tabs, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Tab from "@mui/material/Tab";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 import "../../../css/help.css";
